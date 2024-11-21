@@ -1,0 +1,8 @@
+@use 'base/reset';
+@use './abstract/variables' as vars;
+@use './components/login';
+@use './components/seleccionLogin';
+
+body {
+    font-family: 'Poppins', serif;
+}

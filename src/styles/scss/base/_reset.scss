@@ -1,0 +1,98 @@
+@use '../abstract/variables' as vars;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Eliminar márgenes y rellenos por defecto */
+body,
+h1, h2, h3, h4, h5, h6,
+p,
+blockquote,
+figure,
+dl,
+dd,
+ul,
+ol,
+li,
+fieldset,
+legend,
+button,
+input,
+textarea,
+table,
+th,
+td,
+address {
+  margin: 0;
+  padding: 0;
+}
+
+/* Eliminar estilos de lista */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Eliminar subrayado de enlaces */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Estilos base para el body */
+body {
+  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
+  background-color: vars.$blanco-primario;
+  color: vars.$negro-primario;
+}
+
+/* Asegurar que las imágenes y videos se adapten al contenedor */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Eliminar borde por defecto en inputs y botones */
+input,
+button,
+textarea,
+select {
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+/* Establecer cursor por defecto en botones */
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Quitar estilos por defecto de tablas */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Eliminar estilo de cita en blockquote */
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+}
+
+blockquote,
+q {
+  quotes: '';
+}
+
+/* Establecer tamaño de fuente base */
+html {
+  font-size: 100%;
+}

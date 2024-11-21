@@ -1,0 +1,186 @@
+@charset "UTF-8";
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Eliminar márgenes y rellenos por defecto */
+body,
+h1, h2, h3, h4, h5, h6,
+p,
+blockquote,
+figure,
+dl,
+dd,
+ul,
+ol,
+li,
+fieldset,
+legend,
+button,
+input,
+textarea,
+table,
+th,
+td,
+address {
+  margin: 0;
+  padding: 0;
+}
+
+/* Eliminar estilos de lista */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Eliminar subrayado de enlaces */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Estilos base para el body */
+body {
+  line-height: 1.5;
+  font-family: "Poppins", sans-serif;
+  background-color: #FFFFFF;
+  color: #222222;
+}
+
+/* Asegurar que las imágenes y videos se adapten al contenedor */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Eliminar borde por defecto en inputs y botones */
+input,
+button,
+textarea,
+select {
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+/* Establecer cursor por defecto en botones */
+button,
+[role=button] {
+  cursor: pointer;
+}
+
+/* Quitar estilos por defecto de tablas */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Eliminar estilo de cita en blockquote */
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+}
+
+blockquote,
+q {
+  quotes: "";
+}
+
+/* Establecer tamaño de fuente base */
+html {
+  font-size: 100%;
+}
+
+.login-container {
+  text-align: center;
+  margin-top: 50px;
+}
+.login-container button {
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+.seleccion-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  color: #222222;
+  text-align: center;
+}
+.seleccion-login .titulo-login {
+  padding: 2rem;
+  width: 45%;
+}
+.seleccion-login .titulo-login h1 {
+  font-size: 3rem;
+  line-height: 1.5;
+  color: #222222;
+  font-weight: 400;
+}
+.seleccion-login .titulo-login h1 span {
+  color: #0A9396;
+  font-weight: bold;
+}
+.seleccion-login .formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 55%;
+  padding: 2rem;
+}
+.seleccion-login .formContainer .formLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+  box-shadow: rgba(10, 148, 150, 0.5725490196) 0px 0px 100px 1px;
+  background-color: rgba(10, 147, 150, 0.08);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.seleccion-login .formContainer .formLogin .logoContainer img {
+  width: 15rem;
+  margin-bottom: 2rem;
+}
+.seleccion-login .formContainer .formLogin .logoContainer p {
+  margin-bottom: 4rem;
+}
+.seleccion-login .formContainer .formLogin .botonesContainer {
+  display: flex;
+  flex-direction: column;
+}
+.seleccion-login .formContainer .formLogin .botonesContainer button {
+  width: 250px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #222222;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 1px #222222 solid;
+  box-shadow: #0A9396 2px 2px 6px;
+}
+.seleccion-login .formContainer .formLogin .botonesContainer button:hover {
+  background-color: #b4d9d9;
+}
+
+body {
+  font-family: "Poppins", serif;
+}
+
+/*# sourceMappingURL=main.css.map */
