@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from '../components/Logo.js';
 
 function ResetearContrasenia() {
   const handleSubmit = (e) => {
@@ -8,13 +9,23 @@ function ResetearContrasenia() {
   };
 
   return (
-    <div className="resetear-contrasenia">
-      <h2>Resetear Contraseña</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="password" placeholder="Nueva contraseña" required />
-        <input type="password" placeholder="Confirmar contraseña" required />
-        <button type="submit">Restablecer</button>
-      </form>
+    <div className="login-page">
+      <article className='titulo-login'>
+        <h1>
+          <span>Restablecer </span>Contraseña
+        </h1>
+      </article>
+      <article className='formContainer'>
+        <form className='formLogin' onSubmit={handleSubmit}>
+          <Logo />
+          <div className='inputsContainer'>
+            <input type="password" placeholder="Nueva contraseña" required />
+            <input type="password" placeholder="Confirmar contraseña" required />
+            <button type="submit">Restablecer</button>
+          </div>
+          <a href="/login/interno">Volver al inicio de sesión</a>
+        </form>
+      </article>
     </div>
   );
 }

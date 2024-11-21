@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from '../components/Logo.js';
 
 function RecuperarContrasenia() {
   const handleSubmit = (e) => {
@@ -8,12 +9,22 @@ function RecuperarContrasenia() {
   };
 
   return (
-    <div className="recuperar-contrasenia">
-      <h2>Recuperar Contraseña</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Correo electrónico" required />
-        <button type="submit">Enviar</button>
-      </form>
+    <div className="login-page">
+      <article className='titulo-login'>
+        <h1>
+          <span>Recuperar </span>Contraseña
+        </h1>
+      </article>
+      <article className='formContainer'>
+        <form className='formLogin' onSubmit={handleSubmit}>
+          <Logo />
+          <div className='inputsContainer'>
+            <input type="email" placeholder="Correo electrónico" required />
+            <button type="submit">Enviar</button>
+          </div>
+          <a href="/login/interno">Volver al inicio de sesión</a>
+        </form>
+      </article>
     </div>
   );
 }

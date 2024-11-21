@@ -32,7 +32,7 @@ function App() {
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/" element={<SeleccionLogin />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login/:tipoUsuario" element={<Login />} />
           <Route path="/recuperar-contrasenia" element={<RecuperarContrasenia />} />
           <Route path="/resetear-contrasenia" element={<ResetearContrasenia />} />
         </Route>

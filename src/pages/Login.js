@@ -1,8 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Logo from '../components/Logo.js';
 
 function Login() {
   const navigate = useNavigate();
+  const { tipoUsuario } = useParams();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -12,13 +14,26 @@ function Login() {
 
   return (
     <div className="login-page">
-      <h2>Iniciar Sesión - Usuario Interno</h2>
-      <form onSubmit={handleLogin}>
-        <input type="text" placeholder="Nombre de usuario" required />
-        <input type="password" placeholder="Contraseña" required />
-        <button type="submit">Ingresar</button>
-      </form>
-      <a href="/recuperar-contrasenia">¿Olvidó su contraseña?</a>
+      <article className='titulo-login'>
+        <h1>
+          <span>Centralización </span> y <span>eficiencia</span> en la gestión de requerimientos
+        </h1>
+      </article>
+      <article className='formContainer'>
+        <form className='formLogin' onSubmit={handleLogin}>
+          <Logo />
+          <div className='inputsContainer'>
+            {tipoUsuario === 'interno' && (
+              <input type="text" placeholder="Legajo" required />
+            )}
+            <input type="email" placeholder="Correo electrónico" required />
+            <input type="password" placeholder="Contraseña" required />
+            <a href="/recuperar-contrasenia">¿Olvidó su contraseña?</a>
+            <button type="submit">Ingresar</button>
+          </div>
+          
+        </form>
+      </article>
     </div>
   );
 }

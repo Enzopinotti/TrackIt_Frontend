@@ -2,6 +2,8 @@
 @use './abstract/variables' as vars;
 @use './components/login';
 @use './components/seleccionLogin';
+@use './components/recuperarContrasenia';
+@use './components/resetearContrasenia';
 
 body {
     font-family: 'Poppins', serif;
