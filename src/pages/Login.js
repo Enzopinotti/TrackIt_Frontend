@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../components/Logo.js';
 
 function Login() {
@@ -32,6 +32,15 @@ function Login() {
             <button type="submit">Ingresar</button>
           </div>
           
+          <div className="registro-link">
+            <p>¿No tienes una cuenta?</p>
+            {tipoUsuario === 'interno' && (
+              <Link to="/registro/interno">Regístrate aquí</Link>
+            )}
+            {tipoUsuario === 'externo' && (
+              <Link to="/registro/externo">Regístrate aquí</Link>
+            )}
+          </div>
         </form>
       </article>
     </div>

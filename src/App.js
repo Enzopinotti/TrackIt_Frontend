@@ -19,6 +19,10 @@ import PerfilUsuario from './pages/PerfilUsuario.js';
 
 // Importar el componente PrivateRoute si lo estás usando
 import PrivateRoute from './components/PrivateRoute.js';
+import ConfirmacionRegistro from './pages/ConfirmacionRegistro.js';
+import RegistroExterno from './pages/RegistroExterno.js';
+import RegistroInterno from './pages/RegistroInterno.js';
+import SeleccionRegistro from './pages/SeleccionRegistro.js';
 
 
 function App() {
@@ -35,15 +39,21 @@ function App() {
           <Route path="/login/:tipoUsuario" element={<Login />} />
           <Route path="/recuperar-contrasenia" element={<RecuperarContrasenia />} />
           <Route path="/resetear-contrasenia" element={<ResetearContrasenia />} />
+          {/* Rutas de Registro */}
+          <Route path="/registro" element={<SeleccionRegistro />} />
+          <Route path="/registro/interno" element={<RegistroInterno />} />
+          <Route path="/registro/externo" element={<RegistroExterno />} />
+          {/* Ruta de Confirmación de Registro */}
+          <Route path="/confirmacion-registro/:token/:userId" element={<ConfirmacionRegistro />} />
         </Route>
-
+        <Route path="/confirmacion-registro/:token" element={<ConfirmacionRegistro />} />
         <Route element={<MainLayout />}>
           <Route
-            path="/inicio"
+            path="/home"
             element={
-              <PrivateRoute>
+              
                 <Inicio />
-              </PrivateRoute>
+              
             }
           />
           <Route
@@ -89,6 +99,7 @@ function App() {
             }
           />
         </Route>
+
       </Routes>
     </BrowserRouter>
   );

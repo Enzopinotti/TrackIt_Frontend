@@ -1,18 +1,21 @@
+// src/pages/SeleccionRegistro.scss
+
 @use '../abstract/variables' as vars;
 
-.login-page {
+.seleccion-registro {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: vars.$blanco-primario;
   color: vars.$negro-primario;
   text-align: center;
-  .titulo-login {
+
+  .titulo-registro {
     padding: 2rem;
+    width: 45%;
     h1 {
-      font-size: 2.15rem;
+      font-size: 3rem;
       line-height: 1.5;
       color: vars.$negro-primario;
       font-weight: 400;
@@ -30,43 +33,30 @@
     align-items: center;
     width: 55%;
     padding: 2rem;
-    .formLogin {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
-      align-items: center;
+
+    .formRegistro {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       padding: 3rem;
       box-shadow: #0a949692 0px 0px 100px 1px;
       background-color: rgba(#0A9396, 0.08);
       border-radius: 20px;
-      padding-top: 3rem;
+
       .logoContainer {
         img {
-          width: 13rem;
+          width: 15rem;
           margin-bottom: 2rem;
         }
         p {
           margin-bottom: 4rem;
         }
       }
-      .inputsContainer {
+
+      .botonesContainer {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        width: 100%;
-        input {
-          width: 100%;
-          padding: 1rem;
-          margin: 0.5rem 0;
-          font-size: 1rem;
-          color: vars.$negro-primario;
-          background-color: vars.$blanco-primario;
-          border: 1px vars.$negro-primario solid;
-          border-radius: 5px;
-        }
-
         button {
           width: 250px;
           height: 3.2rem;
@@ -83,56 +73,17 @@
           border: 1px vars.$negro-primario solid;
           box-shadow: #0A9396 2px 2px 6px;
           &:hover {
-              background-color: #b4d9d9;
+            background-color: #b4d9d9;
           }
-        }
-      }
-
-      a {
-        margin-top: 1rem;
-        color: vars.$color-primario;
-        text-decoration: none;
-        &:hover {
-          text-decoration: underline;
         }
       }
     }
   }
-}
-
-@media (min-width: 420px) {
-  .button{
-    width: 200px;
-    height: 3.5rem;
-  }
-  .logoContainer{
-      img{
-          width: 15rem !important;
-          margin-bottom: 2rem;
-      }
-      p{
-          margin-bottom: 4rem;
-      }
-  }
-
-}
-
-@media (min-width: 1024px) {
-  .login-page{
-    flex-direction: row;
-  }
-  .titulo-login {
-    padding: 2rem;
-    h1 {
-      font-size: 3rem !important;
-      line-height: 1.5;
-      color: vars.$negro-primario;
-      font-weight: 400;
-      max-width: 630px;
-      span {
-        color: vars.$color-primario;
-        font-weight: bold;
-      }
+  .volver-btn{
+    margin-top: 2rem;
+    color: vars.$color-primario;
+    &:hover{
+        color: darken(vars.$color-primario, 10%);
     }
   }
 }

@@ -2,6 +2,7 @@
 
 .seleccion-login {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -11,9 +12,8 @@
 
   .titulo-login {
     padding: 2rem;
-    width: 45%;
     h1 {
-      font-size: 3rem;
+      font-size: 2.1rem;
       line-height: 1.5;
       color: vars.$negro-primario;
       font-weight: 400;
@@ -34,14 +34,14 @@
     
 
     .formLogin{
-        width: 70%;
+
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 3rem;
+        padding: 3.5rem;
         padding-top: 6rem;
-        padding-bottom: 6rem;
+        padding-bottom: 4rem;
         box-shadow: #0a949692 0px 0px 100px 1px;
         background-color: rgba($color: #0A9396, $alpha: 0.08);
         border-radius:20px;
@@ -52,7 +52,7 @@
 
         .logoContainer{
             img{
-                width: 15rem;
+                width: 13rem;
                 margin-bottom: 2rem;
             }
             p{
@@ -63,8 +63,8 @@
             display: flex;
             flex-direction: column;
             button{
-                width: 250px;
-                height: 3.2rem;
+                width: 170px;
+                height: 3rem;
                 padding: 0.5rem;
                 margin: 0.5rem 0;
                 font-size: 1rem;
@@ -85,5 +85,47 @@
         
     }
     
+  }
+  .registro-link{
+    margin-top: 4rem;
+    a{
+      color: vars.$color-primario;
+    }
+  }
+}
+@media (min-width: 420px) {
+  .button{
+    width: 200px;
+    height: 3.5rem;
+  }
+  .logoContainer{
+      img{
+          width: 15rem !important;
+          margin-bottom: 2rem;
+      }
+      p{
+          margin-bottom: 4rem;
+      }
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .seleccion-login{
+    flex-direction: row;
+  }
+  .titulo-login {
+    padding: 2rem;
+    h1 {
+      font-size: 3rem !important;
+      line-height: 1.5;
+      color: vars.$negro-primario;
+      font-weight: 400;
+      max-width: 630px;
+      span {
+        color: vars.$color-primario;
+        font-weight: bold;
+      }
+    }
   }
 }

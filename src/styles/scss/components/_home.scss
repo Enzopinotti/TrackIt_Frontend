@@ -1,0 +1,175 @@
+@use '../abstract/variables' as vars;
+
+.inicio-page {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: vars.$blanco-primario;
+  color: vars.$negro-primario;
+
+  .ultimos-requerimientos {
+    background-color: vars.$blanco-primario;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: vars.$color-primario;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: vars.$gris-secundario;
+    }
+
+    .carpetas-container {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .carpeta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100px;
+        padding: 1rem;
+        background: linear-gradient(135deg, vars.$color-primario, vars.$color-secundario);
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .carpeta-icon {
+          width: 50px;
+          height: 50px;
+          object-fit: contain;
+          margin-bottom: 0.5rem;
+        }
+
+        p {
+          font-size: 1rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .notificaciones-rapidas {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    .notificacion {
+      flex: 1;
+      min-width: 280px;
+      background-color: vars.$blanco-primario;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: vars.$color-primario;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1rem;
+
+          .icono-interaccion {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            margin-right: 0.5rem;
+          }
+
+          .info-comentario,
+          .info-notificacion {
+            display: flex;
+            flex-direction: column;
+          }
+
+          .nombre {
+            font-weight: bold;
+            color: vars.$negro-primario;
+          }
+
+          .cargo,
+          .tiempo,
+          .titulo,
+          .descripcion {
+            font-size: 0.9rem;
+            color: vars.$gris-secundario;
+          }
+
+          .descripcion {
+            margin-top: 0.3rem;
+          }
+        }
+      }
+
+      .ver-notificaciones-btn {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: vars.$color-primario;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: darken(vars.$color-primario, 10%);
+        }
+      }
+    }
+  }
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  .inicio-page {
+    padding: 1rem;
+
+    .notificaciones-rapidas {
+      flex-direction: column;
+    }
+
+    .ultimos-requerimientos {
+      .carpetas-container {
+        justify-content: center;
+
+        .carpeta {
+          width: 80px;
+          padding: 0.8rem;
+
+          .carpeta-icon {
+            width: 40px;
+            height: 40px;
+          }
+
+          p {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}

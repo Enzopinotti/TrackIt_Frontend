@@ -1,0 +1,45 @@
+// src/pages/ConfirmacionRegistro.scss
+
+@use '../abstract/variables' as vars;
+
+.confirmacion-registro-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: vars.$blanco-primario;
+  color: vars.$negro-primario;
+  text-align: center;
+
+  .titulo-confirmacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+
+    h1 {
+      font-size: 2.5rem;
+      color: vars.$color-primario;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      padding: 0.8rem 1.5rem;
+      background-color: vars.$color-primario;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: darken(vars.$color-primario, 10%);
+      }
+    }
+  }
+}

@@ -4,6 +4,11 @@
 @use './components/seleccionLogin';
 @use './components/recuperarContrasenia';
 @use './components/resetearContrasenia';
+@use './components/home';
+@use './components/confirmacionRegistro';
+@use './components/seleccionRegistro';
+@use './components/registroExterno';
+@use './components/registroInterno';
 
 body {
     font-family: 'Poppins', serif;
