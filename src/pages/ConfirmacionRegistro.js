@@ -1,54 +1,76 @@
 // src/pages/ConfirmacionRegistro.js
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Logo from '../components/Logo.js';
 
 function ConfirmacionRegistro() {
-  const { token } = useParams(); // Suponiendo que el token se pasa como parámetro
+  const { token, userId } = useParams(); // Obtener token y userId de la URL
   const navigate = useNavigate();
-  const [estado, setEstado] = useState('confirmando'); // estados: confirmando, exito, error
 
   useEffect(() => {
-    // Realizar petición al backend para confirmar el email
-    fetch(`https://tu-backend/api/confirmar-email?token=${token}`, {
-      method: 'GET',
-    })
-      .then((res) => {
-        if (res.ok) {
-          setEstado('exito');
-        } else {
-          setEstado('error');
-        }
-      })
-      .catch(() => {
-        setEstado('error');
+    // Validar que token y userId existan
+    if (!token || !userId) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Enlace de confirmación inválido.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      }).then(() => {
+        navigate('/');
       });
-  }, [token]);
+      return;
+    }
+
+    // Realizar petición al backend para confirmar el email
+    const confirmarEmail = async () => {
+      try {
+        const res = await fetch('https://tu-backend.com/api/confirmar-email', { // Actualiza con la URL correcta
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, userId }),
+        });
+
+        if (res.ok) {
+          await Swal.fire({
+            title: 'Correo Confirmado',
+            text: 'Tu cuenta ha sido confirmada. Espera a que un administrador habilite tu acceso.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+          });
+          navigate('/');
+        } else {
+          const data = await res.json();
+          await Swal.fire({
+            title: 'Error',
+            text: data.message || 'Hubo un problema al confirmar tu correo electrónico. Intenta nuevamente.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+          });
+          navigate('/');
+        }
+      } catch (error) {
+        await Swal.fire({
+          title: 'Error',
+          text: 'Hubo un problema al confirmar tu correo electrónico. Intenta nuevamente.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+        });
+        navigate('/');
+      }
+    };
+
+    confirmarEmail();
+  }, [token, userId, navigate]);
 
   return (
     <div className="confirmacion-registro-page">
       <article className='titulo-confirmacion'>
         <Logo />
-        {estado === 'confirmando' && <p>Confirmando tu correo electrónico...</p>}
-        {estado === 'exito' && (
-          <>
-            <h1>¡Correo Confirmado!</h1>
-            <p>Tu cuenta ha sido confirmada. Espera a que un administrador habilite tu acceso.</p>
-            <button onClick={() => navigate('/')}>Volver al Inicio</button>
-          </>
-        )}
-        {estado === 'error' && (
-          <>
-            <h1>Error en la Confirmación</h1>
-            <p>Hubo un problema al confirmar tu correo electrónico. Intenta nuevamente.</p>
-            <button onClick={() => navigate('/')}>Volver al Inicio</button>
-          </>
-        )}
       </article>
     </div>
   );
 }
 
 export default ConfirmacionRegistro;
-    

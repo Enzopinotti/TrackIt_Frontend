@@ -63,7 +63,8 @@
         align-items: center;
         width: 100%;
 
-        input {
+        input,
+        textarea {
           width: 100%;
           padding: 1rem;
           margin: 0.5rem 0;
@@ -74,6 +75,11 @@
           border-radius: 5px;
         }
 
+        textarea {
+          resize: vertical;
+          height: 100px;
+        }
+
         button {
           width: 250px;
           height: 3.2rem;
@@ -81,7 +87,7 @@
           margin: 0.5rem 0;
           font-size: 1rem;
           font-weight: bold;
-          color: vars.$negro-primario;
+          color: vars.$blanco-primario;
           background-color: vars.$color-primario;
           border: none;
           border-radius: 5px;

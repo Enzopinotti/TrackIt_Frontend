@@ -486,6 +486,7 @@ html {
 }
 .confirmacion-registro-page {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -494,35 +495,39 @@ html {
   text-align: center;
 }
 .confirmacion-registro-page .titulo-confirmacion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding: 2rem;
 }
-.confirmacion-registro-page .titulo-confirmacion h1 {
-  font-size: 2.5rem;
-  color: #0A9396;
-  margin-bottom: 1rem;
-}
-.confirmacion-registro-page .titulo-confirmacion p {
-  font-size: 1.2rem;
+.confirmacion-registro-page .titulo-confirmacion img {
+  width: 13rem;
   margin-bottom: 2rem;
 }
-.confirmacion-registro-page .titulo-confirmacion button {
-  padding: 0.8rem 1.5rem;
-  background-color: #0A9396;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.confirmacion-registro-page .titulo-confirmacion p {
+  margin-bottom: 4rem;
 }
-.confirmacion-registro-page .titulo-confirmacion button:hover {
-  background-color: rgb(6.8125, 100.14375, 102.1875);
+@media (min-width: 420px) {
+  .confirmacion-registro-page .titulo-confirmacion img {
+    width: 15rem !important;
+    margin-bottom: 2rem;
+  }
+  .confirmacion-registro-page .titulo-confirmacion p {
+    margin-bottom: 4rem;
+  }
+}
+@media (min-width: 1024px) {
+  .confirmacion-registro-page {
+    flex-direction: row;
+  }
+  .confirmacion-registro-page .titulo-confirmacion {
+    padding: 2rem;
+  }
+  .confirmacion-registro-page .titulo-confirmacion img {
+    width: 20rem !important;
+  }
 }
 
 .seleccion-registro {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -532,10 +537,9 @@ html {
 }
 .seleccion-registro .titulo-registro {
   padding: 2rem;
-  width: 45%;
 }
 .seleccion-registro .titulo-registro h1 {
-  font-size: 3rem;
+  font-size: 2.15rem;
   line-height: 1.5;
   color: #222222;
   font-weight: 400;
@@ -562,7 +566,7 @@ html {
   border-radius: 20px;
 }
 .seleccion-registro .formContainer .formRegistro .logoContainer img {
-  width: 15rem;
+  width: 13rem;
   margin-bottom: 2rem;
 }
 .seleccion-registro .formContainer .formRegistro .logoContainer p {
@@ -655,7 +659,8 @@ html {
   align-items: center;
   width: 100%;
 }
-.registro-externo-page .formContainer .formRegistro .inputsContainer input {
+.registro-externo-page .formContainer .formRegistro .inputsContainer input,
+.registro-externo-page .formContainer .formRegistro .inputsContainer textarea {
   width: 100%;
   padding: 1rem;
   margin: 0.5rem 0;
@@ -665,6 +670,10 @@ html {
   border: 1px #222222 solid;
   border-radius: 5px;
 }
+.registro-externo-page .formContainer .formRegistro .inputsContainer textarea {
+  resize: vertical;
+  height: 100px;
+}
 .registro-externo-page .formContainer .formRegistro .inputsContainer button {
   width: 250px;
   height: 3.2rem;
@@ -672,7 +681,7 @@ html {
   margin: 0.5rem 0;
   font-size: 1rem;
   font-weight: bold;
-  color: #222222;
+  color: #FFFFFF;
   background-color: #0A9396;
   border: none;
   border-radius: 5px;
@@ -776,7 +785,8 @@ html {
   align-items: center;
   width: 100%;
 }
-.registro-interno-page .formContainer .formRegistro .inputsContainer input {
+.registro-interno-page .formContainer .formRegistro .inputsContainer input,
+.registro-interno-page .formContainer .formRegistro .inputsContainer textarea {
   width: 100%;
   padding: 1rem;
   margin: 0.5rem 0;
@@ -786,6 +796,10 @@ html {
   border: 1px #222222 solid;
   border-radius: 5px;
 }
+.registro-interno-page .formContainer .formRegistro .inputsContainer textarea {
+  resize: vertical;
+  height: 100px;
+}
 .registro-interno-page .formContainer .formRegistro .inputsContainer button {
   width: 250px;
   height: 3.2rem;
@@ -793,7 +807,7 @@ html {
   margin: 0.5rem 0;
   font-size: 1rem;
   font-weight: bold;
-  color: #222222;
+  color: #FFFFFF;
   background-color: #0A9396;
   border: none;
   border-radius: 5px;

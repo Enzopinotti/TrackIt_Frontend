@@ -4,6 +4,7 @@
 
 .seleccion-registro {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -13,9 +14,8 @@
 
   .titulo-registro {
     padding: 2rem;
-    width: 45%;
     h1 {
-      font-size: 3rem;
+      font-size: 2.15rem;
       line-height: 1.5;
       color: vars.$negro-primario;
       font-weight: 400;
@@ -46,7 +46,7 @@
 
       .logoContainer {
         img {
-          width: 15rem;
+          width: 13rem;
           margin-bottom: 2rem;
         }
         p {

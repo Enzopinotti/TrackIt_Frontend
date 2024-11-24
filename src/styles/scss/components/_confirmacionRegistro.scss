@@ -4,6 +4,7 @@
 
 .confirmacion-registro-page {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -12,33 +13,35 @@
   text-align: center;
 
   .titulo-confirmacion {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 2rem;
-
-    h1 {
-      font-size: 2.5rem;
-      color: vars.$color-primario;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.2rem;
+    img {
+      width: 13rem;
       margin-bottom: 2rem;
     }
+    p {
+      margin-bottom: 4rem;
+    }
+  }
 
-    button {
-      padding: 0.8rem 1.5rem;
-      background-color: vars.$color-primario;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+  @media (min-width: 420px) {
+    .titulo-confirmacion {
+      img {
+        width: 15rem !important;
+        margin-bottom: 2rem;
+      }
+      p {
+        margin-bottom: 4rem;
+      }
+    }
+  }
 
-      &:hover {
-        background-color: darken(vars.$color-primario, 10%);
+  @media (min-width: 1024px) {
+    flex-direction: row;
+
+    .titulo-confirmacion {
+      padding: 2rem;
+      img {
+        width: 20rem !important;
       }
     }
   }
