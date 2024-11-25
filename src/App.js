@@ -43,9 +43,8 @@ function App() {
           <Route path="/registro/interno" element={<RegistroInterno />} />
           <Route path="/registro/externo" element={<RegistroExterno />} />
           {/* Ruta de Confirmación de Registro */}
-          <Route path="/confirmacion-registro/:token/:userId" element={<ConfirmacionRegistro />} />
+          <Route path="/confirmacion-registro/" element={<ConfirmacionRegistro />} />
         </Route>
-        <Route path="/confirmacion-registro/:token" element={<ConfirmacionRegistro />} />
         <Route element={<MainLayout />}>
           <Route path="/home" element={<Inicio />} />
           <Route path="/requerimientos" element={<RequerimientosWrapper />} /> {/* Ruta actualizada */}

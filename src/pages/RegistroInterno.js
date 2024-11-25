@@ -40,7 +40,7 @@ function RegistroInterno() {
 
     // Lógica para enviar datos al backend
     try {
-      const res = await fetch('https://tu-backend.com/api/registro/interno', { // Actualiza con la URL correcta
+      const res = await fetch('http://trackit.somee.com/api/User/register-internal', { // Actualiza con la URL correcta
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

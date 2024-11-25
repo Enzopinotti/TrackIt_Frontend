@@ -2,7 +2,6 @@
 
 import React, { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import config from '../config/config.js'; // Importar la configuración
 
 // Crear el contexto
 export const AuthContext = createContext();
@@ -11,59 +10,98 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   // Estado de autenticación
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // Nuevo estado de carga
 
   // Función para iniciar sesión
-  const login = (userData) => {
-    setUser(userData);
+  const login = async (token) => {
+    // Guardar el token en localStorage
+    localStorage.setItem('authToken', token);
+
+    try {
+      // Realizar una solicitud al backend para obtener el perfil del usuario
+      const response = await fetch('http://trackit.somee.com/api/User/profile', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Enviar el token en la cabecera
+        },
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+      } else {
+        // Si la respuesta no es ok, manejar el error
+        console.error('Error al obtener el perfil del usuario:', response.statusText);
+        localStorage.removeItem('authToken');
+        setUser(null);
+      }
+    } catch (error) {
+      console.error('Error al conectar con el servidor:', error);
+      localStorage.removeItem('authToken');
+      setUser(null);
+    } finally {
+      setLoading(false); // Finalizar la carga
+    }
   };
 
   // Función para cerrar sesión
   const logout = () => {
+    // Eliminar el token del localStorage
+    localStorage.removeItem('authToken');
     setUser(null);
   };
 
+  // Función para actualizar el usuario
+  const updateUser = (updatedUserData) => {
+    setUser(updatedUserData);
+  };
+
   useEffect(() => {
-    if (config.useBackend) {
-      // Aquí deberías implementar la lógica para obtener el usuario desde el backend
-      // Por ejemplo, verificar el token en localStorage y obtener datos del usuario
-      // Este es un ejemplo simulado
-      const fetchUserFromBackend = async () => {
+    // Obtener el token del localStorage
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      // Intentar obtener el perfil del usuario
+      const fetchUserProfile = async () => {
         try {
-          // Simular una llamada al backend
-          const response = await new Promise((resolve) =>
-            setTimeout(
-              () =>
-                resolve({
-                  id: 1,
-                  name: 'Usuario Backend',
-                  email: 'usuario@backend.com',
-                  role: 'interno', // Cambia según sea necesario
-                }),
-              1000
-            )
-          );
-          setUser(response);
+          const response = await fetch('http://trackit.somee.com/api/User/profile', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`, // Enviar el token en la cabecera
+            },
+          });
+
+          if (response.ok) {
+            const userData = await response.json();
+            console.log(userData);
+            setUser(userData);
+          } else {
+            // Si la respuesta no es ok, manejar el error
+            console.error('Error al obtener el perfil del usuario:', response.statusText);
+            localStorage.removeItem('authToken');
+            setUser(null);
+          }
         } catch (error) {
-          console.error('Error al obtener el usuario del backend:', error);
+          console.error('Error al conectar con el servidor:', error);
+          localStorage.removeItem('authToken');
           setUser(null);
+        } finally {
+          setLoading(false); // Finalizar la carga
         }
       };
 
-      fetchUserFromBackend();
+      fetchUserProfile();
     } else {
-      // Establecer un usuario falso para pruebas
-      const fakeUser = {
-        id: 999,
-        name: 'Usuario Falso',
-        email: 'falso@ejemplo.com',
-        role: 'externo', // Cambia a 'interno' o 'admin' para probar
-      };
-      setUser(fakeUser);
+      // No hay token, el usuario no está autenticado
+      setUser(null);
+      setLoading(false); // Finalizar la carga
     }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

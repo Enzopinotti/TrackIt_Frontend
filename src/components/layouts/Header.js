@@ -1,19 +1,39 @@
 // src/components/Header/Header.js
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuOverlay from '../layouts/MenuOverlay.js';
 import Logo from '../Logo.js';
 import NotificationsButton from '../NotificationsButton.js';
 import UserProfile from '../UserProfile.js';
 import Navigation from '../Navigation.js';
+import { AuthContext } from '../../context/AuthContext.js';
 
 function Header() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useContext(AuthContext);
 
-  // Simulación del rol del usuario. En producción, obtén esto del contexto de autenticación o del backend.
-  const userRole = 'interno'; // Cambia a 'admin' o 'externo' para probar
+  // Deshabilitar el scroll cuando el menú está abierto
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    // Limpieza al desmontar el componente
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMenuOpen]);
+
+  // Si el usuario no está autenticado, no renderizar nada
+  if (!user) {
+    return null;
+  }
+
+  const userRole = user.role;
 
   // Función para manejar clic en el perfil de usuario
   const handleProfileClick = () => {
@@ -32,20 +52,6 @@ function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Deshabilitar el scroll cuando el menú está abierto
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    // Limpieza al desmontar el componente
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [isMenuOpen]);
-
   return (
     <>
       <header className="app-header">
@@ -55,7 +61,7 @@ function Header() {
         </div>
         <div className="header-right">
           <NotificationsButton onClick={handleNotificationsClick} count={3} />
-          <UserProfile onClick={handleProfileClick} />
+          <UserProfile onClick={handleProfileClick} user={user} />
           {/* Botón de Hamburguesa */}
           <button
             className="hamburger-button"

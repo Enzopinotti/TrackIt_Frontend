@@ -7,7 +7,7 @@ import Logo from '../components/Logo.js';
 
 function RegistroExterno() {
   const navigate = useNavigate();
-  const clientUri = process.env.REACT_APP_CLIENT_URI; // Obtener clientUri desde variables de entorno
+  const clientUri = "http://localhost:3000/confirmacion-registro"; // Obtener clientUri desde variables de entorno
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -18,7 +18,7 @@ function RegistroExterno() {
     cuil: '',
     empresa: '',
     descripcion: '',
-    clientUri: clientUri, // Incluir clientUri
+    clientUri: clientUri, 
   });
 
   const handleChange = (e) => {
@@ -41,7 +41,7 @@ function RegistroExterno() {
 
     // Lógica para enviar datos al backend
     try {
-      const res = await fetch('https://tu-backend.com/api/registro/externo', { // Actualiza con la URL correcta
+      const res = await fetch('http://trackit.somee.com/api/User/register-external', { // Actualiza con la URL correcta
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

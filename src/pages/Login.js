@@ -1,15 +1,44 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Logo from '../components/Logo.js';
+import { AuthContext } from '../context/AuthContext.js';
 
 function Login() {
   const navigate = useNavigate();
   const { tipoUsuario } = useParams();
-
-  const handleLogin = (e) => {
+  const { login } = useContext(AuthContext);
+  
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Lógica de autenticación
-    navigate('/inicio');
+
+    // Obtener los valores de los campos de entrada
+    const email = e.target[0].value; // Correo electrónico
+    const password = e.target[1].value; // Contraseña
+
+    // Llamada a la API del backend para autenticar al usuario
+    try {
+      const response = await fetch('http://trackit.somee.com/api/User/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+      console.log(response);
+      if (!response.ok) {
+        throw new Error('Error en la autenticación');
+      }
+
+      const data = await response.json();
+      login(data.token);
+      // Redirigir a la página principal después de un login exitoso
+      navigate('/home');
+    } catch (error) {
+      console.error('Error de autenticación:', error);
+    }
   };
 
   return (
@@ -22,10 +51,7 @@ function Login() {
       <article className='formContainer'>
         <form className='formLogin' onSubmit={handleLogin}>
           <Logo />
-          <div className='inputsContainer'>
-            {tipoUsuario === 'interno' && (
-              <input type="text" placeholder="Legajo" required />
-            )}
+          <div className='inputsContainer'>         
             <input type="email" placeholder="Correo electrónico" required />
             <input type="password" placeholder="Contraseña" required />
             <a href="/recuperar-contrasenia">¿Olvidó su contraseña?</a>
