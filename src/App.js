@@ -1,3 +1,5 @@
+// src/App.js
+
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -11,19 +13,16 @@ import Login from './pages/Login.js';
 import RecuperarContrasenia from './pages/RecuperarContrasenia.js';
 import ResetearContrasenia from './pages/ResetearContrasenia.js';
 import Inicio from './pages/Inicio.js';
-import Requerimientos from './pages/Requerimientos.js';
+import RequerimientosWrapper from './pages/Requerimientos/RequerimientosWrapper.js'; // Ruta actualizada
 import TiposCategorias from './pages/TiposCategorias.js';
 import Usuarios from './pages/Usuarios.js';
 import Notificaciones from './pages/Notificaciones.js';
 import PerfilUsuario from './pages/PerfilUsuario.js';
 
-// Importar el componente PrivateRoute si lo estás usando
-import PrivateRoute from './components/PrivateRoute.js';
 import ConfirmacionRegistro from './pages/ConfirmacionRegistro.js';
 import RegistroExterno from './pages/RegistroExterno.js';
 import RegistroInterno from './pages/RegistroInterno.js';
 import SeleccionRegistro from './pages/SeleccionRegistro.js';
-
 
 function App() {
   return (
@@ -48,58 +47,15 @@ function App() {
         </Route>
         <Route path="/confirmacion-registro/:token" element={<ConfirmacionRegistro />} />
         <Route element={<MainLayout />}>
-          <Route
-            path="/home"
-            element={
-              
-                <Inicio />
-              
-            }
-          />
-          <Route
-            path="/requerimientos"
-            element={
-              <PrivateRoute>
-                <Requerimientos />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/notificaciones"
-            element={
-              <PrivateRoute>
-                <Notificaciones />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/perfil-usuario"
-            element={
-              <PrivateRoute>
-                <PerfilUsuario />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/home" element={<Inicio />} />
+          <Route path="/requerimientos" element={<RequerimientosWrapper />} /> {/* Ruta actualizada */}
+          <Route path="/notificaciones" element={<Notificaciones />} />
+          <Route path="/perfil-usuario" element={<PerfilUsuario />} />
 
           {/* Rutas exclusivas para usuarios internos */}
-          <Route
-            path="/tipos-categorias"
-            element={
-              <PrivateRoute onlyInternal={true}>
-                <TiposCategorias />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/usuarios"
-            element={
-              <PrivateRoute onlyInternal={true}>
-                <Usuarios />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/tipos-categorias" element={<TiposCategorias />} />
+          <Route path="/usuarios" element={<Usuarios />} />
         </Route>
-
       </Routes>
     </BrowserRouter>
   );

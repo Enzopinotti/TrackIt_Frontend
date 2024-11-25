@@ -1,5 +1,7 @@
 @use 'base/reset';
 @use './abstract/variables' as vars;
+@use './components/header';
+@use './components/menuOverlay';
 @use './components/login';
 @use './components/seleccionLogin';
 @use './components/recuperarContrasenia';
@@ -9,7 +11,13 @@
 @use './components/seleccionRegistro';
 @use './components/registroExterno';
 @use './components/registroInterno';
+@use './components/requerimientos';
+@use './components/misRequerimientos';
 
 body {
     font-family: 'Poppins', serif;
+}
+
+main{
+    margin-top: 130px;
 }

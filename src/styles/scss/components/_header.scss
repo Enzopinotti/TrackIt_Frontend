@@ -1,0 +1,208 @@
+// src/components/Header/Header.scss
+
+@use '../abstract/variables' as vars;
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem 2rem; // Padding para móviles
+  background-color: vars.$blanco-primario;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed; // Fijo en la parte superior
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; // Por encima del contenido
+  backdrop-filter: blur(5px); // Fondo borroso
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  @media (min-width: 1024px) {
+    padding: 2.5rem 4rem; // Padding para móviles
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem; // Espacio para móviles
+
+    .logoContainer {
+      img {
+        width: 130px; // Tamaño para móviles
+        height: auto;
+        transition: width 0.3s ease;
+        margin-bottom: 0rem !important;
+        @media (min-width: 420px) {
+          width: 180px !important; // Tamaño para tablets
+        }
+      }
+    }
+
+    .navigation {
+      display: none; // Oculto por defecto en móviles
+
+      @media (min-width: 1000px) {
+        display: block; // Visible en pantallas grandes
+      }
+
+      ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        margin-left: 2rem;
+        padding: 0;
+
+        li {
+          a {
+            text-decoration: none;
+            color: vars.$negro-primario;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+
+            &.active {
+              color: vars.$color-primario;
+              text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+
+              &:after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: vars.$color-primario;
+              }
+            }
+
+            &:hover {
+              color: vars.$color-primario;
+              text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem; // Espacio para móviles
+
+    .notifications-button {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+
+      img {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.3s ease;
+      }
+
+      .badge {
+        position: absolute;
+        top: -8px;
+        right: -5px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+
+      &:hover img {
+        transform: scale(1.1);
+      }
+    }
+
+    .user-profile-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+        display: none;
+      .user-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid vars.$color-primario;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      &:hover .user-image {
+        opacity: 0.8;
+        transform: scale(1.05);
+      }
+      @media (min-width: 1000px) {
+        display: flex; // Oculto en pantallas grandes
+      }
+    }
+
+    /* Botón de Hamburguesa */
+    .hamburger-button {
+      display: block; // Visible por defecto en móviles
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+
+      @media (min-width: 1000px) {
+        display: none; // Oculto en pantallas grandes
+      }
+    }
+
+    /* Mejoras en las letras */
+    .navigation a,
+    .navigation-vertical a {
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* Media Queries para Responsividad */
+  @media (min-width: 768px) {
+    .app-header {
+      padding: 1.5rem 3rem;
+
+      .header-left {
+        .navigation {
+          ul {
+            gap: 2rem;
+
+            li {
+              a {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+
+      .header-right {
+        .notifications-button img,
+        .user-profile-button .user-image {
+          width: 22px;
+          height: 22px;
+        }
+
+        .hamburger-button img {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+  }
+}

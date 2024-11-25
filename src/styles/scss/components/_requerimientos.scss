@@ -1,0 +1,324 @@
+// src/pages/Requerimientos/Requerimientos.scss
+
+@use '../abstract/variables' as vars;
+
+.requerimientos-page {
+  padding: 4rem 1rem 1rem 1rem; // Espacio superior para evitar el header fijo
+  min-height: 100vh;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      color: vars.$color-secundario;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      padding: 1rem;
+
+      @media (min-width: 600px) {
+        margin-bottom: 0;
+      }
+      
+    }
+
+    .create-button {
+        width: 250px;
+        height: 3.2rem;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        font-size: 1rem;
+        font-weight: bold;
+        color: vars.$negro-primario;
+        background-color: vars.$blanco-primario;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border: 1px vars.$negro-primario solid;
+        box-shadow: #0A9396 2px 2px 6px;
+        
+      .plus-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 0.5rem;
+        fill: vars.$negro-primario; // Cambia el color del SVG si es necesario
+      }
+
+      &:hover {
+        background-color: #b4d9d9;
+      }
+    }
+  }
+
+  .kanban-board {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem; // Espacio inferior para scroll
+    margin-bottom: 2rem;
+
+    /* Scrollbar personalizado (opcional) */
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: vars.$color-secundario;
+      border-radius: 4px;
+    }
+
+    .kanban-column {
+      flex: 0 0 100%; // Cada columna ocupa el 100% del ancho en mobile
+      background-color: vars.$blanco-primario;
+      padding: 2rem;
+      min-width: 300px; // Ancho mínimo de cada columna
+      position: relative; // Para posicionar elementos absolutos como placeholders
+
+      @media (min-width: 600px) {
+        flex: 0 0 calc(50% - 1rem); // Dos columnas visibles en tablet
+      }
+
+      @media (min-width: 1000px) {
+        flex: 0 0 30%; // Tres columnas visibles en escritorio
+      }
+
+      .column-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        h2 {
+          font-size: 1.2rem;
+          color: vars.$negro-primario;
+        }
+
+        .count {
+          font-size: 1rem;
+          color: vars.$color-secundario;
+          background-color: rgba(10, 147, 150, 0.2);
+          padding: 0.2rem 0.5rem;
+          border-radius: 3px;
+        }
+      }
+
+      .column-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        /* Placeholder para Drag and Drop */
+        &.placeholder {
+          background-color: vars.$overlay-background;
+          border: 2px dashed vars.$color-secundario;
+          height: 100px;
+        }
+
+        .requerimiento-card {
+            position: relative;
+            width: 300px;
+            height: auto;
+            background-image: url('/public/assets/images/fondoTarjetaRequerimiento.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 15px; // Ajusta según el fondo PNG
+            padding: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        
+            &:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            }
+        
+            .card-content {
+              position: relative;
+              z-index: 1; // Asegura que el contenido esté encima del fondo
+              color: vars.$blanco-primario; // Texto blanco por defecto
+        
+              /* Tipo del Requerimiento */
+              .requirement-type {
+                background-color: rgba(0, 0, 0, 0.7); // Fondo negro semi-transparente
+                color: vars.$blanco-primario;
+                padding: 0.3rem 0.6rem;
+                border-radius: 3px;
+                display: inline-block;
+                margin-bottom: 0.5rem;
+                font-size: 0.9rem;
+              }
+        
+              /* Título del Requerimiento */
+              .requirement-title {
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+                color: vars.$blanco-primario;
+              }
+        
+              /* Descripción del Requerimiento */
+              .requirement-description {
+                font-size: 0.9rem;
+                color: vars.$blanco-primario;
+                margin-bottom: 0.5rem;
+              }
+        
+              /* Botón de Sub-Requerimientos */
+              .subrequirements-button {
+                width: 100%;
+                background-color: vars.$blanco-primario;
+                color: vars.$negro-primario;
+                border: 1px vars.$gris-secundario solid;
+                border-radius: 5px;
+                padding: 0.5rem;
+                font-size: 0.9rem;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                margin-bottom: 0.5rem;
+        
+                display: flex;
+                align-items: center;
+                justify-content: center;
+        
+                &:hover {
+                  background-color: #f0f0f0;
+                }
+              }
+        
+              /* Información del Requerimiento */
+              .requirement-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+        
+                /* Información de la Fecha */
+                .calendar-info {
+                  display: flex;
+                  align-items: center;
+                  color: vars.$blanco-primario;
+                  font-size: 0.8rem;
+        
+                  .calendar-icon {
+                    width: 16px;
+                    height: 16px;
+                    margin-right: 0.3rem;
+                  }
+        
+                  .date-range {
+                    font-weight: normal;
+                  }
+                }
+        
+                /* Información de Usuarios y Acceso al Detalle */
+                .user-info {
+                  display: flex;
+                  align-items: center;
+        
+                  .users {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 0.5rem;
+        
+                    .user-icon {
+                      width: 32px;
+                      height: 32px;
+                      border-radius: 50%;
+                      object-fit: cover;
+                      border: 2px solid vars.$blanco-primario;
+                      margin-left: -8px;
+                      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+        
+                      &:first-child {
+                        margin-left: 0;
+                      }
+                    }
+                  }
+        
+                  .eye-icon {
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                    transition: transform 0.2s ease;
+        
+                    &:hover {
+                      transform: scale(1.2);
+                    }
+                  }
+                }
+              }
+            }
+        }
+      }
+
+      /* Estilos para cuando una columna está en estado de arrastre */
+      &.dragging-over {
+        background-color: lighten(vars.$color-primario, 40%);
+        transition: background-color 0.2s ease;
+      }
+    }
+  }
+
+  /* Media Queries para Responsividad */
+  @media (min-width: 768px) {
+    .requerimientos-page {
+      padding: 4rem 2rem 2rem 2rem;
+    }
+
+    .header {
+      .title {
+        font-size: 2rem;
+      }
+
+      .create-button {
+        max-width: 300px;
+        height: 3.5rem;
+
+        .plus-icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    .kanban-board {
+      gap: 1.5rem;
+
+      .kanban-column {
+        padding: 1.5rem;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .requerimientos-page {
+      padding: 4rem 4rem 2rem 4rem;
+    }
+
+    .kanban-board {
+      gap: 2rem;
+
+      .kanban-column {
+        padding: 3rem;
+      }
+    }
+    
+        .header{
+            .title{
+                padding: 3rem;
+            }
+        }
+    
+  }
+}

@@ -97,6 +97,281 @@ html {
   font-size: 100%;
 }
 
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem 2rem;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  /* Media Queries para Responsividad */
+}
+@media (min-width: 1024px) {
+  .app-header {
+    padding: 2.5rem 4rem;
+  }
+}
+.app-header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.app-header .header-left .logoContainer img {
+  width: 130px;
+  height: auto;
+  transition: width 0.3s ease;
+  margin-bottom: 0rem !important;
+}
+@media (min-width: 420px) {
+  .app-header .header-left .logoContainer img {
+    width: 180px !important;
+  }
+}
+.app-header .header-left .navigation {
+  display: none;
+}
+@media (min-width: 1000px) {
+  .app-header .header-left .navigation {
+    display: block;
+  }
+}
+.app-header .header-left .navigation ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  margin-left: 2rem;
+  padding: 0;
+}
+.app-header .header-left .navigation ul li a {
+  text-decoration: none;
+  color: #222222;
+  font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.app-header .header-left .navigation ul li a.active {
+  color: #0A9396;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.app-header .header-left .navigation ul li a.active:after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #0A9396;
+}
+.app-header .header-left .navigation ul li a:hover {
+  color: #0A9396;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.app-header .header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* Botón de Hamburguesa */
+  /* Mejoras en las letras */
+}
+.app-header .header-right .notifications-button {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.app-header .header-right .notifications-button img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+.app-header .header-right .notifications-button .badge {
+  position: absolute;
+  top: -8px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.app-header .header-right .notifications-button:hover img {
+  transform: scale(1.1);
+}
+.app-header .header-right .user-profile-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  display: none;
+}
+.app-header .header-right .user-profile-button .user-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0A9396;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.app-header .header-right .user-profile-button:hover .user-image {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+@media (min-width: 1000px) {
+  .app-header .header-right .user-profile-button {
+    display: flex;
+  }
+}
+.app-header .header-right .hamburger-button {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.app-header .header-right .hamburger-button img {
+  width: 30px;
+  height: 30px;
+}
+@media (min-width: 1000px) {
+  .app-header .header-right .hamburger-button {
+    display: none;
+  }
+}
+.app-header .header-right .navigation a,
+.app-header .header-right .navigation-vertical a {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+@media (min-width: 768px) {
+  .app-header .app-header {
+    padding: 1.5rem 3rem;
+  }
+  .app-header .app-header .header-left .navigation ul {
+    gap: 2rem;
+  }
+  .app-header .app-header .header-left .navigation ul li a {
+    font-size: 1rem;
+  }
+  .app-header .app-header .header-right .notifications-button img,
+  .app-header .app-header .header-right .user-profile-button .user-image {
+    width: 22px;
+    height: 22px;
+  }
+  .app-header .app-header .header-right .hamburger-button img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+  z-index: 1001;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  /* Media Queries para Responsividad */
+}
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.menu-overlay .close-button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #222222;
+  cursor: pointer;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  transition: color 0.3s ease;
+}
+.menu-overlay .close-button:hover {
+  color: #0A9396;
+}
+.menu-overlay .menu-content {
+  margin-top: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.menu-overlay .menu-content .user-profile-button-overlay {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+.menu-overlay .menu-content .user-profile-button-overlay .user-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0A9396;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.menu-overlay .menu-content .user-profile-button-overlay:hover .user-image {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+.menu-overlay .menu-content .navigation-vertical ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu-overlay .menu-content .navigation-vertical ul li a {
+  text-decoration: none;
+  color: #222222;
+  font-weight: 600;
+  font-size: 1.9rem;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.menu-overlay .menu-content .navigation-vertical ul li a.active {
+  color: #0A9396;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.menu-overlay .menu-content .navigation-vertical ul li a:hover {
+  color: #0A9396;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 768px) {
+  .menu-overlay .menu-content .navigation-vertical ul {
+    gap: 1rem;
+  }
+  .menu-overlay .menu-content .navigation-vertical ul li a {
+    font-size: 1rem;
+  }
+}
+
 .login-page {
   display: flex;
   flex-direction: column;
@@ -339,6 +614,7 @@ html {
   }
 }
 .inicio-page {
+  margin-top: 10rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -855,8 +1131,550 @@ html {
   }
 }
 
+.requerimientos-page {
+  padding: 4rem 1rem 1rem 1rem;
+  min-height: 100vh;
+  /* Media Queries para Responsividad */
+}
+.requerimientos-page .header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+@media (min-width: 600px) {
+  .requerimientos-page .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.requerimientos-page .header .title {
+  font-size: 1.5rem;
+  color: #03045E;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+@media (min-width: 600px) {
+  .requerimientos-page .header .title {
+    margin-bottom: 0;
+  }
+}
+.requerimientos-page .header .create-button {
+  width: 250px;
+  height: 3.2rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #222222;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 1px #222222 solid;
+  box-shadow: #0A9396 2px 2px 6px;
+}
+.requerimientos-page .header .create-button .plus-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  fill: #222222;
+}
+.requerimientos-page .header .create-button:hover {
+  background-color: #b4d9d9;
+}
+.requerimientos-page .kanban-board {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  /* Scrollbar personalizado (opcional) */
+}
+.requerimientos-page .kanban-board::-webkit-scrollbar {
+  height: 8px;
+}
+.requerimientos-page .kanban-board::-webkit-scrollbar-thumb {
+  background-color: #03045E;
+  border-radius: 4px;
+}
+.requerimientos-page .kanban-board .kanban-column {
+  flex: 0 0 100%;
+  background-color: #FFFFFF;
+  padding: 2rem;
+  min-width: 300px;
+  position: relative;
+  /* Estilos para cuando una columna está en estado de arrastre */
+}
+@media (min-width: 600px) {
+  .requerimientos-page .kanban-board .kanban-column {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+@media (min-width: 1000px) {
+  .requerimientos-page .kanban-board .kanban-column {
+    flex: 0 0 30%;
+  }
+}
+.requerimientos-page .kanban-board .kanban-column .column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.requerimientos-page .kanban-board .kanban-column .column-header h2 {
+  font-size: 1.2rem;
+  color: #222222;
+}
+.requerimientos-page .kanban-board .kanban-column .column-header .count {
+  font-size: 1rem;
+  color: #03045E;
+  background-color: rgba(10, 147, 150, 0.2);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  /* Placeholder para Drag and Drop */
+}
+.requerimientos-page .kanban-board .kanban-column .column-content.placeholder {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px dashed #03045E;
+  height: 100px;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card {
+  position: relative;
+  width: 300px;
+  height: auto;
+  background-image: url("/public/assets/images/fondoTarjetaRequerimiento.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content {
+  position: relative;
+  z-index: 1;
+  color: #FFFFFF;
+  /* Tipo del Requerimiento */
+  /* Título del Requerimiento */
+  /* Descripción del Requerimiento */
+  /* Botón de Sub-Requerimientos */
+  /* Información del Requerimiento */
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-type {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #FFFFFF;
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #FFFFFF;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-description {
+  font-size: 0.9rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .subrequirements-button {
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #222222;
+  border: 1px #949393 solid;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .subrequirements-button:hover {
+  background-color: #f0f0f0;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Información de la Fecha */
+  /* Información de Usuarios y Acceso al Detalle */
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .calendar-info {
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 0.8rem;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .calendar-info .calendar-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.3rem;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .calendar-info .date-range {
+  font-weight: normal;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info {
+  display: flex;
+  align-items: center;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .users {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .users .user-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #FFFFFF;
+  margin-left: -8px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .users .user-icon:first-child {
+  margin-left: 0;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .eye-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .eye-icon:hover {
+  transform: scale(1.2);
+}
+.requerimientos-page .kanban-board .kanban-column.dragging-over {
+  background-color: rgb(118.125, 243.1375, 245.875);
+  transition: background-color 0.2s ease;
+}
+@media (min-width: 768px) {
+  .requerimientos-page .requerimientos-page {
+    padding: 4rem 2rem 2rem 2rem;
+  }
+  .requerimientos-page .header .title {
+    font-size: 2rem;
+  }
+  .requerimientos-page .header .create-button {
+    max-width: 300px;
+    height: 3.5rem;
+  }
+  .requerimientos-page .header .create-button .plus-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .requerimientos-page .kanban-board {
+    gap: 1.5rem;
+  }
+  .requerimientos-page .kanban-board .kanban-column {
+    padding: 1.5rem;
+  }
+}
+@media (min-width: 1200px) {
+  .requerimientos-page .requerimientos-page {
+    padding: 4rem 4rem 2rem 4rem;
+  }
+  .requerimientos-page .kanban-board {
+    gap: 2rem;
+  }
+  .requerimientos-page .kanban-board .kanban-column {
+    padding: 3rem;
+  }
+  .requerimientos-page .header .title {
+    padding: 3rem;
+  }
+}
+
+.mis-requerimientos-page {
+  padding: 4rem 1rem 1rem 1rem;
+  min-height: 100vh;
+  /* Media Queries para Responsividad */
+}
+.mis-requerimientos-page .header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+@media (min-width: 600px) {
+  .mis-requerimientos-page .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.mis-requerimientos-page .header .title {
+  font-size: 1.5rem;
+  color: #03045E;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+@media (min-width: 600px) {
+  .mis-requerimientos-page .header .title {
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1200px) {
+  .mis-requerimientos-page .header .title {
+    padding: 2rem;
+  }
+}
+.mis-requerimientos-page .header .create-button {
+  width: 250px;
+  height: 3.2rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #222222;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 1px #222222 solid;
+  box-shadow: #0A9396 2px 2px 6px;
+  display: flex;
+  align-items: center;
+}
+.mis-requerimientos-page .header .create-button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
+.mis-requerimientos-page .header .create-button:hover {
+  background-color: #b4d9d9;
+}
+.mis-requerimientos-page .kanban-board {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-x: hidden;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+.mis-requerimientos-page .kanban-board .kanban-column {
+  background-color: #FFFFFF;
+  padding: 1rem;
+  min-height: 100px;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-header h2 {
+  font-size: 1.2rem;
+  color: #222222;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-header .count {
+  font-size: 1rem;
+  color: #03045E;
+  background-color: rgba(10, 147, 150, 0.2);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card {
+  position: relative;
+  width: 300px;
+  height: auto;
+  background-image: url("/public/assets/images/fondoTarjetaRequerimiento.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content {
+  position: relative;
+  z-index: 1;
+  color: #FFFFFF;
+  /* Tipo del Requerimiento */
+  /* Título del Requerimiento */
+  /* Descripción del Requerimiento */
+  /* Botón de Sub-Requerimientos */
+  /* Información del Requerimiento */
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-type {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 0.3rem 0.6rem;
+  border-radius: 9px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  -ms-border-radius: 9px;
+  -o-border-radius: 9px;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #FFFFFF;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-description {
+  font-size: 0.9rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .subrequirements-button {
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #222222;
+  border: 1px #949393 solid;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .subrequirements-button:hover {
+  background-color: #f0f0f0;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
+  /* Información de la Fecha */
+  /* Información de Usuarios y Acceso al Detalle */
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .calendar-info {
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .calendar-info .calendar-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.3rem;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .calendar-info .date-range {
+  font-weight: normal;
+  color: #222222;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 3rem;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .users {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .users .user-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .users .user-icon:first-child {
+  margin-right: 1rem;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .eye-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.mis-requerimientos-page .kanban-board .kanban-column .column-content .requerimiento-card .card-content .requirement-info .user-info .eye-icon:hover {
+  transform: scale(1.2);
+}
+@media (min-width: 600px) {
+  .mis-requerimientos-page .mis-requerimientos-page {
+    padding: 4rem 2rem 2rem 2rem;
+  }
+  .mis-requerimientos-page .header .title {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+  .mis-requerimientos-page .header .create-button {
+    max-width: 300px;
+    height: 3.5rem;
+  }
+  .mis-requerimientos-page .header .create-button img {
+    width: 24px;
+    height: 24px;
+  }
+  .mis-requerimientos-page .kanban-board {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  .mis-requerimientos-page .kanban-board .kanban-column {
+    flex: 1;
+  }
+}
+@media (min-width: 1200px) {
+  .mis-requerimientos-page .mis-requerimientos-page {
+    padding: 4rem 4rem 2rem 4rem;
+  }
+  .mis-requerimientos-page .kanban-board {
+    gap: 2rem;
+  }
+  .mis-requerimientos-page .kanban-board .kanban-column {
+    padding: 3rem;
+  }
+  .mis-requerimientos-page .header .title {
+    padding: 3rem;
+  }
+  .mis-requerimientos-page .header .create-button {
+    margin-right: 2rem !important;
+  }
+}
+
 body {
   font-family: "Poppins", serif;
+}
+
+main {
+  margin-top: 130px;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,122 @@
+// src/components/MenuOverlay/MenuOverlay.scss
+
+@use '../abstract/variables' as vars;
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: vars.$overlay-background;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+  z-index: 1001; // Mayor que el header
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%); // Oculto por defecto
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); // Visible cuando está activo
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: vars.$negro-primario;
+    cursor: pointer;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: vars.$color-primario;
+    }
+  }
+
+  .menu-content {
+    margin-top: 4rem; // Espacio debajo del botón de cerrar
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .user-profile-button-overlay {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 2rem;
+
+      .user-image {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid vars.$color-primario;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      &:hover .user-image {
+        opacity: 0.8;
+        transform: scale(1.05);
+      }
+    }
+
+    .navigation-vertical {
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          a {
+            text-decoration: none;
+            color: vars.$negro-primario;
+            font-weight: 600;
+            font-size: 1.9rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+
+            &.active {
+              color: vars.$color-primario;
+              text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            }
+
+            &:hover {
+              color: vars.$color-primario;
+              text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* Media Queries para Responsividad */
+  @media (min-width: 768px) {
+    .menu-content {
+      .navigation-vertical {
+        ul {
+          gap: 1rem;
+
+          li {
+            a {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
