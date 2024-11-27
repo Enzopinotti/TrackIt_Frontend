@@ -1,3 +1,5 @@
+// src/pages/Login.scss
+
 @use '../abstract/variables' as vars;
 
 .login-page {
@@ -9,6 +11,8 @@
   background-color: vars.$blanco-primario;
   color: vars.$negro-primario;
   text-align: center;
+  margin-top: -8.5rem;
+
   .titulo-login {
     padding: 2rem;
     h1 {
@@ -30,6 +34,7 @@
     align-items: center;
     width: 55%;
     padding: 2rem;
+
     .formLogin {
       padding-top: 6rem;
       padding-bottom: 6rem;
@@ -42,6 +47,7 @@
       background-color: rgba(#0A9396, 0.08);
       border-radius: 20px;
       padding-top: 3rem;
+
       .logoContainer {
         img {
           width: 13rem;
@@ -51,11 +57,13 @@
           margin-bottom: 4rem;
         }
       }
+
       .inputsContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
+
         input {
           width: 100%;
           padding: 1rem;
@@ -67,6 +75,34 @@
           border-radius: 5px;
         }
 
+        .password-input-wrapper {
+          position: relative;
+          width: 100%;
+
+          input {
+            padding-right: 3rem; // Espacio para el ícono del ojo
+          }
+
+          .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+          }
+
+          .toggle-password img {
+            width: 24px;
+            height: 24px;
+          }
+        }
+
+        .error-message {
+          color: red;
+          font-size: 0.8rem;
+          margin-top: 0.25rem;
+        }
+
         button {
           width: 250px;
           height: 3.2rem;
@@ -74,16 +110,16 @@
           margin: 0.5rem 0;
           font-size: 1rem;
           font-weight: bold;
-          color: vars.$negro-primario;
-          background-color: vars.$blanco-primario;
+          color: vars.$blanco-primario;
+          background-color: vars.$color-primario;
           border: none;
           border-radius: 5px;
           cursor: pointer;
           transition: background-color 0.3s ease;
-          border: 1px vars.$negro-primario solid;
           box-shadow: #0A9396 2px 2px 6px;
+
           &:hover {
-              background-color: #b4d9d9;
+            background-color: darken(vars.$color-primario, 10%);
           }
         }
       }
@@ -98,40 +134,43 @@
       }
     }
   }
-}
 
-@media (min-width: 420px) {
-  .button{
-    width: 200px;
-    height: 3.5rem;
+  .registro-link {
+    margin-top: 1rem;
+    p {
+      margin-bottom: 0.5rem;
+    }
   }
-  .logoContainer{
-      img{
+
+  @media (min-width: 420px) {
+    .formLogin {
+      .logoContainer {
+        img {
           width: 15rem !important;
           margin-bottom: 2rem;
-      }
-      p{
+        }
+        p {
           margin-bottom: 4rem;
+        }
       }
+    }
   }
 
-}
-
-@media (min-width: 1024px) {
-  .login-page{
+  @media (min-width: 1024px) {
     flex-direction: row;
-  }
-  .titulo-login {
-    padding: 2rem;
-    h1 {
-      font-size: 3rem !important;
-      line-height: 1.5;
-      color: vars.$negro-primario;
-      font-weight: 400;
-      max-width: 630px;
-      span {
-        color: vars.$color-primario;
-        font-weight: bold;
+    .titulo-login {
+      padding: 2rem;
+      h1 {
+        font-size: 3rem !important;
+        line-height: 1.5;
+        color: vars.$negro-primario;
+        font-weight: 400;
+        max-width: 630px;
+
+        span {
+          color: vars.$color-primario;
+          font-weight: bold;
+        }
       }
     }
   }

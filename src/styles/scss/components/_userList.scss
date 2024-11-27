@@ -1,0 +1,64 @@
+// src/components/UserList.scss
+
+@use '../abstract/variables' as vars;
+
+.user-list {
+  flex: 1;
+  padding: 1rem;
+  background-color: vars.$blanco-primario;
+  border: 1px solid vars.$gris-secundario;
+  border-radius: 5px;
+  box-shadow: #0A9396 2px 2px 6px;
+  max-width: 300px;
+
+  h2 {
+    font-size: 1.3rem;
+    color: vars.$negro-primario;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+
+    li {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      background-color: vars.$blanco-primario;
+      border: 1px solid vars.$gris-secundario;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #e0f7fa;
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 0.8rem;
+        border: 2px solid vars.$color-secundario;
+      }
+
+      .info {
+        .nombre {
+          font-size: 1rem;
+          font-weight: bold;
+          color: vars.$negro-primario;
+        }
+
+        .cargo {
+          font-size: 0.9rem;
+          color: vars.$color-secundario;
+        }
+      }
+    }
+  }
+}

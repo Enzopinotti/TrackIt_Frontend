@@ -1,11 +1,13 @@
 // src/pages/SeleccionLogin.js
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Logo from '../components/Logo.js';
+import { AuthContext } from '../context/AuthContext.js';
 
 function SeleccionLogin() {
   const navigate = useNavigate();
+  const { user, loading } = useContext(AuthContext);
 
   const handleInternalLogin = () => {
     navigate('/login/interno');
@@ -15,10 +17,15 @@ function SeleccionLogin() {
     navigate('/login/externo');
   };
 
+  if (loading) {
+    // Puedes reemplazar esto con un spinner o una pantalla de carga
+    return <div>Cargando...</div>;
+  }
+
   return (
     <div className="seleccion-login">
       <article className='titulo-login'>
-        <h1><span>Centralización </span> y <span>eficiencia</span> en la gestión de requerimientos</h1>
+        <h1><span>Centralización </span> y <span>incidencia</span> en la gestión de requerimientos</h1>
       </article>
       <article className='formContainer'>
         <div className='formLogin'>

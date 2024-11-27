@@ -8,17 +8,17 @@ function RequerimientoCard({ requerimiento }) {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/requerimientos/${requerimiento.id}`);
+    navigate(`/requerimiento/${requerimiento.id}`);
   };
 
   const handleEyeClick = (e) => {
     e.stopPropagation(); // Evita que el evento de clic se propague al contenedor principal
-    navigate(`/requerimientos/${requerimiento.id}`);
+    navigate(`/requerimiento/${requerimiento.id}`);
   };
 
   const handleSubrequirementsClick = (e) => {
     e.stopPropagation(); // Evita que el evento de clic se propague al contenedor principal
-    navigate(`/requerimientos/${requerimiento.id}/subrequerimientos`); // Ruta a sub-requerimientos
+    navigate(`/requerimiento/${requerimiento.id}/subrequerimientos`); // Ruta a sub-requerimientos
   };
 
   return (
@@ -48,14 +48,14 @@ function RequerimientoCard({ requerimiento }) {
               className="icon calendar-icon"
             />
             <span className="date-range">
-              {requerimiento.fechaCreacion} - {requerimiento.fechaVencimiento}
+              {requerimiento.fechaCreacion}
             </span>
           </div>
 
           {/* Información de Usuarios y Acceso al Detalle */}
           <div className="user-info">
             <div className="users">
-              {(requerimiento.usuariosAsignados || []).map((usuario, index) => (
+              {(requerimiento.assignedUsers || []).map((usuario, index) => (
                 <img
                   key={index}
                   src={usuario.avatar}
@@ -80,18 +80,19 @@ function RequerimientoCard({ requerimiento }) {
 RequerimientoCard.propTypes = {
   requerimiento: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    tipo: PropTypes.string.isRequired, // Añadido para el tipo del requerimiento
+    tipo: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     descripcion: PropTypes.string.isRequired,
-    fechaCreacion: PropTypes.string.isRequired, // Fecha de creación
-    fechaVencimiento: PropTypes.string.isRequired, // Fecha de vencimiento
-    usuariosAsignados: PropTypes.arrayOf(
+    codigo: PropTypes.string.isRequired,
+    fechaCreacion: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    assignedUsers: PropTypes.arrayOf(
       PropTypes.shape({
+        id: PropTypes.string.isRequired,
         nombre: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
       })
     ).isRequired,
-    status: PropTypes.string.isRequired,
   }).isRequired,
 };
 

@@ -10,12 +10,14 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   // Estado de autenticación
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null); // Estado del token
   const [loading, setLoading] = useState(true); // Nuevo estado de carga
 
   // Función para iniciar sesión
-  const login = async (token) => {
-    // Guardar el token en localStorage
-    localStorage.setItem('authToken', token);
+  const login = async (authToken) => {
+    // Guardar el token en localStorage y en el estado
+    localStorage.setItem('authToken', authToken);
+    setToken(authToken);
 
     try {
       // Realizar una solicitud al backend para obtener el perfil del usuario
@@ -23,7 +25,7 @@ export function AuthProvider({ children }) {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Enviar el token en la cabecera
+          'Authorization': `Bearer ${authToken}`, // Enviar el token en la cabecera
         },
       });
 
@@ -35,11 +37,13 @@ export function AuthProvider({ children }) {
         console.error('Error al obtener el perfil del usuario:', response.statusText);
         localStorage.removeItem('authToken');
         setUser(null);
+        setToken(null);
       }
     } catch (error) {
       console.error('Error al conectar con el servidor:', error);
       localStorage.removeItem('authToken');
       setUser(null);
+      setToken(null);
     } finally {
       setLoading(false); // Finalizar la carga
     }
@@ -47,9 +51,10 @@ export function AuthProvider({ children }) {
 
   // Función para cerrar sesión
   const logout = () => {
-    // Eliminar el token del localStorage
+    // Eliminar el token del localStorage y reiniciar el estado
     localStorage.removeItem('authToken');
     setUser(null);
+    setToken(null);
   };
 
   // Función para actualizar el usuario
@@ -59,9 +64,10 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     // Obtener el token del localStorage
-    const token = localStorage.getItem('authToken');
+    const storedToken = localStorage.getItem('authToken');
 
-    if (token) {
+    if (storedToken) {
+      setToken(storedToken); // Guardar el token en el estado
       // Intentar obtener el perfil del usuario
       const fetchUserProfile = async () => {
         try {
@@ -69,24 +75,25 @@ export function AuthProvider({ children }) {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`, // Enviar el token en la cabecera
+              'Authorization': `Bearer ${storedToken}`, // Enviar el token en la cabecera
             },
           });
 
           if (response.ok) {
             const userData = await response.json();
-            console.log(userData);
             setUser(userData);
           } else {
             // Si la respuesta no es ok, manejar el error
             console.error('Error al obtener el perfil del usuario:', response.statusText);
             localStorage.removeItem('authToken');
             setUser(null);
+            setToken(null);
           }
         } catch (error) {
           console.error('Error al conectar con el servidor:', error);
           localStorage.removeItem('authToken');
           setUser(null);
+          setToken(null);
         } finally {
           setLoading(false); // Finalizar la carga
         }
@@ -96,12 +103,13 @@ export function AuthProvider({ children }) {
     } else {
       // No hay token, el usuario no está autenticado
       setUser(null);
+      setToken(null);
       setLoading(false); // Finalizar la carga
     }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading, updateUser }}>
+    <AuthContext.Provider value={{ user, token, login, logout, loading, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

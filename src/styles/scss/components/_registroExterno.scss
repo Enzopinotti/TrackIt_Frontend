@@ -46,11 +46,13 @@
       background-color: rgba(#0A9396, 0.08);
       border-radius: 20px;
       padding-top: 3rem;
+      padding-left: 6rem !important;
+      padding-right: 6rem !important;
 
       .logoContainer {
         img {
           width: 13rem;
-          margin-bottom: 2rem;
+          margin-bottom: 4rem;
         }
         p {
           margin-bottom: 4rem;
@@ -78,6 +80,49 @@
         textarea {
           resize: vertical;
           height: 100px;
+        }
+
+        .password-input-wrapper {
+          position: relative;
+          width: 100%;
+
+          input {
+            padding-right: 3rem; // Espacio para el ícono del ojo
+          }
+
+          .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+          }
+
+          .toggle-password img {
+            width: 34px;
+            height: 34px;
+          }
+        }
+
+        .password-conditions {
+          list-style: none;
+          padding: 0;
+          margin: 0.5rem 0;
+
+          li {
+            font-size: 0.9rem;
+            color: red;
+
+            &.met {
+              color: green;
+            }
+          }
+        }
+
+        .error-message {
+          color: red;
+          font-size: 0.8rem;
+          margin-top: 0.25rem;
         }
 
         button {

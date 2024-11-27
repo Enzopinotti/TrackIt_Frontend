@@ -32,7 +32,7 @@ function Header() {
   if (!user) {
     return null;
   }
-
+  console.log(user);
   const userRole = user.role;
 
   // Función para manejar clic en el perfil de usuario

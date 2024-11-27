@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext.js';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { handleErrors } from '../utils/handleErrors.js';
 
 function PerfilUsuario() {
   const { user, logout, updateUser } = useContext(AuthContext);
@@ -52,20 +53,9 @@ function PerfilUsuario() {
       });
 
       if (response.ok) {
-        // Verificar si la respuesta tiene contenido
-        let updatedUser = null;
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          updatedUser = await response.json();
-        }
-
-        if (updatedUser) {
-          // Actualizar el usuario en el contexto
-          updateUser(updatedUser);
-        } else {
-          // Si no hay cuerpo en la respuesta, podríamos volver a obtener el perfil del usuario
-          await refreshUserProfile();
-        }
+        const updatedUser = await response.json();
+        // Actualizar el usuario en el contexto
+        updateUser(updatedUser);
 
         await Swal.fire({
           title: 'Éxito',
@@ -77,14 +67,7 @@ function PerfilUsuario() {
         // Limpiar la imagen seleccionada
         setSelectedImage(null);
       } else {
-        const errorText = await response.text();
-        let errorMessage = 'No se pudo actualizar la imagen.';
-        try {
-          const errorData = JSON.parse(errorText);
-          errorMessage = errorData.message || errorMessage;
-        } catch (e) {
-          // El texto de error no es JSON
-        }
+        const errorMessage = await handleErrors(response);
         await Swal.fire({
           title: 'Error',
           text: errorMessage,
@@ -100,28 +83,6 @@ function PerfilUsuario() {
         icon: 'error',
         confirmButtonText: 'Aceptar',
       });
-    }
-  };
-
-  // Función para refrescar el perfil del usuario desde el backend
-  const refreshUserProfile = async () => {
-    const token = localStorage.getItem('authToken');
-    try {
-      const response = await fetch('http://trackit.somee.com/api/User/profile', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      if (response.ok) {
-        const userData = await response.json();
-        updateUser(userData);
-      } else {
-        console.error('Error al obtener el perfil del usuario:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error al conectar con el servidor:', error);
     }
   };
 

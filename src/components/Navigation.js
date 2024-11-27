@@ -18,7 +18,7 @@ function Navigation({ className = 'navigation', role, onLinkClick = () => {} }) 
             REQUERIMIENTOS
           </NavLink>
         </li>
-        {(role === 'admin' || role === 'interno') && (
+        {(role === 'Admin' || role === 'Interno') && (
           <>
             <li>
               <NavLink to="/usuarios" className={({ isActive }) => isActive ? 'active' : ''} onClick={onLinkClick}>

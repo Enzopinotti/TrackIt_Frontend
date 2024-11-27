@@ -1,11 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Logo = () => {
-  return (
-    <div className='logoContainer'>
-        <img src="/assets/images/logo.png" alt="Logo" />
-    </div>
-  )
-}
+  const navigate = useNavigate();
 
-export default Logo
+  const handleLogoClick = () => {
+    navigate('/home');
+  };
+
+  return (
+    <div className='logoContainer' onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
+      <img src="/assets/images/logo.png" alt="Logo" />
+    </div>
+  );
+};
+
+export default Logo;

@@ -2,20 +2,38 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import mockUsers from '../data/mockUsers.js'; // Importar mockUsers
 
 function Inicio() {
   // Datos hardcodeados para requerimientos y notificaciones
   const requerimientosRecientes = []; // Puedes agregar objetos para mostrar requerimientos
+
+  // Generar comentarios recientes usando mockUsers
   const comentariosRecientes = [
     {
-      nombre: 'Leo Perez',
-      cargo: 'Software',
+      userId: 'user1',
       tiempo: 'Hace 2 minutos',
+      comentario: 'He completado el módulo de autenticación.',
     },
     {
-      nombre: 'Monica Ramirez',
-      cargo: 'Soporte Hardware',
+      userId: 'user2',
       tiempo: 'Hace 15 minutos',
+      comentario: 'Necesitamos revisar el servidor de base de datos.',
+    },
+    {
+      userId: 'user3',
+      tiempo: 'Hace 30 minutos',
+      comentario: 'Actualización de la infraestructura de red completada.',
+    },
+    {
+      userId: 'user4',
+      tiempo: 'Hace 45 minutos',
+      comentario: 'Implementando nuevas medidas de seguridad.',
+    },
+    {
+      userId: 'user5',
+      tiempo: 'Hace 1 hora',
+      comentario: 'Soporte para el sistema de reportes financieros.',
     },
   ];
 
@@ -29,6 +47,9 @@ function Inicio() {
       descripcion: 'Mantenimiento del servidor el próximo lunes.',
     },
   ];
+
+  // Función para obtener datos del usuario por ID
+  const getUserById = (id) => mockUsers.find((user) => user.id === id);
 
   return (
     <div className="inicio-page">
@@ -61,20 +82,24 @@ function Inicio() {
             <p>No hay comentarios recientes.</p>
           ) : (
             <ul>
-              {comentariosRecientes.map((comentario, index) => (
-                <li key={index}>
-                  <img
-                    src="/assets/images/placeholder-comment-icon.png" // Imagen genérica
-                    alt="Comentario"
-                    className="icono-interaccion"
-                  />
-                  <div className="info-comentario">
-                    <p className="nombre">{comentario.nombre}</p>
-                    <p className="cargo">{comentario.cargo}</p>
-                    <p className="tiempo">{comentario.tiempo}</p>
-                  </div>
-                </li>
-              ))}
+              {comentariosRecientes.map((comentario, index) => {
+                const user = getUserById(comentario.userId);
+                return (
+                  <li key={index}>
+                    <img
+                      src={user.avatar}
+                      alt={user.nombre}
+                      className="icono-interaccion avatar-icon" // Clase actualizada para el avatar
+                    />
+                    <div className="info-comentario">
+                      <p className="nombre">{user.nombre}</p>
+                      <p className="cargo">{user.cargo}</p>
+                      <p className="comentario">{comentario.comentario}</p>
+                      <p className="tiempo">{comentario.tiempo}</p>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>
@@ -87,11 +112,6 @@ function Inicio() {
             <ul>
               {notificacionesSistema.map((notificacion, index) => (
                 <li key={index}>
-                  <img
-                    src="/assets/images/placeholder-system-icon.png" // Imagen genérica
-                    alt="Sistema"
-                    className="icono-interaccion"
-                  />
                   <div className="info-notificacion">
                     <p className="titulo">{notificacion.titulo}</p>
                     <p className="descripcion">{notificacion.descripcion}</p>

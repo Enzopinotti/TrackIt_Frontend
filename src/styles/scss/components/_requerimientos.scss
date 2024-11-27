@@ -31,7 +31,7 @@
       
     }
 
-    .create-button {
+      .create-button {
         width: 250px;
         height: 3.2rem;
         padding: 0.5rem;
@@ -46,12 +46,12 @@
         transition: background-color 0.3s ease;
         border: 1px vars.$negro-primario solid;
         box-shadow: #0A9396 2px 2px 6px;
-        
-      .plus-icon {
+        display: flex;
+        align-items: center;
+      img {
         width: 20px;
         height: 20px;
         margin-right: 0.5rem;
-        fill: vars.$negro-primario; // Cambia el color del SVG si es necesario
       }
 
       &:hover {
@@ -127,138 +127,144 @@
         }
 
         .requerimiento-card {
+          position: relative;
+          width: 300px;
+          height: auto;
+          background-image: url('/public/assets/images/fondoTarjetaRequerimiento.png');
+          background-size: cover;
+          background-repeat: no-repeat;
+          border-radius: 15px; // Ajusta según el fondo PNG
+          padding: 1rem;
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+      
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+          }
+      
+          .card-content {
             position: relative;
-            width: 300px;
-            height: auto;
-            background-image: url('/public/assets/images/fondoTarjetaRequerimiento.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            border-radius: 15px; // Ajusta según el fondo PNG
-            padding: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        
-            &:hover {
-              transform: translateY(-2px);
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-            }
-        
-            .card-content {
-              position: relative;
-              z-index: 1; // Asegura que el contenido esté encima del fondo
-              color: vars.$blanco-primario; // Texto blanco por defecto
-        
-              /* Tipo del Requerimiento */
+            z-index: 1; // Asegura que el contenido esté encima del fondo
+            color: vars.$blanco-primario; // Texto blanco por defecto
+      
+            /* Tipo del Requerimiento */
               .requirement-type {
-                background-color: rgba(0, 0, 0, 0.7); // Fondo negro semi-transparente
-                color: vars.$blanco-primario;
-                padding: 0.3rem 0.6rem;
-                border-radius: 3px;
-                display: inline-block;
-                margin-bottom: 0.5rem;
-                font-size: 0.9rem;
+                  background-color: rgba(0, 0, 0, 0.7);
+                  //Fondonegrosemi-transparentecolor: vars.$blanco-primario;
+                  padding: 0.3rem 0.6rem;
+                  border-radius: 9px;
+                  display: inline-block;
+                  margin-bottom: 0.5rem;
+                  font-size: 0.9rem;
+                  -webkit-border-radius: 9px;
+                  -moz-border-radius: 9px;
+                  -ms-border-radius: 9px;
+                  -o-border-radius: 9px;
               }
-        
-              /* Título del Requerimiento */
-              .requirement-title {
-                font-size: 1.2rem;
-                font-weight: bold;
-                margin-bottom: 0.5rem;
-                color: vars.$blanco-primario;
+      
+            /* Título del Requerimiento */
+            .requirement-title {
+              font-size: 1.5rem;
+              font-weight: bold;
+              margin-top: 1.5rem;
+              margin-bottom: 1.5rem;
+              color: vars.$blanco-primario;
+            }
+      
+            /* Descripción del Requerimiento */
+            .requirement-description {
+              font-size: 0.9rem;
+              color: vars.$blanco-primario;
+              margin-bottom: 0.5rem;
+            }
+      
+            /* Botón de Sub-Requerimientos */
+            .subrequirements-button {
+              width: 100%;
+              background-color: vars.$blanco-primario;
+              color: vars.$negro-primario;
+              border: 1px vars.$gris-secundario solid;
+              border-radius: 5px;
+              padding: 0.5rem;
+              font-size: 0.9rem;
+              font-weight: bold;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+              margin-bottom: 0.5rem;
+      
+              display: flex;
+              align-items: center;
+              justify-content: center;
+      
+              &:hover {
+                background-color: #f0f0f0;
               }
-        
-              /* Descripción del Requerimiento */
-              .requirement-description {
-                font-size: 0.9rem;
-                color: vars.$blanco-primario;
-                margin-bottom: 0.5rem;
-              }
-        
-              /* Botón de Sub-Requerimientos */
-              .subrequirements-button {
-                width: 100%;
-                background-color: vars.$blanco-primario;
-                color: vars.$negro-primario;
-                border: 1px vars.$gris-secundario solid;
-                border-radius: 5px;
-                padding: 0.5rem;
-                font-size: 0.9rem;
-                font-weight: bold;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-                margin-bottom: 0.5rem;
-        
+            }
+      
+            /* Información del Requerimiento */
+            .requirement-info {
+              display: flex;
+              justify-content: space-between;
+              align-items: start;
+              flex-direction: column;
+              /* Información de la Fecha */
+              .calendar-info {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-        
-                &:hover {
-                  background-color: #f0f0f0;
+                color: vars.$blanco-primario;
+                font-size: 0.8rem;
+                margin-top: 1rem;
+                .calendar-icon {
+                  width: 16px;
+                  height: 16px;
+                  margin-right: 0.3rem;
+                }
+      
+                .date-range {
+                  font-weight: normal;
+                  color: vars.$negro-primario;
                 }
               }
-        
-              /* Información del Requerimiento */
-              .requirement-info {
+      
+              /* Información de Usuarios y Acceso al Detalle */
+              .user-info {
                 display: flex;
+                align-items: center;
                 justify-content: space-between;
-                align-items: center;
-        
-                /* Información de la Fecha */
-                .calendar-info {
+                  width: 100%;
+                  margin-top: 3rem;
+                .users {
                   display: flex;
                   align-items: center;
-                  color: vars.$blanco-primario;
-                  font-size: 0.8rem;
-        
-                  .calendar-icon {
-                    width: 16px;
-                    height: 16px;
-                    margin-right: 0.3rem;
-                  }
-        
-                  .date-range {
-                    font-weight: normal;
+                  width: fit-content;
+                  .user-icon {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 2px solid vars.$blanco-primario;
+                    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+      
+                    &:first-child {
+                      margin-right: 1rem;
+                    }
                   }
                 }
-        
-                /* Información de Usuarios y Acceso al Detalle */
-                .user-info {
-                  display: flex;
-                  align-items: center;
-        
-                  .users {
-                    display: flex;
-                    align-items: center;
-                    margin-right: 0.5rem;
-        
-                    .user-icon {
-                      width: 32px;
-                      height: 32px;
-                      border-radius: 50%;
-                      object-fit: cover;
-                      border: 2px solid vars.$blanco-primario;
-                      margin-left: -8px;
-                      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-        
-                      &:first-child {
-                        margin-left: 0;
-                      }
-                    }
-                  }
-        
-                  .eye-icon {
-                    width: 20px;
-                    height: 20px;
-                    cursor: pointer;
-                    transition: transform 0.2s ease;
-        
-                    &:hover {
-                      transform: scale(1.2);
-                    }
+      
+                .eye-icon {
+                  width: 40px;
+                  height: 40px;
+                  cursor: pointer;
+                  transition: transform 0.2s ease;
+      
+                  &:hover {
+                    transform: scale(1.2);
                   }
                 }
               }
             }
+          }
         }
       }
 

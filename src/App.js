@@ -14,8 +14,8 @@ import RecuperarContrasenia from './pages/RecuperarContrasenia.js';
 import ResetearContrasenia from './pages/ResetearContrasenia.js';
 import Inicio from './pages/Inicio.js';
 import RequerimientosWrapper from './pages/Requerimientos/RequerimientosWrapper.js'; // Ruta actualizada
-import TiposCategorias from './pages/TiposCategorias.js';
-import Usuarios from './pages/Usuarios.js';
+import TiposCategorias from './pages/TiposCategorias/TiposCategorias.js'; // Ruta actualizada
+import Usuarios from './pages/Usuarios/Usuarios.js';
 import Notificaciones from './pages/Notificaciones.js';
 import PerfilUsuario from './pages/PerfilUsuario.js';
 
@@ -23,6 +23,11 @@ import ConfirmacionRegistro from './pages/ConfirmacionRegistro.js';
 import RegistroExterno from './pages/RegistroExterno.js';
 import RegistroInterno from './pages/RegistroInterno.js';
 import SeleccionRegistro from './pages/SeleccionRegistro.js';
+
+// Importar componentes de rutas
+import ProtectedRoute from './components/ProtectedRoute.js';
+import PublicRoute from './components/PublicRoute.js';
+import DetalleRequerimiento from './pages/Requerimientos/DetalleRequerimiento.js';
 
 function App() {
   return (
@@ -33,7 +38,14 @@ function App() {
       }}
     >
       <Routes>
-        <Route element={<AuthLayout />}>
+        {/* Rutas Públicas */}
+        <Route
+          element={
+            <PublicRoute>
+              <AuthLayout />
+            </PublicRoute>
+          }
+        >
           <Route path="/" element={<SeleccionLogin />} />
           <Route path="/login/:tipoUsuario" element={<Login />} />
           <Route path="/recuperar-contrasenia" element={<RecuperarContrasenia />} />
@@ -45,9 +57,18 @@ function App() {
           {/* Ruta de Confirmación de Registro */}
           <Route path="/confirmacion-registro/" element={<ConfirmacionRegistro />} />
         </Route>
-        <Route element={<MainLayout />}>
+
+        {/* Rutas Protegidas */}
+        <Route
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/home" element={<Inicio />} />
-          <Route path="/requerimientos" element={<RequerimientosWrapper />} /> {/* Ruta actualizada */}
+          <Route path="/requerimientos" element={<RequerimientosWrapper />} />
+          <Route path="/requerimiento/:id" element={<DetalleRequerimiento />} />
           <Route path="/notificaciones" element={<Notificaciones />} />
           <Route path="/perfil-usuario" element={<PerfilUsuario />} />
 

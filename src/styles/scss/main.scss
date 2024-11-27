@@ -14,6 +14,19 @@
 @use './components/requerimientos';
 @use './components/misRequerimientos';
 @use './components/perfilUsuario';
+@use './components/customModal';
+@use './components/requirementForm';
+@use './components//linkRequirementModal';
+@use './components/detalleRequerimiento';
+@use './components/userList';
+@use './components/userForm';
+@use './components/usuarios';
+@use './components/typeList';
+@use './components/categoryList';
+@use './components/typeForm';
+@use './components/categoryForm';
+@use './components/tiposCategorias';
+
 
 body {
     font-family: 'Poppins', serif;
