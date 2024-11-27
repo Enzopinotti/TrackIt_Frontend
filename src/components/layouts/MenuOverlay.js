@@ -49,20 +49,4 @@ function MenuOverlay({ isOpen, onClose, userRole, onProfileClick, user }) {
   );
 }
 
-MenuOverlay.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  userRole: PropTypes.string.isRequired,
-  onProfileClick: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    nombre: PropTypes.string.isRequired,
-    avatar: PropTypes.string, // Puede ser opcional si no siempre está disponible
-    // Agrega más campos si es necesario
-  }),
-};
-
-MenuOverlay.defaultProps = {
-  user: null,
-};
-
 export default MenuOverlay;

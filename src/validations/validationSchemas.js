@@ -17,18 +17,7 @@ export const loginSchema = yup.object().shape({
   password: yup.string().required('La contraseña es requerida'),
 });
 
-export const requirementSchema = yup.object().shape({
-  subject: yup.string().required('El asunto es obligatorio'),
-  requirementTypeId: yup.number().typeError('Seleccione un tipo').required('El tipo es obligatorio'),
-  categoryId: yup.number().typeError('Seleccione una categoría').required('La categoría es obligatoria'),
-  description: yup.string().nullable(),
-  priorityId: yup.number().nullable(),
-  assignedUser: yup.string().when('userRole', {
-    is: 'Interno',
-    then: yup.string().required('Debe asignar el requerimiento a un usuario'),
-    otherwise: yup.string().notRequired(),
-  }),
-});
+
 
 // Esquema para Registro Externo
 export const registerExternalSchema = yup.object().shape({

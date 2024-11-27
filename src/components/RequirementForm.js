@@ -4,8 +4,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { AuthContext } from '../context/AuthContext.js';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { requirementSchema } from '../validations/validationSchemas.js';
 import DOMPurify from 'dompurify';
 import LinkRequirementModal from './LinkRequirementModal.js';
 
@@ -19,7 +17,6 @@ function RequirementForm({ onSubmit, onCancel }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(requirementSchema),
   });
 
   const handleLinkRequirement = () => {
@@ -100,10 +97,11 @@ function RequirementForm({ onSubmit, onCancel }) {
             />
             <datalist id="assignedUsers">
               {/* Aquí podrías mapear una lista de usuarios internos */}
-              <option value="Juan Pérez" />
-              <option value="María Gómez" />
-              <option value="Carlos López" />
-              <option value="Ana Torres" />
+              <option value="user1" label="Juan Pérez" />
+              <option value="user2" label="María García" />
+              <option value="user3" label="Carlos López" />
+              <option value="user4" label="Ana Martínez" />
+              <option value="user5" label="Luis Rodríguez" />
               {/* Agrega más opciones según sea necesario */}
             </datalist>
             {errors.assignedUser && <p className="error">{errors.assignedUser.message}</p>}
