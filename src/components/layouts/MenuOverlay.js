@@ -4,7 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Navigation from '../Navigation.js';
 
-function MenuOverlay({ isOpen, onClose, userRole, onProfileClick }) {
+function MenuOverlay({ isOpen, onClose, userRole, onProfileClick, user }) {
   const overlayRef = useRef();
 
   useEffect(() => {
@@ -36,7 +36,12 @@ function MenuOverlay({ isOpen, onClose, userRole, onProfileClick }) {
           onClick={() => { onProfileClick(); onClose(); }}
           aria-label="Perfil de usuario"
         >
-          <img src="/assets/images/user-placeholder.png" alt="Perfil de Usuario" className="user-image" />
+          <img
+            src={user && user.image ? user.image : "/assets/images/user-placeholder.png"}
+            alt={`${user ? user.nombre : 'Usuario'} - Perfil`}
+            className="user-image"
+          />
+          <span className="user-name">{user ? user.nombre : 'Usuario'}</span>
         </button>
         <Navigation className="navigation-vertical" role={userRole} onLinkClick={onClose} />
       </div>
@@ -49,6 +54,15 @@ MenuOverlay.propTypes = {
   onClose: PropTypes.func.isRequired,
   userRole: PropTypes.string.isRequired,
   onProfileClick: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    nombre: PropTypes.string.isRequired,
+    avatar: PropTypes.string, // Puede ser opcional si no siempre está disponible
+    // Agrega más campos si es necesario
+  }),
+};
+
+MenuOverlay.defaultProps = {
+  user: null,
 };
 
 export default MenuOverlay;

@@ -3039,6 +3039,96 @@ html {
   }
 }
 
+.footer {
+  background-color: #222222;
+  color: #FFFFFF;
+  padding: 2rem 1rem;
+  font-family: "Arial", sans-serif;
+}
+.footer .footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .footer .footer-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+.footer .footer-container .footer-section {
+  flex: 1;
+}
+.footer .footer-container .footer-section h2,
+.footer .footer-container .footer-section h3 {
+  color: #0A9396;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+.footer .footer-container .footer-section p {
+  line-height: 1.6;
+}
+.footer .footer-container .footer-section a {
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer .footer-container .footer-section a:hover {
+  color: rgb(22.5, 234.85, 239.5);
+}
+.footer .footer-container .footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+.footer .footer-container .footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+.footer .footer-container .footer-section ul li a:hover {
+  text-decoration: underline;
+}
+.footer .footer-container .footer-section.social-media .social-icons {
+  display: flex;
+  gap: 1rem;
+}
+.footer .footer-container .footer-section.social-media .social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #03045E;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+}
+.footer .footer-container .footer-section.social-media .social-icons a:hover {
+  background-color: rgb(4.5773195876, 6.1030927835, 143.4226804124);
+}
+.footer .footer-container .footer-section.company-info .company-logo {
+  width: 150px;
+  margin-top: 1rem;
+}
+.footer .footer-bottom {
+  border-top: 1px solid #949393;
+  padding-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.footer .footer-bottom p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .footer .footer-container .footer-section {
+    text-align: center !important;
+  }
+  .footer .footer-container .footer-section .social-icons {
+    justify-content: center;
+  }
+}
 body {
   font-family: "Poppins", serif;
 }

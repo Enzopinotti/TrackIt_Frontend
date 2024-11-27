@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MenuOverlay from '../layouts/MenuOverlay.js';
+import MenuOverlay from '../layouts/MenuOverlay.js'; // Ajustar la ruta si es necesario
 import Logo from '../Logo.js';
 import NotificationsButton from '../NotificationsButton.js';
 import UserProfile from '../UserProfile.js';
@@ -32,7 +32,7 @@ function Header() {
   if (!user) {
     return null;
   }
-  console.log(user);
+
   const userRole = user.role;
 
   // Función para manejar clic en el perfil de usuario
@@ -80,6 +80,7 @@ function Header() {
         onClose={() => setIsMenuOpen(false)}
         userRole={userRole}
         onProfileClick={handleProfileClick}
+        user={user} // Pasar el objeto user aquí
       />
     </>
   );
