@@ -1,46 +1,42 @@
 // src/pages/Requerimientos/MisRequerimientos.js
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import KanbanBoard from '../../components/KanbanBoard.js';
 import { AuthContext } from '../../context/AuthContext.js';
 import CustomModal from '../../components/CustomModal.js';
 import RequirementForm from '../../components/RequirementForm.js';
 import Swal from 'sweetalert2';
+import { formatDateToDDMMYYYY } from '../../utils/dateUtils.js'; // Importamos la función
 
 function MisRequerimientos() {
   const { user, token } = useContext(AuthContext); // Obtenemos el usuario y el token
-  const [requerimientos, setRequerimientos] = useState([]); // Puedes hacer un fetch para llenarlo
+  const [requerimientos, setRequerimientos] = useState([]); // Inicializar como un array vacío
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const estados = ['Pendiente', 'En Proceso', 'Completado'];
+  const estados = ['Abierto', 'Asignado']; // Los estados cambiados
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  /**
-   * Maneja la creación de requerimientos enviando la información a la API.
-   */
   const handleCreateRequirement = async (data) => {
     try {
-      // Ajusta la URL según tus rutas en el servidor
       const response = await fetch('http://trackit.somee.com/api/Requirements/createRequeriment', {
-        method: 'POST', // Es recomendable que en tu backend cambies el método a POST
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Enviar el token
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       });
-      console.log(response)
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.Message || 'Error al crear requerimiento');
       }
 
-      // Respuesta exitosa
       const result = await response.json();
-      const newRequirement = result.Data; // Suponiendo que el backend devuelva { Message, Data }
+      const newRequirement = result.data;
 
-      // Actualizar estado local (si es que quieres reflejar el nuevo requerimiento en tu Kanban de inmediato)
-      setRequerimientos((prev) => [newRequirement, ...prev]);
+      // Actualizar el estado y reflejar el nuevo requerimiento en el Kanban Board
+      setRequerimientos((prev) => [...prev, newRequirement]);  // Agregar al final del arreglo
 
       Swal.fire({
         title: 'Éxito',
@@ -60,6 +56,41 @@ function MisRequerimientos() {
       });
     }
   };
+
+  // Llamada al backend para obtener los requerimientos del usuario
+  const fetchRequerimientos = useCallback(async () => {
+    try {
+      const response = await fetch(`http://trackit.somee.com/api/Requirements/created-by/${user.id}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.Message || 'Error al obtener los requerimientos');
+      }
+
+      const result = await response.json();
+      console.log(result);  // Verifica aquí si los datos están correctos
+      setRequerimientos(result.data); // Asumimos que el backend devuelve los requerimientos en `Data`
+    } catch (error) {
+      console.error('Error al obtener los requerimientos:', error.message);
+      Swal.fire({
+        title: 'Error',
+        text: error.message,
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      });
+    }
+  }, [user?.id, token]); // Dependencias de user.id y token
+
+  useEffect(() => {
+    if (user && user.id && token) { // Asegurémonos de que tenemos todos los datos antes de hacer la llamada
+      fetchRequerimientos();
+    }
+  }, [fetchRequerimientos, user, token]); // Agregar dependencias de user y token
 
   // Verificar permisos de acceso (rol "Externo")
   if (!user || user.role !== 'Externo') {
@@ -82,8 +113,15 @@ function MisRequerimientos() {
         </button>
       </div>
 
-      {/* Aquí iría tu tablero Kanban si así lo deseas */}
-      <KanbanBoard requerimientos={requerimientos} estados={estados} isDraggable={false} />
+      {/* Tablero Kanban con los requerimientos */}
+      <KanbanBoard
+        requerimientos={requerimientos.map((req) => ({
+          ...req,
+          date: formatDateToDDMMYYYY(req.date), // Formatear la fecha
+        }))}
+        estados={estados}
+        isDraggable={false}
+      />
 
       {/* Modal para crear requerimiento */}
       <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>

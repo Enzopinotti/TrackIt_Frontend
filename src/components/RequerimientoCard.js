@@ -1,5 +1,4 @@
 // src/components/RequerimientoCard/RequerimientoCard.js
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
@@ -25,11 +24,11 @@ function RequerimientoCard({ requerimiento }) {
     <div className="requerimiento-card" onClick={handleCardClick}>
       <div className="card-content">
         {/* Tipo del Requerimiento */}
-        <div className="requirement-type">{requerimiento.tipo}</div>
-
+        <div className="requirement-type">{requerimiento.requirementType}</div> 
+        
         {/* Título del Requerimiento */}
-        <h2 className="requirement-title">{requerimiento.title}</h2>
-
+        <h2 className="requirement-title">{requerimiento.subject}</h2> 
+        
         {/* Botón de Sub-Requerimientos */}
         <button
           className="subrequirements-button"
@@ -48,7 +47,7 @@ function RequerimientoCard({ requerimiento }) {
               className="icon calendar-icon"
             />
             <span className="date-range">
-              {requerimiento.fechaCreacion}
+              {requerimiento.date} {/* Cambié 'fechaCreacion' por 'date' */}
             </span>
           </div>
 
@@ -80,11 +79,11 @@ function RequerimientoCard({ requerimiento }) {
 RequerimientoCard.propTypes = {
   requerimiento: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    tipo: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    descripcion: PropTypes.string.isRequired,
-    codigo: PropTypes.string.isRequired,
-    fechaCreacion: PropTypes.string.isRequired,
+    requirementType: PropTypes.string.isRequired, // Cambié 'tipo' por 'requirementType'
+    subject: PropTypes.string.isRequired, // Cambié 'title' por 'subject'
+    description: PropTypes.string.isRequired, // Cambié 'descripcion' por 'description'
+    code: PropTypes.string.isRequired, // Cambié 'codigo' por 'code'
+    date: PropTypes.string.isRequired, // Cambié 'fechaCreacion' por 'date'
     status: PropTypes.string.isRequired,
     assignedUsers: PropTypes.arrayOf(
       PropTypes.shape({

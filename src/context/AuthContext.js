@@ -31,6 +31,7 @@ export function AuthProvider({ children }) {
 
       if (response.ok) {
         const userData = await response.json();
+        console.log(userData);
         setUser(userData);
       } else {
         // Si la respuesta no es ok, manejar el error

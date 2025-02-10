@@ -1,87 +1,58 @@
 // src/pages/Requerimientos/DetalleRequerimiento.js
-
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext.js';
+import { AuthContext } from '../../context/AuthContext.js';  // Accede al contexto para obtener el usuario
 import RequirementDetails from './RequirementDetails.js';
 import CommentsSection from './CommentsSection.js';
+import Swal from 'sweetalert2';
 
 function DetalleRequerimiento() {
-  const { id } = useParams();
+  const { id } = useParams(); // Obtenemos el id del requerimiento desde la URL
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext); // Obtenemos el usuario y el token desde el contexto
 
-  const [requirement, setRequirement] = useState(null);
+  const [requirement, setRequirement] = useState(null); // Estado para almacenar los detalles del requerimiento
 
   useEffect(() => {
-    // TODO: Reemplazar con una llamada al backend
+    // Llamada a la API para obtener los detalles del requerimiento
     const fetchRequirement = async () => {
       try {
-        // Simulación de una llamada al backend
-        // const response = await fetch(`/api/requerimientos/${id}`);
-        // const data = await response.json();
-        // setRequirement(data);
+        const response = await fetch(`http://trackit.somee.com/api/Requirements/${id}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`, // Usamos el token para autenticar la solicitud
+          },
+        });
 
-        // Datos ficticios por ahora
-        const dummyRequirement = {
-          id: id,
-          codigo: `#${id}`,
-          title: 'Requerimiento de Ejemplo',
-          description: 'Descripción detallada del requerimiento de ejemplo.',
-          priority: 'Alta',
-          recipient: 'Juan Pérez',
-          sender: 'María Gómez',
-          creationDate: '2023-10-01',
-          creationTime: '14:30',
-          status: 'Abierto',
-          subRequirementsCount: 2, // Número de sub-requerimientos
-          comments: [
-            {
-              id: 1,
-              user: 'Juan Pérez',
-              message: 'Este es un comentario de ejemplo.',
-              date: '2023-10-02',
-              time: '15:00',
-            },
-            {
-              id: 2,
-              user: 'María Gómez',
-              message: 'Otro comentario de prueba.',
-              date: '2023-10-03',
-              time: '10:30',
-            },
-            // Más comentarios
-          ],
-          history: [
-            {
-              id: 1,
-              action: 'Requerimiento creado',
-              date: '2023-10-01',
-              time: '14:30',
-            },
-            {
-              id: 2,
-              action: 'Asignado a Juan Pérez',
-              date: '2023-10-02',
-              time: '09:15',
-            },
-            // Más historial
-          ],
-        };
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.Message || 'Error al obtener el requerimiento');
+        }
 
-        setRequirement(dummyRequirement);
+        const result = await response.json();
+        console.log('detalle del requerimieno: ', result);
+        setRequirement(result.data); // Establecemos el requerimiento en el estado
       } catch (error) {
-        console.error('Error:', error);
-        // Manejar errores, quizás mostrar un mensaje al usuario
+        console.error('Error al obtener el requerimiento:', error.message);
+        Swal.fire({
+          title: 'Error',
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+        });
       }
     };
 
-    fetchRequirement();
-  }, [id]);
+    if (id && token) {
+      fetchRequirement();
+    }
+  }, [id, token]); // Solo se ejecuta cuando el id o el token cambian
 
   const handleBack = () => {
-    navigate(-1); // Regresar a la página anterior
+    navigate(-1); // Regresamos a la página anterior cuando el usuario hace clic en el botón de volver
   };
+
+  if (!requirement) return <div>Cargando...</div>; // Mostramos un mensaje de carga mientras esperamos los datos
 
   return (
     <div className="detalle-requerimiento">
