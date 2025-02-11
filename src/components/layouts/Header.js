@@ -1,5 +1,3 @@
-// src/components/Header/Header.js
-
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuOverlay from '../layouts/MenuOverlay.js'; // Ajustar la ruta si es necesario
@@ -30,10 +28,10 @@ function Header() {
 
   // Si el usuario no está autenticado, no renderizar nada
   if (!user) {
-    return null;
+    return <p>Cargando...</p>; // O mostrar un loader mientras se obtiene el usuario
   }
 
-  const userRole = user.role;
+  const userRole = user.role || ''; // Asegurarse de que `role` no sea undefined
 
   // Función para manejar clic en el perfil de usuario
   const handleProfileClick = () => {

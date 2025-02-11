@@ -1,5 +1,3 @@
-// src/pages/PerfilUsuario.js
-
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext.js';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +25,7 @@ function PerfilUsuario() {
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
-
+  
     if (!selectedImage) {
       await Swal.fire({
         title: 'Error',
@@ -37,12 +35,11 @@ function PerfilUsuario() {
       });
       return;
     }
-
+  
     const token = localStorage.getItem('authToken');
-
     const formData = new FormData();
     formData.append('file', selectedImage);
-
+  
     try {
       const response = await fetch(`http://trackit.somee.com/api/User/upload-image/${user.id}`, {
         method: 'POST',
@@ -51,19 +48,19 @@ function PerfilUsuario() {
         },
         body: formData,
       });
-
+  
       if (response.ok) {
         const updatedUser = await response.json();
-        // Actualizar el usuario en el contexto
-        updateUser(updatedUser);
-
+        // Solo actualizar la imagen en el estado, manteniendo el resto del perfil intacto
+        updateUser({ ...user, image: updatedUser.image });
+  
         await Swal.fire({
           title: 'Éxito',
           text: 'Imagen actualizada correctamente.',
           icon: 'success',
           confirmButtonText: 'Aceptar',
         });
-
+  
         // Limpiar la imagen seleccionada
         setSelectedImage(null);
       } else {
@@ -84,7 +81,7 @@ function PerfilUsuario() {
         confirmButtonText: 'Aceptar',
       });
     }
-  };
+  };  
 
   return (
     <div className="perfil-usuario-page">

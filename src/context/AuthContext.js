@@ -1,5 +1,3 @@
-// src/context/AuthContext.js
-
 import React, { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -31,7 +29,6 @@ export function AuthProvider({ children }) {
 
       if (response.ok) {
         const userData = await response.json();
-        console.log(userData);
         setUser(userData);
       } else {
         // Si la respuesta no es ok, manejar el error
@@ -60,6 +57,7 @@ export function AuthProvider({ children }) {
 
   // Función para actualizar el usuario
   const updateUser = (updatedUserData) => {
+    // Actualizamos el estado del usuario para reflejar los datos nuevos
     setUser(updatedUserData);
   };
 
