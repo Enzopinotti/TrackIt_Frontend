@@ -110,7 +110,7 @@ function Requerimientos() {
   }, []); // Ejecutar solo una vez al montar
 
   // Verificar permisos de acceso
-  if (!user || (user.role !== 'Interno' && user.role !== 'Admin')) {
+  if (!user || (user.role !== 'Interno' && user.role !== 'admin')) {
     Swal.fire({
       title: 'Acceso Denegado',
       text: 'No tienes permisos para acceder a esta página.',

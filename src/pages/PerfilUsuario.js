@@ -3,6 +3,7 @@ import { AuthContext } from '../context/AuthContext.js';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { handleErrors } from '../utils/handleErrors.js';
+import LoadingOverlay from '../components/LoadingOverlay.js';
 
 function PerfilUsuario() {
   const { user, logout, updateUser } = useContext(AuthContext);
@@ -10,10 +11,8 @@ function PerfilUsuario() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   if (!user) {
-    // Si el usuario no está disponible, puedes mostrar un mensaje o redirigir
-    return <p>Cargando...</p>;
+    return <LoadingOverlay isLoading={true} />;
   }
-
   const handleLogout = () => {
     logout();
     navigate('/');

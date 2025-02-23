@@ -1,5 +1,4 @@
 // src/pages/RegistroInterno.js
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -14,6 +13,7 @@ import { handleErrors } from '../utils/handleErrors.js';
 function RegistroInterno() {
   const navigate = useNavigate();
   const clientUri = "http://localhost:3000/confirmacion-registro";
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm({
     resolver: yupResolver(registerInternalSchema),
@@ -21,11 +21,9 @@ function RegistroInterno() {
 
   const password = watch('password', '');
 
-  // Estados para mostrar/ocultar contraseña
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Funciones para alternar la visibilidad de la contraseña
   const togglePasswordVisibility = () => {
     setShowPassword(prevState => !prevState);
   };
@@ -37,7 +35,7 @@ function RegistroInterno() {
   const passwordConditions = validatePasswordConditions(password);
 
   const onSubmit = async (data) => {
-    // Sanitizar datos
+    setIsSubmitting(true);
     const sanitizedData = {
       firstName: DOMPurify.sanitize(data.firstName),
       lastName: DOMPurify.sanitize(data.lastName),
@@ -80,6 +78,8 @@ function RegistroInterno() {
         icon: 'error',
         confirmButtonText: 'Aceptar',
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -118,7 +118,6 @@ function RegistroInterno() {
             />
             {errors.email && <p className="error-message">{errors.email.message}</p>}
 
-            {/* Campo de contraseña */}
             <div className="password-input-wrapper">
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -140,7 +139,6 @@ function RegistroInterno() {
             </div>
             {errors.password && <p className="error-message">{errors.password.message}</p>}
 
-            {/* Mostrar las condiciones de la contraseña */}
             <ul className="password-conditions">
               <li className={passwordConditions.hasUpperCase ? 'met' : 'unmet'}>
                 Al menos una letra mayúscula
@@ -156,7 +154,6 @@ function RegistroInterno() {
               </li>
             </ul>
 
-            {/* Campo de confirmar contraseña */}
             <div className="password-input-wrapper">
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
@@ -194,7 +191,9 @@ function RegistroInterno() {
             />
             {errors.departamento && <p className="error-message">{errors.departamento.message}</p>}
 
-            <button type="submit">Registrar</button>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Procesando...' : 'Registrar'}
+            </button>
           </div>
           <Link to="/" className="volver-btn">Volver al inicio</Link>
         </form>

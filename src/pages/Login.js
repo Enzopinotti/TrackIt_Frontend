@@ -1,5 +1,4 @@
 // src/pages/Login.js
-
 import React, { useContext, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../components/Logo.js';
@@ -10,12 +9,13 @@ import { loginSchema } from '../validations/validationSchemas.js';
 import DOMPurify from 'dompurify';
 import { handleErrors } from '../utils/handleErrors.js';
 import Swal from 'sweetalert2';
+import LoadingOverlay from '../components/LoadingOverlay.js';
 
 function Login() {
   const { tipoUsuario } = useParams();
   const { login, loading } = useContext(AuthContext);
-
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Estado para evitar múltiples envíos
 
   const {
     register,
@@ -30,6 +30,7 @@ function Login() {
   };
 
   const handleLogin = async (data) => {
+    setIsSubmitting(true); // Deshabilita el botón al iniciar
     // Sanitizar datos
     const sanitizedData = {
       email: DOMPurify.sanitize(data.email),
@@ -44,30 +45,30 @@ function Login() {
         },
         body: JSON.stringify(sanitizedData),
       });
-
+      
       if (!response.ok) {
         const errorMessage = await handleErrors(response);
         throw new Error(errorMessage);
       }
 
       const resData = await response.json();
+      console.log(resData);
       login(resData.token);
-      // Redirección será manejada por el contexto y las rutas protegidas
     } catch (error) {
       console.error('Error de autenticación:', error.message);
-      // Mostrar mensaje de error al usuario
       Swal.fire({
         title: 'Error de autenticación',
         text: error.message,
         icon: 'error',
         confirmButtonText: 'Aceptar',
       });
+    } finally {
+      setIsSubmitting(false); // Vuelve a habilitar el botón
     }
   };
 
   if (loading) {
-    // Puedes reemplazar esto con un spinner o una pantalla de carga
-    return <div>Cargando...</div>;
+    return <LoadingOverlay isLoading={true} />;
   }
 
   return (
@@ -109,7 +110,9 @@ function Login() {
             {errors.password && <p className="error-message">{errors.password.message}</p>}
 
             <Link to="/recuperar-contrasenia">¿Olvidó su contraseña?</Link>
-            <button type="submit">Ingresar</button>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Procesando...' : 'Ingresar'}
+            </button>
           </div>
           <div className="registro-link">
             <p>¿No tienes una cuenta?</p>

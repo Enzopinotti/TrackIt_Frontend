@@ -93,7 +93,7 @@ function MisRequerimientos() {
   }, [fetchRequerimientos, user, token]); // Agregar dependencias de user y token
 
   // Verificar permisos de acceso (rol "Externo")
-  if (!user || user.role !== 'Externo') {
+  if (!user || user.role !== 'Externo' || user.role !== 'admin') {
     Swal.fire({
       title: 'Acceso Denegado',
       text: 'No tienes permisos para acceder a esta página.',

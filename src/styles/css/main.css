@@ -111,12 +111,24 @@ html {
   z-index: 1000;
   backdrop-filter: blur(5px);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
   /* Media Queries para Responsividad */
 }
 @media (min-width: 1024px) {
   .app-header {
     padding: 2.5rem 4rem;
   }
+}
+.app-header .admin-button {
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+}
+.app-header .admin-button p {
+  margin-left: 0.5rem;
+}
+.app-header .admin-button:hover {
+  opacity: 0.8;
 }
 .app-header .header-left {
   display: flex;
@@ -480,6 +492,7 @@ html {
   cursor: pointer;
   transition: background-color 0.3s ease;
   box-shadow: #0A9396 2px 2px 6px;
+  user-select: none;
 }
 .login-page .formContainer .formLogin .inputsContainer button:hover {
   background-color: rgb(6.8125, 100.14375, 102.1875);
@@ -1030,6 +1043,7 @@ html {
   cursor: pointer;
   transition: background-color 0.3s ease;
   box-shadow: #0A9396 2px 2px 6px;
+  user-select: none;
 }
 .registro-externo-page .formContainer .formRegistro .inputsContainer button:hover {
   background-color: rgb(6.8125, 100.14375, 102.1875);
@@ -1191,6 +1205,7 @@ html {
   cursor: pointer;
   transition: background-color 0.3s ease;
   box-shadow: #0A9396 2px 2px 6px;
+  user-select: none;
 }
 .registro-interno-page .formContainer .formRegistro .inputsContainer button:hover {
   background-color: rgb(6.8125, 100.14375, 102.1875);
@@ -3129,12 +3144,134 @@ html {
     justify-content: center;
   }
 }
+.admin-dashboard {
+  margin-top: 10rem;
+  padding: 2rem;
+  background-color: #FFFFFF;
+  color: #222222;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.admin-dashboard h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #0A9396;
+}
+.admin-dashboard .usuarios-section {
+  background-color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.admin-dashboard .usuarios-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #0A9396;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card {
+  background-color: #FFFFFF;
+  border: 1px solid #949393;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-name {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #0A9396;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-email,
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-role {
+  font-size: 0.9rem;
+  color: #949393;
+  margin-bottom: 0.3rem;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-status {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-status .accepted {
+  color: green;
+  font-weight: bold;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-status .pending {
+  color: orange;
+  font-weight: bold;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-actions .btn-accept {
+  background-color: green;
+  color: white;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-actions .btn-accept:hover {
+  background-color: #004d00;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-actions .btn-reject {
+  background-color: red;
+  color: white;
+}
+.admin-dashboard .usuarios-section .usuario-admin-container .user-card .user-actions .btn-reject:hover {
+  background-color: #cc0000;
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1rem;
+  }
+  .admin-dashboard .usuarios-section .users-grid {
+    grid-template-columns: 1fr;
+  }
+}
 body {
   font-family: "Poppins", serif;
 }
 
 main {
   margin-top: 130px;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -9,7 +9,7 @@ import LinkRequirementModal from './LinkRequirementModal.js';
 
 function RequirementForm({ onSubmit, onCancel }) {
   const { user, token } = useContext(AuthContext);
-
+  
   // Estados para datos del formulario
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
   const [relatedRequirements, setRelatedRequirements] = useState([]);
@@ -22,7 +22,6 @@ function RequirementForm({ onSubmit, onCancel }) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
     setValue,
   } = useForm();
@@ -133,7 +132,6 @@ function RequirementForm({ onSubmit, onCancel }) {
       <form className="requirement-form" onSubmit={handleSubmit(submitForm)}>
         <h2>Crear Requerimiento</h2>
 
-        {/* Asunto */}
         <input
           type="text"
           placeholder="Asunto"
@@ -141,7 +139,6 @@ function RequirementForm({ onSubmit, onCancel }) {
         />
         {errors.subject && <p className="error">{errors.subject.message}</p>}
 
-        {/* Tipo de Requerimiento */}
         <select
           {...register('requirementTypeId', { required: 'El tipo es obligatorio' })}
           onChange={handleRequirementTypeChange}

@@ -1,0 +1,129 @@
+@use '../abstract/variables' as vars;
+
+.admin-dashboard {
+  margin-top: 10rem;
+  padding: 2rem;
+  background-color: vars.$blanco-primario;
+  color: vars.$negro-primario;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    color: vars.$color-primario;
+  }
+
+  .usuarios-section {
+    background-color: vars.$blanco-primario;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: vars.$color-primario;
+    }
+
+    // Estilos para UsuarioAdmin
+    .usuario-admin-container {
+      .users-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .user-card {
+        background-color: vars.$blanco-primario;
+        border: 1px solid vars.$gris-secundario;
+        border-radius: 10px;
+        padding: 1rem;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-image {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 1rem;
+        }
+
+        .user-name {
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
+          color: vars.$color-primario;
+        }
+
+        .user-email,
+        .user-role {
+          font-size: 0.9rem;
+          color: vars.$gris-secundario;
+          margin-bottom: 0.3rem;
+        }
+
+        .user-status {
+          font-size: 0.9rem;
+          margin-bottom: 0.5rem;
+          .accepted {
+            color: green;
+            font-weight: bold;
+          }
+          .pending {
+            color: orange;
+            font-weight: bold;
+          }
+        }
+
+        .user-actions {
+          display: flex;
+          justify-content: space-around;
+          gap: 0.5rem;
+          button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+          .btn-accept {
+            background-color: green;
+            color: white;
+            &:hover {
+              background-color: darken(green, 10%);
+            }
+          }
+          .btn-reject {
+            background-color: red;
+            color: white;
+            &:hover {
+              background-color: darken(red, 10%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Media query para pantallas pequeñas
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1rem;
+
+    .usuarios-section {
+      .users-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}

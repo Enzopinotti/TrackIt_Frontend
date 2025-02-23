@@ -29,6 +29,7 @@ import ProtectedRoute from './components/ProtectedRoute.js';
 import PublicRoute from './components/PublicRoute.js';
 import DetalleRequerimiento from './pages/Requerimientos/DetalleRequerimiento.js';
 import PageNotFound from './pages/PageNotFound.js';
+import AdminDashboard from './pages/AdminDashboard.js';
 
 function App() {
   return (
@@ -76,7 +77,7 @@ function App() {
           {/* Rutas exclusivas para usuarios internos */}
           <Route path="/tipos-categorias" element={<TiposCategorias />} />
           <Route path="/usuarios" element={<Usuarios />} />
-
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="*" element={<PageNotFound />} />
 
         </Route>

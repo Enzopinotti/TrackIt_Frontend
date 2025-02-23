@@ -16,7 +16,7 @@ function RequerimientosWrapper() {
 
   if (role === 'Externo') {
     return <MisRequerimientos />;
-  } else if (role === 'Interno' || role === 'Admin') {
+  } else if (role === 'Interno' || role === 'admin') {
     return <Requerimientos />;
   } else {
     return <p>Rol de usuario no reconocido.</p>;

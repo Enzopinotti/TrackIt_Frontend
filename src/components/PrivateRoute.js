@@ -3,10 +3,14 @@
 import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext.js';
+import LoadingOverlay from './LoadingOverlay.js';
 
 function PrivateRoute({ children, onlyInternal = false }) {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
+  if (loading) {
+    return <LoadingOverlay isLoading={true} />;
+  }
   if (!user) {
     return <Navigate to="/login/interno" />; // Redirige al login interno si no está autenticado
   }
