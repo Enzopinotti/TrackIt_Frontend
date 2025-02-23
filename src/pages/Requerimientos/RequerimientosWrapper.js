@@ -13,7 +13,7 @@ function RequerimientosWrapper() {
   }
 
   const { role } = user;
-
+  console.log('pase, role:', role);
   if (role === 'Externo') {
     return <MisRequerimientos />;
   } else if (role === 'Interno' || role === 'admin') {

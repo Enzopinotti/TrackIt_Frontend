@@ -1951,6 +1951,13 @@ html {
   display: flex;
   flex-direction: column;
 }
+.requirement-form-container .requirement-form .file-warning {
+  font-size: 0.85rem;
+  color: #d9534f;
+  margin-top: 0.1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
 .requirement-form-container .requirement-form h2 {
   font-size: 1.8rem;
   color: #222222;

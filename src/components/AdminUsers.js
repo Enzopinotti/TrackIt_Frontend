@@ -116,14 +116,14 @@ function AdminUsers() {
   if (loading) {
     return <LoadingOverlay isLoading={true} />;
   }
-
   return (
     <div className="usuario-admin-container">
       {usuarios.length === 0 ? (
         <p>No hay usuarios para mostrar.</p>
       ) : (
         <div className="users-grid">
-          {usuarios.map((user) => (
+          {
+          usuarios.map((user) => (
             <div className="user-card" key={user.id}>
               <img
                 src={user.image || '/assets/images/user-placeholder.png'}
@@ -134,7 +134,6 @@ function AdminUsers() {
                 {user.firstName} {user.lastName}
               </h3>
               <p className="user-email">{user.email}</p>
-              <p className="user-role">Rol: {user.role}</p>
               <p className="user-status">
                 Estado: {user.isEnabled ? <span className="accepted">Aceptado</span> : <span className="pending">Pendiente</span>}
               </p>

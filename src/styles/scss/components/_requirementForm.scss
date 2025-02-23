@@ -6,7 +6,13 @@
   .requirement-form {
     display: flex;
     flex-direction: column;
-
+    .file-warning {
+      font-size: 0.85rem;
+      color: #d9534f; // o el color que prefieras para advertencias
+      margin-top: 0.1rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
     h2 {
       font-size: 1.8rem;
       color: vars.$negro-primario;
@@ -108,3 +114,4 @@
     }
   }
 }
+
