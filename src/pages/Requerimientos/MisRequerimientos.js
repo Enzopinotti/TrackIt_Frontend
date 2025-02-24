@@ -5,13 +5,12 @@ import { AuthContext } from '../../context/AuthContext.js';
 import CustomModal from '../../components/CustomModal.js';
 import RequirementForm from '../../components/RequirementForm.js';
 import Swal from 'sweetalert2';
-import { formatDateToDDMMYYYY } from '../../utils/dateUtils.js'; // Importamos la función
+import { formatDateToDDMMYYYY } from '../../utils/dateUtils.js';
 
 function MisRequerimientos() {
-  const { user, token } = useContext(AuthContext); // Obtenemos el usuario y el token
-  const [requerimientos, setRequerimientos] = useState([]); // Inicializar como un array vacío
+  const { user, token } = useContext(AuthContext);
+  const [requerimientos, setRequerimientos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const estados = ['Abierto', 'Asignado']; // Los estados cambiados
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -21,10 +20,9 @@ function MisRequerimientos() {
       const response = await fetch('http://trackit.somee.com/api/Requirements/createRequeriment', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(data),
+        body: data, // FormData
       });
 
       if (!response.ok) {
@@ -34,26 +32,15 @@ function MisRequerimientos() {
 
       const result = await response.json();
       const newRequirement = result.data;
+      
+      // Actualizar el estado
+      setRequerimientos((prev) => [...prev, newRequirement]);
 
-      // Actualizar el estado y reflejar el nuevo requerimiento en el Kanban Board
-      setRequerimientos((prev) => [...prev, newRequirement]);  // Agregar al final del arreglo
-
-      Swal.fire({
-        title: 'Éxito',
-        text: 'Requerimiento creado exitosamente.',
-        icon: 'success',
-        confirmButtonText: 'Aceptar',
-      });
-
+      Swal.fire('Éxito', 'Requerimiento creado exitosamente.', 'success');
       closeModal();
     } catch (error) {
       console.error('Error al crear el requerimiento:', error.message);
-      Swal.fire({
-        title: 'Error',
-        text: error.message,
-        icon: 'error',
-        confirmButtonText: 'Aceptar',
-      });
+      Swal.fire('Error', error.message, 'error');
     }
   };
 
@@ -113,19 +100,22 @@ function MisRequerimientos() {
         </button>
       </div>
 
-      {/* Tablero Kanban con los requerimientos */}
       <KanbanBoard
         requerimientos={requerimientos.map((req) => ({
           ...req,
-          date: formatDateToDDMMYYYY(req.date), // Formatear la fecha
+          date: formatDateToDDMMYYYY(req.date),
         }))}
-        estados={estados}
+        estados={['Abierto', 'Asignado']}
         isDraggable={false}
       />
 
-      {/* Modal para crear requerimiento */}
       <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
-        <RequirementForm onSubmit={handleCreateRequirement} onCancel={closeModal} />
+        <RequirementForm
+          onSubmit={handleCreateRequirement}
+          onCancel={closeModal}
+          setRequerimientos={setRequerimientos} // ✅ Pasar la prop
+          closeModal={closeModal} // ✅ Pasar la prop
+        />
       </CustomModal>
     </div>
   );

@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import { AuthContext } from '../context/AuthContext.js';
 import { useForm } from 'react-hook-form';
 import DOMPurify from 'dompurify';
+import Swal from 'sweetalert2';
 import LinkRequirementModal from './LinkRequirementModal.js';
 
-function RequirementForm({ onSubmit, onCancel }) {
+function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) {
   const { user, token } = useContext(AuthContext);
   
   // Estados para datos del formulario
@@ -95,57 +96,38 @@ function RequirementForm({ onSubmit, onCancel }) {
   const submitForm = async (data) => {
     setIsSubmitting(true);
     try {
-      // Sanitizar y preparar datos básicos
-      const sanitizedSubject = DOMPurify.sanitize(data.subject);
-      const sanitizedDescription = DOMPurify.sanitize(data.description);
-
-      // Crear FormData (para enviar multipart/form-data)
       const formData = new FormData();
-      formData.append('subject', sanitizedSubject);
-      formData.append('description', sanitizedDescription);
-      formData.append('requirementTypeId', data.requirementTypeId);
-      formData.append('categoryId', data.categoryId);
-      if(data.priorityId) {
-        formData.append('priorityId', data.priorityId);
-      }
-      // Si el usuario es Interno, se asigna al usuario seleccionado (opcional)
-      if (user.role === 'Interno' && data.assignedUser) {
-        formData.append('assignedUsers', data.assignedUser);
-      }
-      // Agregar requerimientos relacionados (si los hay)
-      if (relatedRequirements && relatedRequirements.length > 0) {
-        // Se puede enviar como cadena JSON o repetir el mismo nombre para cada valor
-        formData.append('relatedRequirementIds', JSON.stringify(relatedRequirements));
+
+      // Campos básicos (¡nota el PascalCase!)
+      formData.append("Subject", DOMPurify.sanitize(data.subject));
+      formData.append("Description", DOMPurify.sanitize(data.description));
+      formData.append("RequirementTypeId", data.requirementTypeId);
+      formData.append("CategoryId", data.categoryId);
+
+      if (data.priorityId) {
+        formData.append("PriorityId", data.priorityId);
       }
 
-      // Procesar archivos adjuntos:
-      // data.files es un FileList; convertirlo a array:
+      // Archivos
       const files = data.files ? Array.from(data.files) : [];
-      // Validar cantidad máxima de archivos:
-      if (files.length > 5) {
-        throw new Error("Solo se permiten hasta 5 archivos adjuntos.");
-      }
-      // Extensiones permitidas:
-      const allowedExtensions = ['.doc', '.docx', '.xls', '.xlsx', '.pdf'];
-      const maxFileSize = 5 * 1024 * 1024; // 5 MB
+      if (files.length > 5) throw new Error("Máximo 5 archivos.");
 
-      files.forEach((file, index) => {
-        const extension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+      const allowedExtensions = [".doc", ".docx", ".xls", ".xlsx", ".pdf"];
+      files.forEach((file) => {
+        const extension = file.name.slice(file.name.lastIndexOf(".")).toLowerCase();
         if (!allowedExtensions.includes(extension)) {
-          throw new Error(`El archivo '${file.name}' tiene una extensión no permitida.`);
+          throw new Error(`Extensión no permitida: ${file.name}`);
         }
-        if (file.size > maxFileSize) {
-          throw new Error(`El archivo '${file.name}' excede el tamaño máximo permitido de 5 MB.`);
+        if (file.size > 5 * 1024 * 1024) {
+          throw new Error(`Archivo demasiado grande: ${file.name}`);
         }
-        // Se añade cada archivo a FormData con el mismo nombre, por ejemplo "files"
-        formData.append('files', file);
+        formData.append("Files", file); // Clave en PascalCase
       });
 
-      // Llamar a la función onSubmit pasada por props, enviando FormData
       await onSubmit(formData);
     } catch (error) {
       console.error(error);
-      // Puedes utilizar un alert o Swal para notificar el error
+      Swal.fire("Error", error.message, "error");
     } finally {
       setIsSubmitting(false);
     }
@@ -254,6 +236,8 @@ function RequirementForm({ onSubmit, onCancel }) {
 RequirementForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  setRequerimientos: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default RequirementForm;
