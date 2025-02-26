@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 function RequerimientoCard({ requerimiento }) {
   const navigate = useNavigate();
-
   const handleCardClick = () => {
     navigate(`/requerimiento/${requerimiento.id}`);
   };
@@ -57,7 +56,7 @@ function RequerimientoCard({ requerimiento }) {
               {(requerimiento.assignedUsers || []).map((usuario, index) => (
                 <img
                   key={index}
-                  src={usuario.avatar}
+                  src={usuario.image}
                   alt={usuario.nombre}
                   className="user-icon"
                 />

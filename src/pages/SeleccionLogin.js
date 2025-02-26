@@ -25,7 +25,7 @@ function SeleccionLogin() {
   return (
     <div className="seleccion-login">
       <article className='titulo-login'>
-        <h1><span>Centralización </span> y <span>incidencia</span> en la gestión de requerimientos</h1>
+        <h1><span>zación </span> y <span>incidencia</span> en la gestión de requerimientos</h1>
       </article>
       <article className='formContainer'>
         <div className='formLogin'>

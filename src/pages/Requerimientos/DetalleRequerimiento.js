@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthContext.js';  // Accede al contex
 import RequirementDetails from './RequirementDetails.js';
 import CommentsSection from './CommentsSection.js';
 import Swal from 'sweetalert2';
+import LoadingOverlay from '../../components/LoadingOverlay.js';
 
 function DetalleRequerimiento() {
   const { id } = useParams(); // Obtenemos el id del requerimiento desde la URL
@@ -51,8 +52,8 @@ function DetalleRequerimiento() {
   const handleBack = () => {
     navigate(-1); // Regresamos a la página anterior cuando el usuario hace clic en el botón de volver
   };
-
-  if (!requirement) return <div>Cargando...</div>; // Mostramos un mensaje de carga mientras esperamos los datos
+  
+  if (!requirement) return <LoadingOverlay isLoading={true} />;; // Mostramos un mensaje de carga mientras esperamos los datos
 
   return (
     <div className="detalle-requerimiento">

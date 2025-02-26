@@ -75,7 +75,7 @@ function Login() {
     <div className="login-page">
       <article className="titulo-login">
         <h1>
-          <span>Centralización </span> y <span>eficiencia</span> en la gestión de requerimientos
+          <span>Centralización </span> e <span>eficiencia</span> en la gestión de requerimientos
         </h1>
       </article>
       <article className="formContainer">

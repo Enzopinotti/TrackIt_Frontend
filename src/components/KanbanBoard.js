@@ -6,7 +6,8 @@ import RequerimientoCard from './RequerimientoCard.js'; // Ajusta la ruta si es 
 function KanbanBoard({ requerimientos, estados, isDraggable = false }) {
   // Asegurarse de que requerimientos sea un array, en caso contrario usar un array vacío
   const validRequerimientos = Array.isArray(requerimientos) ? requerimientos : [];
-
+  console.log(requerimientos)
+  console.log(estados)
   return (
     <div className={`kanban-board ${isDraggable ? 'draggable' : ''}`}>
       {estados.map((estado) => {

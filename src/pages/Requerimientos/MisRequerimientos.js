@@ -11,7 +11,7 @@ function MisRequerimientos() {
   const { user, token } = useContext(AuthContext);
   const [requerimientos, setRequerimientos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  console.log(requerimientos)
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
