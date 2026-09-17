@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# TrackIt Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Historical React frontend for the **TrackIt** product/prototype.
 
-## Available Scripts
+This repository is being preserved as part of a portfolio-wide modernization program. The current codebase still reflects its original Create React App architecture; this README documents what the repository actually contains today and the security boundary that must be understood before any framework migration.
 
-In the project directory, you can run:
+## Current technical baseline
 
-### `npm start`
+- React 18
+- Create React App / `react-scripts` 5
+- React Router 6
+- React Hook Form + Yup
+- Sass
+- DOMPurify
+- Font Awesome / React Icons
+- Lottie integrations
+- Testing Library dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Configuration boundary
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The frontend reads configuration through Create React App variables prefixed with `REACT_APP_`.
 
-### `npm test`
+**Anything stored in a `REACT_APP_*` variable is compiled into browser-delivered JavaScript and must be considered public.** Passwords, private API keys, CAPTCHA server secrets and other privileged credentials must never be stored in frontend environment variables.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Use the committed `.env.example` only as a configuration contract:
 
-### `npm run build`
+```bash
+cp .env.example .env
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The historical variable name `REACT_APP_SECRET_KEY_CAPTCHA` is misleading. If this integration is used, the frontend value must only represent a public client/site key. Any server-side CAPTCHA secret belongs in a backend or another trusted server-side environment.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Local development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install dependencies:
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Start the CRA development server and Sass watcher:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Create a production build:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run build
+```
 
-## Learn More
+Run the existing CRA test command:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm test
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Repository status
 
-### Code Splitting
+This repository is currently in **security/hygiene triage**, not full modernization.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The immediate goals are:
 
-### Analyzing the Bundle Size
+1. remove tracked local `.env` material from the current source tree;
+2. keep only a value-free `.env.example` contract;
+3. classify any historically exposed values outside the public repository and rotate/revoke them if they were ever privileged;
+4. only after the security boundary is closed, decide whether the historical CRA application should be migrated or simply documented and preserved.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+No visual redesign, backend invention or framework migration is part of this security pass.
 
-### Making a Progressive Web App
+## Historical context
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The repository is intentionally not being rewritten to make older work look newer. Its value is showing a real stage of frontend development and the engineering lessons that follow from reviewing configuration, dependency and browser-security boundaries later.
 
-### Advanced Configuration
+Portfolio coordination: [`Enzopinotti/Enzopinotti#19`](https://github.com/Enzopinotti/Enzopinotti/issues/19)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Author
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Enzo Pinotti
