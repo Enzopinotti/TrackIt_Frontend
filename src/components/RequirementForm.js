@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import DOMPurify from 'dompurify';
 import Swal from 'sweetalert2';
 import LinkRequirementModal from './LinkRequirementModal.js';
+import { apiUrl } from '../config/runtime.js';
 
 function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) {
   const { user, token } = useContext(AuthContext);
@@ -34,7 +35,7 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
   useEffect(() => {
     const fetchRequirementTypes = async () => {
       try {
-        const response = await fetch('http://trackit.somee.com/api/RequirementType', {
+        const response = await fetch(apiUrl('/api/RequirementType'), {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) {
@@ -59,7 +60,7 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          `http://trackit.somee.com/api/Category/by-requirement-type/${selectedRequirementType}`,
+          apiUrl(`/api/Category/by-requirement-type/${selectedRequirementType}`),
           { headers: { Authorization: `Bearer ${token}` } }
         );
         if (!response.ok) {
