@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada }) {
+function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null }) {
   const [nombre, setNombre] = useState('');
   const [typeId, setTypeId] = useState('');
 
@@ -102,8 +102,5 @@ CategoryForm.propTypes = {
   }),
 };
 
-CategoryForm.defaultProps = {
-  categoriaSeleccionada: null,
-};
 
 export default CategoryForm;
