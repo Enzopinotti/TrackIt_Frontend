@@ -1,7 +1,7 @@
 // src/pages/Inicio.js
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import mockUsers from '../data/mockUsers.js'; // Importar mockUsers
 
 function Inicio() {
