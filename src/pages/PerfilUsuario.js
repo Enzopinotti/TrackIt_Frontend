@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { handleErrors } from '../utils/handleErrors.js';
 import LoadingOverlay from '../components/LoadingOverlay.js';
