@@ -1,9 +1,9 @@
 import React from 'react';
-import { Player } from '@lottiefiles/react-lottie-player';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const PageNotFound = () => (
   <div style={{ textAlign: 'center', padding: '50px' }}>
-    <Player
+    <DotLottieReact
       autoplay
       loop
       src="https://assets2.lottiefiles.com/packages/lf20_khzniaya.json"
