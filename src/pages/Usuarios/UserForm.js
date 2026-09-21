@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function UserForm({ onAgregar, onActualizar, usuarioSeleccionado }) {
+function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
   const [nombre, setNombre] = useState('');
   const [cargo, setCargo] = useState('');
   const [avatar, setAvatar] = useState('');
@@ -116,8 +116,5 @@ UserForm.propTypes = {
   }),
 };
 
-UserForm.defaultProps = {
-  usuarioSeleccionado: null,
-};
 
 export default UserForm;
