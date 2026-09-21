@@ -1,6 +1,6 @@
 // src/pages/Login.js
 import React, { useContext, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router';
 import Logo from '../components/Logo.js';
 import { AuthContext } from '../context/AuthContext.js';
 import { useForm } from 'react-hook-form';
