@@ -6,6 +6,7 @@ import CustomModal from '../../components/CustomModal.js';
 import RequirementForm from '../../components/RequirementForm.js';
 import Swal from 'sweetalert2';
 import { formatDateToDDMMYYYY } from '../../utils/dateUtils.js';
+import { apiUrl } from '../../config/runtime.js';
 
 function MisRequerimientos() {
   const { user, token } = useContext(AuthContext);
@@ -17,7 +18,7 @@ function MisRequerimientos() {
 
   const handleCreateRequirement = async (data) => {
     try {
-      const response = await fetch('http://trackit.somee.com/api/Requirements/createRequeriment', {
+      const response = await fetch(apiUrl('/api/Requirements/createRequeriment'), {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,7 +48,7 @@ function MisRequerimientos() {
   // Llamada al backend para obtener los requerimientos del usuario
   const fetchRequerimientos = useCallback(async () => {
     try {
-      const response = await fetch(`http://trackit.somee.com/api/Requirements/created-by/${user.id}`, {
+      const response = await fetch(apiUrl(`/api/Requirements/created-by/${user.id}`), {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
