@@ -7,6 +7,7 @@ import DOMPurify from 'dompurify';
 import Swal from 'sweetalert2';
 import LinkRequirementModal from './LinkRequirementModal.js';
 import { apiUrl } from '../config/runtime.js';
+import { validateRequirementFiles } from '../utils/requirementFiles.js';
 
 function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) {
   const { user, token } = useContext(AuthContext);
@@ -110,18 +111,8 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
       }
 
       // Archivos
-      const files = data.files ? Array.from(data.files) : [];
-      if (files.length > 5) throw new Error("Máximo 5 archivos.");
-
-      const allowedExtensions = [".doc", ".docx", ".xls", ".xlsx", ".pdf"];
+      const files = validateRequirementFiles(data.files);
       files.forEach((file) => {
-        const extension = file.name.slice(file.name.lastIndexOf(".")).toLowerCase();
-        if (!allowedExtensions.includes(extension)) {
-          throw new Error(`Extensión no permitida: ${file.name}`);
-        }
-        if (file.size > 5 * 1024 * 1024) {
-          throw new Error(`Archivo demasiado grande: ${file.name}`);
-        }
         formData.append("Files", file); // Clave en PascalCase
       });
 
