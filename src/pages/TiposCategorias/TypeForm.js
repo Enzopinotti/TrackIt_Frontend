@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function TypeForm({ onAgregar, onActualizar, tipoSeleccionado, categorias }) {
+function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias }) {
   const [nombre, setNombre] = useState('');
   const [categoriasAsignadas, setCategoriasAsignadas] = useState([]);
 
@@ -120,8 +120,5 @@ TypeForm.propTypes = {
   ).isRequired,
 };
 
-TypeForm.defaultProps = {
-  tipoSeleccionado: null,
-};
 
 export default TypeForm;
