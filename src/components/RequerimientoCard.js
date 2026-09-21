@@ -1,7 +1,7 @@
 // src/components/RequerimientoCard/RequerimientoCard.js
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 function RequerimientoCard({ requerimiento }) {
   const navigate = useNavigate();
