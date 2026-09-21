@@ -1,6 +1,6 @@
 // src/pages/RegistroInterno.js
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import Logo from '../components/Logo.js';
 import { useForm } from 'react-hook-form';
