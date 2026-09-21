@@ -29,8 +29,10 @@ jobs:
           node-version: "24.20.0"
           cache: npm
 
-      - name: Regenerate npm lockfile
-        run: npm install --package-lock-only --ignore-scripts
+      - name: Regenerate npm lockfile from the modern package contract
+        run: |
+          rm -f package-lock.json
+          npm install --package-lock-only --ignore-scripts
 
       - name: Publish changed lockfile
         shell: bash
