@@ -6,6 +6,7 @@ import RequirementDetails from './RequirementDetails.js';
 import CommentsSection from './CommentsSection.js';
 import Swal from 'sweetalert2';
 import LoadingOverlay from '../../components/LoadingOverlay.js';
+import { apiUrl } from '../../config/runtime.js';
 
 function DetalleRequerimiento() {
   const { id } = useParams(); // Obtenemos el id del requerimiento desde la URL
@@ -18,7 +19,7 @@ function DetalleRequerimiento() {
     // Llamada a la API para obtener los detalles del requerimiento
     const fetchRequirement = async () => {
       try {
-        const response = await fetch(`http://trackit.somee.com/api/Requirements/${id}`, {
+        const response = await fetch(apiUrl(`/api/Requirements/${id}`), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`, // Usamos el token para autenticar la solicitud
