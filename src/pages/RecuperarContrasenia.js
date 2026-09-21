@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import Logo from '../components/Logo.js';
+import { apiUrl, callbackUrl } from '../config/runtime.js';
 
 function RecuperarContrasenia() {
   const [email, setEmail] = useState('');
@@ -11,14 +12,14 @@ function RecuperarContrasenia() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://trackit.somee.com/api/User/forgot-password', {
+      const response = await fetch(apiUrl('/api/User/forgot-password'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: email.trim(), // Aseguramos que el correo no tenga espacios en blanco
-          clientUri: 'http://localhost:3000/resetear-contrasenia', // Cambia a la URI real en producción
+          clientUri: callbackUrl('/resetear-contrasenia'), // Cambia a la URI real en producción
         }),
       });
 
