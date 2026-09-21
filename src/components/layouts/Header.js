@@ -1,6 +1,6 @@
 // src/components/Header/Header.js
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import MenuOverlay from '../layouts/MenuOverlay.js'; // Ajusta la ruta según corresponda
 import Logo from '../Logo.js';
 import NotificationsButton from '../NotificationsButton.js';
