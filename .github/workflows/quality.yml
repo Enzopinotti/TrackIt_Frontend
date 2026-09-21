@@ -37,18 +37,19 @@ jobs:
       - name: Install exact dependency graph
         run: npm ci
 
-      - name: Validate TrackIt baseline authority
-        run: node scripts/baseline-authority.mjs
+      - name: Validate TrackIt Vite authority
+        run: node scripts/b1-vite-authority.mjs
 
-      - name: Run current CRA test surface
-        env:
-          CI: "true"
-        run: npm test -- --watchAll=false --passWithNoTests
+      - name: Run Vitest suite
+        run: npm test
 
-      - name: Build current CRA application
-        env:
-          CI: "false"
+      - name: Build Vite application
         run: npm run build
+
+      - name: Verify Vite output authority
+        run: |
+          test -d dist
+          test ! -d build
 
       - name: Measure production dependency audit
         continue-on-error: true
