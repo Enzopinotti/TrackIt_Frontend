@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { apiUrl } from '../config/runtime.js';
 
 // Crear el contexto
 export const AuthContext = createContext();
@@ -19,7 +20,7 @@ export function AuthProvider({ children }) {
 
     try {
       // Realizar una solicitud al backend para obtener el perfil del usuario
-      const response = await fetch('http://trackit.somee.com/api/User/profile', {
+      const response = await fetch(apiUrl('/api/User/profile'), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ export function AuthProvider({ children }) {
       // Intentar obtener el perfil del usuario
       const fetchUserProfile = async () => {
         try {
-          const response = await fetch('http://trackit.somee.com/api/User/profile', {
+          const response = await fetch(apiUrl('/api/User/profile'), {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
