@@ -1,79 +1,94 @@
 # TrackIt Frontend
 
-Historical React frontend for the **TrackIt** product/prototype.
+TrackIt is a React frontend for a requirements/ticket-management product prototype.
 
-This repository is being preserved as part of a portfolio-wide modernization program. The current codebase still reflects its original Create React App architecture; this README documents what the repository actually contains today and the security boundary that must be understood before any framework migration.
+The repository intentionally preserves the historical product flows while modernizing the frontend engineering baseline. Some flows call a historical external backend; other administration/product areas remain mock or localStorage-driven. The paired public backend repository does not provide a maintained server implementation, so this frontend does not pretend those missing server capabilities exist.
 
-## Current technical baseline
+## Current stack
 
-- React 18
-- Create React App / `react-scripts` 5
-- React Router 6
+- React 19.3
+- React Router 8
+- Vite 8
+- Vitest 5
 - React Hook Form + Yup
 - Sass
 - DOMPurify
 - Font Awesome / React Icons
-- Lottie integrations
-- Testing Library dependencies
+- dotLottie React
+- GitHub Actions quality gates
+- Vercel SPA deployment contract
 
-## Configuration boundary
+Runtime authority is pinned to Node 24.20.0.
 
-The frontend reads configuration through Create React App variables prefixed with `REACT_APP_`.
+## Install and run
 
-**Anything stored in a `REACT_APP_*` variable is compiled into browser-delivered JavaScript and must be considered public.** Passwords, private API keys, CAPTCHA server secrets and other privileged credentials must never be stored in frontend environment variables.
-
-Use the committed `.env.example` only as a configuration contract:
-
-```bash
-cp .env.example .env
-```
-
-The historical variable name `REACT_APP_SECRET_KEY_CAPTCHA` is misleading. If this integration is used, the frontend value must only represent a public client/site key. Any server-side CAPTCHA secret belongs in a backend or another trusted server-side environment.
-
-## Local development
-
-Install dependencies:
+Use the committed lockfile:
 
 ```bash
-npm install
+npm ci
 ```
 
-Start the CRA development server and Sass watcher:
+Start the Vite development server:
 
 ```bash
-npm start
+npm run dev
 ```
 
-Create a production build:
+Build the production application:
 
 ```bash
 npm run build
 ```
 
-Run the existing CRA test command:
+Run the current test command:
 
 ```bash
 npm test
 ```
 
-## Repository status
+## Browser-public configuration
 
-This repository is currently in **security/hygiene triage**, not full modernization.
+Copy the value-free configuration contract when local overrides are needed:
 
-The immediate goals are:
+```bash
+cp .env.example .env
+```
 
-1. remove tracked local `.env` material from the current source tree;
-2. keep only a value-free `.env.example` contract;
-3. classify any historically exposed values outside the public repository and rotate/revoke them if they were ever privileged;
-4. only after the security boundary is closed, decide whether the historical CRA application should be migrated or simply documented and preserved.
+Vite exposes `VITE_*` variables to browser-delivered JavaScript. They are public configuration, not a place for passwords, private API keys, CAPTCHA server secrets, or other privileged credentials.
 
-No visual redesign, backend invention or framework migration is part of this security pass.
+Supported frontend configuration:
 
-## Historical context
+- `VITE_API_BASE_URL` — historical external API base URL. The maintained default is `https://trackit.somee.com` so an HTTPS Vercel frontend never hard-codes an insecure mixed-content origin.
+- `VITE_APP_BASE_URL` — optional public frontend origin used for email callbacks. When omitted, TrackIt derives callback URLs from `window.location.origin`.
 
-The repository is intentionally not being rewritten to make older work look newer. Its value is showing a real stage of frontend development and the engineering lessons that follow from reviewing configuration, dependency and browser-security boundaries later.
+URL composition lives in `src/config/runtime.js`. Maintained screens must not hard-code Somee or localhost origins.
 
-Portfolio coordination: [`Enzopinotti/Enzopinotti#19`](https://github.com/Enzopinotti/Enzopinotti/issues/19)
+## Product boundary
+
+The current frontend contains real external-backend integrations for authentication, profile, users, requirement metadata and requirement workflows. It also contains intentional mock/localStorage-driven areas and simulated/unimplemented server paths.
+
+Modernization rules:
+
+- do not invent a backend that is not versioned here;
+- do not silently convert mock flows to server-backed behavior;
+- do not put privileged secrets in frontend configuration;
+- keep the real-vs-demo boundary explicit in code and documentation.
+
+## Quality
+
+GitHub Actions verifies:
+
+- exact Node/npm install authority;
+- Vite/Vercel build authority;
+- React 19 / React Router 8 runtime authority;
+- centralized API/callback configuration;
+- Vitest execution;
+- production build output;
+- dependency audit measurement.
+
+Modernization program: issue #3.
+
+Historical credential review remains tracked separately in issue #1; deleting current-tree values does not prove historical external credentials were rotated or revoked.
 
 ## Author
 
