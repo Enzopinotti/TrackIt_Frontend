@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { handleErrors } from '../utils/handleErrors.js';
 import LoadingOverlay from '../components/LoadingOverlay.js';
+import { apiUrl } from '../config/runtime.js';
 
 function PerfilUsuario() {
   const { user, logout, updateUser } = useContext(AuthContext);
@@ -70,7 +71,7 @@ function PerfilUsuario() {
     formData.append('file', selectedImage);
 
     try {
-      const response = await fetch(`http://trackit.somee.com/api/User/upload-image/${user.id}`, {
+      const response = await fetch(apiUrl(`/api/User/upload-image/${user.id}`), {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`, // Enviar el token en la cabecera
