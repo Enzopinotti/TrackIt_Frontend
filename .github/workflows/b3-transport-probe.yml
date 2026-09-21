@@ -1,0 +1,44 @@
+name: B3 backend transport probe
+
+on:
+  push:
+    branches:
+      - modernize/b3-api-config
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    if: github.event.head_commit.message == 'B3 transport probe'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe historical backend transports
+        shell: bash
+        run: |
+          set +e
+          for origin in "http://trackit.somee.com" "https://trackit.somee.com"; do
+            echo "=== $origin ==="
+            body="$(mktemp)"
+            code="$(curl --location --silent --show-error --output "$body" --write-out "%{http_code}" --connect-timeout 10 --max-time 20 "$origin/" 2>&1)"
+            rc=$?
+            echo "curl-exit=$rc"
+            echo "http-code=$code"
+            echo "body-bytes=$(wc -c < "$body" | tr -d ' ')"
+            head -c 300 "$body" || true
+            echo
+            rm -f "$body"
+          done
+
+          for origin in "http://trackit.somee.com" "https://trackit.somee.com"; do
+            echo "=== $origin/api/User/profile ==="
+            body="$(mktemp)"
+            code="$(curl --location --silent --show-error --output "$body" --write-out "%{http_code}" --connect-timeout 10 --max-time 20 "$origin/api/User/profile" 2>&1)"
+            rc=$?
+            echo "curl-exit=$rc"
+            echo "http-code=$code"
+            echo "body-bytes=$(wc -c < "$body" | tr -d ' ')"
+            head -c 300 "$body" || true
+            echo
+            rm -f "$body"
+          done
