@@ -43,6 +43,9 @@ jobs:
       - name: Validate TrackIt runtime authority
         run: node scripts/b2-runtime-authority.mjs
 
+      - name: Validate TrackIt API/config authority
+        run: node scripts/b3-api-config-authority.mjs
+
       - name: Run Vitest suite
         run: npm test
 
