@@ -10,6 +10,7 @@ import DOMPurify from 'dompurify';
 import { handleErrors } from '../utils/handleErrors.js';
 import Swal from 'sweetalert2';
 import LoadingOverlay from '../components/LoadingOverlay.js';
+import { apiUrl } from '../config/runtime.js';
 
 function Login() {
   const { tipoUsuario } = useParams();
@@ -38,7 +39,7 @@ function Login() {
     };
 
     try {
-      const response = await fetch('http://trackit.somee.com/api/User/login', {
+      const response = await fetch(apiUrl('/api/User/login'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
