@@ -67,9 +67,11 @@ The unused CRA `src/config/config.js` module is also retired after repository se
 
 Historical TrackIt components use JSX inside `.js` files.
 
-Rather than renaming dozens of files in the same tooling block, `vite.config.js` explicitly transforms maintained `src/**/*.js` as JSX.
+B1 keeps those filenames unchanged to avoid mixing a mass rename into the toolchain migration.
 
-This preserves source history and keeps B1 focused on toolchain authority.
+The first Vite candidate used a custom `transformWithEsbuild` pre-transform. GitHub Actions proved that approach is wrong for Vite 8: the helper is deprecated and esbuild is no longer a built-in dependency.
+
+The corrected authority delegates JSX transformation to `@vitejs/plugin-react` 6, whose include contract covers `.js`, `.jsx`, `.ts` and `.tsx`. This keeps the Vite 8 Oxc pipeline authoritative and avoids reintroducing esbuild only to preserve historical filenames.
 
 ## Lockfile authority
 
