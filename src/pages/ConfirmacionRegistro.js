@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import Logo from '../components/Logo.js';
+import { apiUrl } from '../config/runtime.js';
 
 function ConfirmacionRegistro() {
   const [searchParams] = useSearchParams(); // Obtener parámetros de la URL
@@ -28,7 +29,7 @@ function ConfirmacionRegistro() {
     const confirmarEmail = async () => {
       try {
         const res = await fetch(
-          `http://trackit.somee.com/api/User/confirm-email?userId=${encodeURIComponent(userId)}&token=${encodeURIComponent(token)}`
+          apiUrl(`/api/User/confirm-email?userId=${encodeURIComponent(userId)}&token=${encodeURIComponent(token)}`)
         );
 
         console.log('Respuesta del servidor:', res);
