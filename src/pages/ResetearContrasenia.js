@@ -10,6 +10,7 @@ import { resetPasswordSchema } from '../validations/validationSchemas.js';
 import DOMPurify from 'dompurify';
 import { validatePasswordConditions } from '../validations/passwordValidation.js';
 import { handleErrors } from '../utils/handleErrors.js';
+import { apiUrl } from '../config/runtime.js';
 
 function ResetearContrasenia() {
   const [searchParams] = useSearchParams();
@@ -71,7 +72,7 @@ function ResetearContrasenia() {
     }
 
     try {
-      const response = await fetch('http://trackit.somee.com/api/User/reset-password', {
+      const response = await fetch(apiUrl('/api/User/reset-password'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
