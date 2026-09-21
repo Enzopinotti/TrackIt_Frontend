@@ -23,6 +23,11 @@ const sources = sourceFiles.map((file) => ({
   file: path.relative(ROOT, file),
   content: fs.readFileSync(file, "utf8"),
 }));
+const productionSources = sources.filter(
+  ({ file }) =>
+    !/\.(test|spec)\.[cm]?[jt]sx?$/.test(file) &&
+    !file.startsWith("src/test/"),
+);
 
 const runtime = fs.readFileSync(RUNTIME_CONFIG, "utf8");
 const envExample = fs.readFileSync(ENV_EXAMPLE, "utf8");
@@ -50,11 +55,13 @@ if (!envExample.includes("VITE_API_BASE_URL=https://trackit.somee.com")) {
   failures.push(".env.example must document the HTTPS historical backend default");
 }
 
-const consumerSources = sources.filter(({ file }) => file !== "src/config/runtime.js");
+const consumerSources = productionSources.filter(
+  ({ file }) => file !== "src/config/runtime.js",
+);
 const residualSomee = consumerSources
   .filter(({ content }) => /https?:\/\/trackit\.somee\.com/.test(content))
   .map(({ file }) => file);
-const residualLocalhost = sources
+const residualLocalhost = productionSources
   .filter(({ content }) => /http:\/\/localhost(?::\d+)?/.test(content))
   .map(({ file }) => file);
 const envReadsOutsideAuthority = consumerSources
