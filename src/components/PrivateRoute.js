@@ -1,7 +1,7 @@
 // src/components/PrivateRoute.js
 
 import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import { AuthContext } from '../context/AuthContext.js';
 import LoadingOverlay from './LoadingOverlay.js';
 
