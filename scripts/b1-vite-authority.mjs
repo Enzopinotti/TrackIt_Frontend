@@ -113,12 +113,12 @@ if (craEnvReads.length !== 0) {
   failures.push("CRA process.env reads remain in maintained source: " + craEnvReads.length);
 }
 
-if (insecureApi.length !== 17) {
-  failures.push("B3 API-origin debt changed unexpectedly before API authority work: " + insecureApi.length);
+if (insecureApi.length !== 0) {
+  failures.push("legacy insecure Somee origin returned: " + insecureApi.length);
 }
 
-if (localhost.length !== 3) {
-  failures.push("B3 localhost callback debt changed unexpectedly before API authority work: " + localhost.length);
+if (localhost.length !== 0) {
+  failures.push("hard-coded localhost origin returned: " + localhost.length);
 }
 
 console.log("trackit-build-authority=Vite");
