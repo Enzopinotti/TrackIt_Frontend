@@ -85,7 +85,7 @@ function AdminUsers() {
   // Manejo de rechazar usuario (eliminarlo)
   const handleReject = async (userId) => {
     try {
-      const response = await fetch(`http://trackit.somee.com/api/Admin/DeleteUser/${userId}`, {
+      const response = await fetch(apiUrl(`/api/Admin/DeleteUser/${userId}`), {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
