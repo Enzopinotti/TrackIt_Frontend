@@ -80,3 +80,27 @@ The quality workflow now validates:
 B3 does not add a backend, change mock/localStorage behavior, or claim the historical external service is under this repository's control.
 
 Behavior tests for these contracts belong to B4.
+
+
+## Final B3 evidence
+
+GitHub Actions Quality run `35669600391` proved the B3 candidate on Node 24.20.0:
+
+- exact `npm ci`: green;
+- B1 Vite/deployment authority: green;
+- B2 React/runtime authority: green;
+- B3 API/config authority: green;
+- hard-coded HTTP Somee references in maintained source: 0;
+- hard-coded localhost origins in maintained source: 0;
+- direct Somee consumer files outside runtime authority: 0;
+- environment reads outside runtime authority: 0;
+- files consuming centralized `apiUrl()`: 12;
+- centralized callback URL calls: 3;
+- Vitest command: green;
+- Vite production build and `dist/` authority: green;
+- production dependency audit: 0 vulnerabilities;
+- complete dependency audit: 0 vulnerabilities.
+
+The seventeenth historical Somee reference was the admin `DeleteUser` endpoint. It was discovered by the permanent zero-debt gate after code search had surfaced only the other sixteen consumers.
+
+Vercel did not execute this preview because the account had already exceeded its daily deployment quota. The provider returned `api-deployments-free-per-day` before a TrackIt build started; this is an external quota condition, not a repository build failure.
