@@ -100,3 +100,36 @@ B2 is complete when:
 4. Vitest command and Vite production build pass under Node 24.20.0;
 5. dependency audit has no known high or critical findings and the Router findings from B1 are removed;
 6. Vercel preview succeeds with the published Vite deployment contract.
+
+## Final B2 evidence
+
+GitHub Actions Quality run `35666633599` proved the runtime candidate on Node 24.20.0:
+
+- exact `npm ci`: green;
+- B1 Vite/deployment/API-debt authority: green;
+- B2 React/runtime authority: green;
+- React 19.3.0 / React DOM 19.3.0: confirmed;
+- React Router 8.4.0: confirmed;
+- maintained Router v8 consumer files: 22;
+- maintained `react-router-dom` source references: 0;
+- function-component `defaultProps`: 0;
+- dotLottie React 0.19.16: confirmed;
+- Vitest command: green;
+- Vite production build and `dist/` authority: green;
+- production dependency audit: 0 vulnerabilities;
+- complete dependency audit: 0 vulnerabilities.
+
+The deprecated Lottie player's direct-`eval` build warning is gone.
+
+The build still reports non-blocking follow-up debt:
+
+- Dart Sass deprecated global/color helpers such as `darken()`;
+- the application JavaScript bundle remains above Vite's 500 kB advisory threshold.
+
+Those are later style/performance modernization inputs, not runtime blockers.
+
+### Vercel status for the final candidate
+
+Vercel did not execute the B2 preview because the provider returned its account-level build-rate-limit / upgrade URL before a TrackIt build ran.
+
+This is classified as an external provider quota condition, not as a TrackIt build failure. The repository deployment contract itself is unchanged from the B1 Vercel-proven configuration (`vite`, `npm run build`, `dist`, SPA rewrite), and the same application bundle builds successfully in GitHub Actions.
