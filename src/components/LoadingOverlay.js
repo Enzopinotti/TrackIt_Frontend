@@ -1,12 +1,12 @@
 import React from 'react';
-import { Player } from '@lottiefiles/react-lottie-player';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 function LoadingOverlay({ isLoading }) {
   if (!isLoading) return null;
 
   return (
     <div className="loading-animation">
-      <Player
+      <DotLottieReact
         autoplay
         loop
         src="/assets/videos/animacionCarga.json" // Asegúrate de la ruta
