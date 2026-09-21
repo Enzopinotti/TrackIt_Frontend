@@ -1,0 +1,59 @@
+name: TrackIt quality
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      - modernize/2026-trackit-carrier
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Setup Node 24.20.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: "24.20.0"
+          cache: npm
+
+      - name: Runtime authority
+        run: |
+          node --version
+          npm --version
+          test "$(node --version)" = "v24.20.0"
+
+      - name: Install exact dependency graph
+        run: npm ci
+
+      - name: Validate TrackIt baseline authority
+        run: node scripts/baseline-authority.mjs
+
+      - name: Run current CRA test surface
+        env:
+          CI: "true"
+        run: npm test -- --watchAll=false --passWithNoTests
+
+      - name: Build current CRA application
+        env:
+          CI: "false"
+        run: npm run build
+
+      - name: Measure production dependency audit
+        continue-on-error: true
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Measure complete dependency audit
+        continue-on-error: true
+        run: npm audit --audit-level=high
