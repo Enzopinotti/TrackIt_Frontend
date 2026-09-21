@@ -91,6 +91,34 @@ The correct fix was used:
 
 No `--legacy-peer-deps` or `--force` resolution was adopted.
 
+## Vercel deployment authority
+
+The repository now carries its deployment contract in root `vercel.json` instead of depending on historical dashboard defaults from the CRA era.
+
+B1 fixes the deploy contract to:
+
+- framework: `vite`;
+- build command: `npm run build`;
+- output directory: `dist`;
+- SPA catch-all rewrite to `/index.html` so BrowserRouter deep links remain client-routed.
+
+The B1 authority gate verifies these values.
+
+## Dependency result
+
+The final B1 GitHub Actions candidate reduced the B0 audit from 68 vulnerabilities (33 high, 3 critical) to 2 moderate vulnerabilities.
+
+Both remaining findings are in the React Router 6 line and require a breaking Router 7 upgrade, so they are intentionally assigned to B2 rather than hidden behind `npm audit fix --force`.
+
+The build also exposes follow-up maintenance signals for later blocks:
+
+- deprecated Sass color helpers such as `darken()`;
+- deprecated `@fortawesome/react-fontawesome` 0.2.x;
+- a direct-eval warning inside `@lottiefiles/react-lottie-player`;
+- a single JavaScript chunk above Vite's 500 kB advisory threshold.
+
+These are measured B2/B5 inputs, not reasons to reintroduce CRA.
+
 ## Deferred product/config debt
 
 B1 deliberately does not change:
