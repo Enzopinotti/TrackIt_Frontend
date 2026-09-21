@@ -9,10 +9,11 @@ import { registerInternalSchema } from '../validations/validationSchemas.js';
 import DOMPurify from 'dompurify';
 import { validatePasswordConditions } from '../validations/passwordValidation.js';
 import { handleErrors } from '../utils/handleErrors.js';
+import { apiUrl, callbackUrl } from '../config/runtime.js';
 
 function RegistroInterno() {
   const navigate = useNavigate();
-  const clientUri = "http://localhost:3000/confirmacion-registro";
+  const clientUri = callbackUrl("/confirmacion-registro");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm({
@@ -48,7 +49,7 @@ function RegistroInterno() {
     };
 
     try {
-      const res = await fetch('http://trackit.somee.com/api/User/register-internal', {
+      const res = await fetch(apiUrl('/api/User/register-internal'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(sanitizedData),
