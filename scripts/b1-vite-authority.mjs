@@ -50,6 +50,7 @@ for (const [script, command] of Object.entries({
 for (const required of [
   "index.html",
   "vite.config.js",
+  "vercel.json",
   ".nvmrc",
   "src/styles/scss/main.scss",
 ]) {
@@ -67,6 +68,23 @@ for (const retired of [
   if (fs.existsSync(path.join(ROOT, retired))) {
     failures.push("retired CRA/generated source returned: " + retired);
   }
+}
+
+const vercel = JSON.parse(fs.readFileSync(path.join(ROOT, "vercel.json"), "utf8"));
+if (vercel.framework !== "vite") {
+  failures.push("Vercel framework authority must be vite");
+}
+if (vercel.buildCommand !== "npm run build") {
+  failures.push("Vercel build command must use npm run build");
+}
+if (vercel.outputDirectory !== "dist") {
+  failures.push("Vercel output directory must be dist");
+}
+const spaRewrite = vercel.rewrites?.find(
+  (rewrite) => rewrite.source === "/(.*)" && rewrite.destination === "/index.html",
+);
+if (!spaRewrite) {
+  failures.push("Vercel SPA rewrite to /index.html is missing");
 }
 
 const entry = fs.readFileSync(path.join(SRC, "index.js"), "utf8");
@@ -107,6 +125,9 @@ console.log("trackit-build-authority=Vite");
 console.log("trackit-test-authority=Vitest");
 console.log("trackit-node-authority=" + pkg.engines.node);
 console.log("trackit-generated-css-source=absent");
+console.log("trackit-vercel-framework=" + vercel.framework);
+console.log("trackit-vercel-output=" + vercel.outputDirectory);
+console.log("trackit-vercel-spa-rewrite=present");
 console.log("trackit-cra-env-read-count=" + craEnvReads.length);
 console.log("trackit-legacy-http-somee-reference-count=" + insecureApi.length);
 console.log("trackit-hardcoded-localhost-reference-count=" + localhost.length);
