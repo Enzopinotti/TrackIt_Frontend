@@ -84,6 +84,29 @@ B0 does not:
 - close the historical credential-review issue;
 - redesign TrackIt.
 
+## Observed baseline
+
+PR #4 Quality run:
+
+`35648148592`
+
+Result:
+
+- Node 24.20.0 setup: success;
+- exact `npm ci`: success;
+- baseline authority gate: success;
+- maintained application tests: **0** (`--passWithNoTests`);
+- CRA production build: success;
+- production/full audit snapshot: **68 vulnerabilities**;
+  - 15 low;
+  - 17 moderate;
+  - 33 high;
+  - 3 critical.
+
+The audit report confirms substantial debt in the CRA/Jest/Webpack dependency graph and also identifies direct-package upgrade pressure such as DOMPurify and React Router.
+
+This is evidence for replacing the historical toolchain rather than applying a blind `npm audit fix --force`.
+
 ## Exit condition
 
-B0 is complete when the current CRA tree has a reproducible GitHub-run baseline and every failure is classified as pre-existing product/tooling debt rather than guessed locally.
+B0 is complete: the current CRA tree has a reproducible GitHub-run baseline and its main failures/debt are measured rather than guessed.
