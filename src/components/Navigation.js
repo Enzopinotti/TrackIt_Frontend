@@ -1,7 +1,7 @@
 // src/components/Navigation/Navigation.js
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 import PropTypes from 'prop-types';
 
 function Navigation({ className = 'navigation', role, onLinkClick = () => {} }) {
