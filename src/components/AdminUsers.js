@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Swal from 'sweetalert2';
 import LoadingOverlay from './LoadingOverlay.js';
 import { AuthContext } from '../context/AuthContext.js';
+import { apiUrl } from '../config/runtime.js';
 
 function AdminUsers() {
   const [usuarios, setUsuarios] = useState([]);
@@ -12,7 +13,7 @@ function AdminUsers() {
   // Función para obtener el listado de usuarios
   const fetchUsuarios = async () => {
     try {
-      const response = await fetch('http://trackit.somee.com/api/Admin/GetAllUsers', {
+      const response = await fetch(apiUrl('/api/Admin/GetAllUsers'), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ function AdminUsers() {
   const handleAccept = async (user) => {
     try {
       // Se requiere el DTO: { Email, IsEnabled } en el body
-      const response = await fetch('http://trackit.somee.com/api/Admin/UpdateUserStatus', {
+      const response = await fetch(apiUrl('/api/Admin/UpdateUserStatus'), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
