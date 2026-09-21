@@ -1,7 +1,7 @@
 // src/pages/Requerimientos/Requerimientos.js
 
 import React, { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import KanbanBoard from '../../components/KanbanBoard.js';
 import { AuthContext } from '../../context/AuthContext.js';
 import CustomModal from '../../components/CustomModal.js';
