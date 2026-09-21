@@ -1,6 +1,6 @@
 // src/pages/Requerimientos/DetalleRequerimiento.js
 import React, { useContext, useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext.js';  // Accede al contexto para obtener el usuario
 import RequirementDetails from './RequirementDetails.js';
 import CommentsSection from './CommentsSection.js';
