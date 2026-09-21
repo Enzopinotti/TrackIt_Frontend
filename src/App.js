@@ -1,7 +1,7 @@
 // src/App.js
 
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router';
 
 // Importar los layouts
 import MainLayout from './components/layouts/MainLayout.js';
@@ -33,12 +33,7 @@ import AdminDashboard from './pages/AdminDashboard.js';
 
 function App() {
   return (
-    <BrowserRouter
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplat: true,
-      }}
-    >
+    <BrowserRouter>
       <Routes>
         {/* Rutas Públicas */}
         <Route
