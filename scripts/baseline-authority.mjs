@@ -40,8 +40,8 @@ if (!fs.existsSync(envExamplePath)) {
   }
 }
 
-if (insecureApiMatches.length !== 16) {
-  failures.push(`expected 16 legacy HTTP Somee origin references, found ${insecureApiMatches.length}`);
+if (insecureApiMatches.length !== 17) {
+  failures.push(`expected 17 legacy HTTP Somee origin references, found ${insecureApiMatches.length}`);
 }
 
 if (localhostMatches.length !== 3) {
