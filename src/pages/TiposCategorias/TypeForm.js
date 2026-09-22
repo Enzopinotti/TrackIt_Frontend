@@ -1,6 +1,6 @@
 // src/components/TypeForm.js
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias }) {
   const [nombre, setNombre] = useState('');
