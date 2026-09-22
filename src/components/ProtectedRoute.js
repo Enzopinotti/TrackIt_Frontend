@@ -2,7 +2,6 @@
 
 import React, { useContext } from 'react';
 import { Navigate } from 'react-router';
-import PropTypes from 'prop-types';
 import { AuthContext } from '../context/AuthContext.js';
 import LoadingOverlay from './LoadingOverlay.js';
 
@@ -19,9 +18,5 @@ function ProtectedRoute({ children }) {
 
   return children;
 }
-
-ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default ProtectedRoute;
