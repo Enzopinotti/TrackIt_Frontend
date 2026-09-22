@@ -44,6 +44,6 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint src scripts vite.config.js eslint.config.js"
+    "lint": "eslint src scripts vite.config.js eslint.config.js --max-warnings 0"
   }
 }
