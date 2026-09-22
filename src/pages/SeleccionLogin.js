@@ -1,13 +1,13 @@
 // src/pages/SeleccionLogin.js
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate, Link } from 'react-router';
 import Logo from '../components/Logo.js';
 import { AuthContext } from '../context/AuthContext.js';
 
 function SeleccionLogin() {
   const navigate = useNavigate();
-  const { user, loading } = useContext(AuthContext);
+  const { loading } = useContext(AuthContext);
 
   const handleInternalLogin = () => {
     navigate('/login/interno');

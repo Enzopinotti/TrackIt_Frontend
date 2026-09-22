@@ -1,3 +1,4 @@
+@use 'sass:color';
 // src/components/Footer.scss
 
 @use '../abstract/variables' as vars;
@@ -40,7 +41,7 @@
         transition: color 0.3s ease;
 
         &:hover {
-          color: lighten(vars.$color-primario, 20%);
+          color: color.adjust(vars.$color-primario, $lightness: 20%);
         }
       }
 
@@ -77,7 +78,7 @@
             font-size: 1.2rem;
 
             &:hover {
-              background-color: lighten(vars.$color-secundario, 10%);
+              background-color: color.adjust(vars.$color-secundario, $lightness: 10%);
             }
           }
         }

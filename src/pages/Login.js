@@ -1,5 +1,5 @@
 // src/pages/Login.js
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import Logo from '../components/Logo.js';
 import { AuthContext } from '../context/AuthContext.js';
@@ -98,7 +98,15 @@ function Login() {
               />
               <div
                 onClick={togglePasswordVisibility}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    togglePasswordVisibility();
+                  }
+                }}
                 className="toggle-password ojo"
+                role="button"
+                tabIndex={0}
                 aria-label="Mostrar u ocultar contraseña"
               >
                 {showPassword ? (

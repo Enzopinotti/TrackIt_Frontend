@@ -1,3 +1,4 @@
+@use 'sass:color';
 // src/components/CustomModal.scss
 
 @use '../abstract/variables' as vars;
@@ -52,21 +53,21 @@
       box-shadow: 2px 2px 6px vars.$color-primario;
 
       &:hover {
-        background-color: lighten(vars.$color-primario, 10%);
+        background-color: color.adjust(vars.$color-primario, $lightness: 10%);
       }
 
       &.enlazar-button {
-        background-color: lighten(vars.$color-primario, 15%);
+        background-color: color.adjust(vars.$color-primario, $lightness: 15%);
         opacity: 0.9; // Mayor opacidad
         &:hover {
-          background-color: lighten(vars.$color-primario, 5%);
+          background-color: color.adjust(vars.$color-primario, $lightness: 5%);
         }
       }
 
       &.cancel-button {
         background-color: vars.$gris-secundario;
         &:hover {
-          background-color: lighten(vars.$gris-secundario, 10%);
+          background-color: color.adjust(vars.$gris-secundario, $lightness: 10%);
         }
       }
     }

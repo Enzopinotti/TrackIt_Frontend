@@ -1,7 +1,6 @@
 // src/components/UserForm.js
 
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 
 function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
   const [nombre, setNombre] = useState('');
@@ -51,8 +50,10 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
       <h2>{usuarioSeleccionado ? 'Editar Usuario' : 'Agregar Usuario'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Nombre:</label>
+          <label htmlFor="user-name">Nombre:</label>
           <input
+            id="user-name"
+            aria-label="Nombre del usuario"
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
@@ -62,8 +63,10 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
         </div>
 
         <div className="form-group">
-          <label>Cargo:</label>
+          <label htmlFor="user-role">Cargo:</label>
           <input
+            id="user-role"
+            aria-label="Cargo del usuario"
             type="text"
             value={cargo}
             onChange={(e) => setCargo(e.target.value)}
@@ -73,8 +76,10 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
         </div>
 
         <div className="form-group">
-          <label>Avatar (URL):</label>
+          <label htmlFor="user-avatar">Avatar (URL):</label>
           <input
+            id="user-avatar"
+            aria-label="URL del avatar"
             type="text"
             value={avatar}
             onChange={(e) => setAvatar(e.target.value)}
@@ -104,17 +109,5 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
     </div>
   );
 }
-
-UserForm.propTypes = {
-  onAgregar: PropTypes.func.isRequired,
-  onActualizar: PropTypes.func.isRequired,
-  usuarioSeleccionado: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    nombre: PropTypes.string.isRequired,
-    cargo: PropTypes.string.isRequired,
-    avatar: PropTypes.string.isRequired,
-  }),
-};
-
 
 export default UserForm;

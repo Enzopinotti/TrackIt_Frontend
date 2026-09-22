@@ -1,15 +1,27 @@
 // src/components/CategoryList.js
 
-import React from 'react';
-import PropTypes from 'prop-types';
 
 function CategoryList({ categorias, onSeleccionar }) {
+  const handleItemKeyDown = (event, id) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onSeleccionar(id);
+    }
+  };
+
   return (
     <div className="category-list">
       <h2>Lista de Categorías</h2>
       <ul>
         {categorias.map((categoria) => (
-          <li key={categoria.id} onClick={() => onSeleccionar(categoria.id)}>
+          <li
+            key={categoria.id}
+            onClick={() => onSeleccionar(categoria.id)}
+            onKeyDown={(event) => handleItemKeyDown(event, categoria.id)}
+            role="button"
+            tabIndex={0}
+            aria-label={`Editar categoría ${categoria.nombre}`}
+          >
             <p className="nombre">{categoria.nombre}</p>
             <p className="tipo">Tipo: {categoria.typeId}</p>
           </li>
@@ -18,16 +30,5 @@ function CategoryList({ categorias, onSeleccionar }) {
     </div>
   );
 }
-
-CategoryList.propTypes = {
-  categorias: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      nombre: PropTypes.string.isRequired,
-      typeId: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onSeleccionar: PropTypes.func.isRequired,
-};
 
 export default CategoryList;

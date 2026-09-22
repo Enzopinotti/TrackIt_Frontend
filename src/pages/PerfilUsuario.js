@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext.js';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
@@ -122,7 +122,7 @@ function PerfilUsuario() {
           className="perfil-imagen"
         />
         <form onSubmit={handleImageUpload} className="form-upload-image">
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+          <input type="file" accept="image/*" onChange={handleImageChange} aria-label="Seleccionar imagen de perfil" />
           <button type="submit" className="btn-actualizar-imagen">
             Actualizar Imagen
           </button>

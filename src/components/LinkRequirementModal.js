@@ -1,7 +1,6 @@
 // src/components/LinkRequirementModal.js
 
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 import CustomModal from './CustomModal.js';
 
 function LinkRequirementModal({ isOpen, onRequestClose, onSelect }) {
@@ -47,6 +46,7 @@ function LinkRequirementModal({ isOpen, onRequestClose, onSelect }) {
             <label key={req.id}>
               <input
                 type="checkbox"
+                aria-label={req.title}
                 value={req.id}
                 checked={selectedIds.includes(req.id)}
                 onChange={() => handleCheckboxChange(req.id)}
@@ -67,11 +67,5 @@ function LinkRequirementModal({ isOpen, onRequestClose, onSelect }) {
     </CustomModal>
   );
 }
-
-LinkRequirementModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
-  onSelect: PropTypes.func.isRequired,
-};
 
 export default LinkRequirementModal;

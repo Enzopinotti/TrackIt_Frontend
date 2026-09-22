@@ -1,6 +1,6 @@
 // src/pages/RecuperarContrasenia.js
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 import Logo from '../components/Logo.js';
 import { apiUrl, callbackUrl } from '../config/runtime.js';
@@ -41,7 +41,7 @@ function RecuperarContrasenia() {
           confirmButtonText: 'Aceptar',
         });
       }
-    } catch (error) {
+    } catch {
       await Swal.fire({
         title: 'Error',
         text: 'Hubo un problema al conectar con el servidor. Inténtelo nuevamente más tarde.',
@@ -64,6 +64,7 @@ function RecuperarContrasenia() {
           <div className="inputsContainer">
             <input
               type="email"
+              aria-label="Correo electrónico"
               placeholder="Correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

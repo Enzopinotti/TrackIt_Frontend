@@ -1,5 +1,5 @@
 // src/pages/RegistroExterno.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import Logo from '../components/Logo.js';
@@ -73,7 +73,7 @@ function RegistroExterno() {
           confirmButtonText: 'Aceptar',
         });
       }
-    } catch (error) {
+    } catch {
       await Swal.fire({
         title: 'Error',
         text: 'Error en la conexión. Intenta nuevamente.',
@@ -129,7 +129,15 @@ function RegistroExterno() {
               />
               <div
                 onClick={togglePasswordVisibility}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    togglePasswordVisibility();
+                  }
+                }}
                 className="toggle-password ojo"
+                role="button"
+                tabIndex={0}
                 aria-label="Mostrar u ocultar contraseña"
               >
                 {showPassword ? (
@@ -165,7 +173,15 @@ function RegistroExterno() {
               />
               <div
                 onClick={toggleConfirmPasswordVisibility}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleConfirmPasswordVisibility();
+                  }
+                }}
                 className="toggle-password ojo"
+                role="button"
+                tabIndex={0}
                 aria-label="Mostrar u ocultar contraseña"
               >
                 {showConfirmPassword ? (

@@ -1,3 +1,4 @@
+@use 'sass:color';
 // src/pages/Login.scss
 
 @use '../abstract/variables' as vars;
@@ -120,7 +121,7 @@
           user-select: none;
 
           &:hover {
-            background-color: darken(vars.$color-primario, 10%);
+            background-color: color.adjust(vars.$color-primario, $lightness: -10%);
           }
         }
       }

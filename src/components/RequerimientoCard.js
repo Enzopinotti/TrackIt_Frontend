@@ -1,6 +1,4 @@
 // src/components/RequerimientoCard/RequerimientoCard.js
-import React from 'react';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 
 function RequerimientoCard({ requerimiento }) {
@@ -14,13 +12,33 @@ function RequerimientoCard({ requerimiento }) {
     navigate(`/requerimiento/${requerimiento.id}`);
   };
 
+  const handleCardKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleCardClick();
+    }
+  };
+
+  const handleEyeKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleEyeClick(event);
+    }
+  };
+
   const handleSubrequirementsClick = (e) => {
     e.stopPropagation(); // Evita que el evento de clic se propague al contenedor principal
     navigate(`/requerimiento/${requerimiento.id}/subrequerimientos`); // Ruta a sub-requerimientos
   };
 
   return (
-    <div className="requerimiento-card" onClick={handleCardClick}>
+    <div
+      className="requerimiento-card"
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      role="button"
+      tabIndex={0}
+    >
       <div className="card-content">
         {/* Tipo del Requerimiento */}
         <div className="requirement-type">{requerimiento.requirementType}</div> 
@@ -67,6 +85,10 @@ function RequerimientoCard({ requerimiento }) {
               alt="Ver Detalle"
               className="eye-icon"
               onClick={handleEyeClick}
+              onKeyDown={handleEyeKeyDown}
+              role="button"
+              tabIndex={0}
+              aria-label="Ver detalle del requerimiento"
             />
           </div>
         </div>
@@ -74,24 +96,5 @@ function RequerimientoCard({ requerimiento }) {
     </div>
   );
 }
-
-RequerimientoCard.propTypes = {
-  requerimiento: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    requirementType: PropTypes.string.isRequired, // Cambié 'tipo' por 'requirementType'
-    subject: PropTypes.string.isRequired, // Cambié 'title' por 'subject'
-    description: PropTypes.string.isRequired, // Cambié 'descripcion' por 'description'
-    code: PropTypes.string.isRequired, // Cambié 'codigo' por 'code'
-    date: PropTypes.string.isRequired, // Cambié 'fechaCreacion' por 'date'
-    status: PropTypes.string.isRequired,
-    assignedUsers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        nombre: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-};
 
 export default RequerimientoCard;

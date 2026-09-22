@@ -1,7 +1,6 @@
 // src/components/CategoryForm.js
 
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 
 function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null }) {
   const [nombre, setNombre] = useState('');
@@ -46,8 +45,10 @@ function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null })
       <h2>{categoriaSeleccionada ? 'Editar Categoría' : 'Agregar Categoría'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Nombre de la Categoría:</label>
+          <label htmlFor="category-name">Nombre de la Categoría:</label>
           <input
+            id="category-name"
+            aria-label="Nombre de la categoría"
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
@@ -57,8 +58,9 @@ function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null })
         </div>
 
         <div className="form-group">
-          <label>Tipo Asociado:</label>
+          <label htmlFor="category-type">Tipo Asociado:</label>
           <select
+            id="category-type"
             value={typeId}
             onChange={(e) => setTypeId(e.target.value)}
             required
@@ -91,16 +93,5 @@ function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null })
     </div>
   );
 }
-
-CategoryForm.propTypes = {
-  onAgregar: PropTypes.func.isRequired,
-  onActualizar: PropTypes.func.isRequired,
-  categoriaSeleccionada: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    nombre: PropTypes.string.isRequired,
-    typeId: PropTypes.string.isRequired,
-  }),
-};
-
 
 export default CategoryForm;

@@ -49,7 +49,7 @@ function CommentsSection({ requirement, user }) {
     };
   }, []);
 
-  const onEmojiClick = (emojiData, event) => {
+  const onEmojiClick = (emojiData) => {
     setNewComment((prev) => prev + emojiData.emoji);
   };
 
@@ -147,6 +147,7 @@ function CommentsSection({ requirement, user }) {
       {showChatInput && (
         <div className="add-comment" ref={inputRef}>
           <textarea
+            aria-label="Nuevo comentario"
             placeholder="Escribe un comentario..."
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}

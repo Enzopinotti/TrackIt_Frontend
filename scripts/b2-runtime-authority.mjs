@@ -11,9 +11,7 @@ const expectedDependencies = {
   react: "19.3.0",
   "react-dom": "19.3.0",
   "react-router": "8.4.0",
-  "@fortawesome/react-fontawesome": "3.5.0",
   "@lottiefiles/dotlottie-react": "0.19.16",
-  "prop-types": "15.8.1",
   "react-modal": "3.16.3",
 };
 
@@ -39,6 +37,9 @@ for (const [name, version] of Object.entries(expectedDevDependencies)) {
 for (const retired of [
   "react-router-dom",
   "@lottiefiles/react-lottie-player",
+  "@fortawesome/free-solid-svg-icons",
+  "@fortawesome/react-fontawesome",
+  "prop-types",
 ]) {
   if (pkg.dependencies?.[retired] || pkg.devDependencies?.[retired]) {
     failures.push("retired runtime dependency returned: " + retired);
@@ -66,6 +67,10 @@ if (joined.includes("react-router-dom")) {
 
 if (joined.includes("@lottiefiles/react-lottie-player")) {
   failures.push("maintained source still references the archived Lottie React player");
+}
+
+if (joined.includes("prop-types") || /\.propTypes\s*=/.test(joined)) {
+  failures.push("React 19 ignored propTypes remain in maintained source");
 }
 
 const defaultPropsFiles = sources
@@ -116,6 +121,8 @@ for (const [name, version] of Object.entries({
 for (const retiredLock of [
   "node_modules/react-router-dom",
   "node_modules/@lottiefiles/react-lottie-player",
+  "node_modules/@fortawesome/free-solid-svg-icons",
+  "node_modules/@fortawesome/react-fontawesome",
 ]) {
   if (lock.packages?.[retiredLock]) {
     failures.push("retired lockfile package returned: " + retiredLock);

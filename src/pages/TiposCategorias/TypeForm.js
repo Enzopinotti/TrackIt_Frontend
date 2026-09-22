@@ -1,7 +1,6 @@
 // src/components/TypeForm.js
 
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 
 function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias }) {
   const [nombre, setNombre] = useState('');
@@ -57,8 +56,10 @@ function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias
       <h2>{tipoSeleccionado ? 'Editar Tipo' : 'Agregar Tipo'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Nombre del Tipo:</label>
+          <label htmlFor="type-name">Nombre del Tipo:</label>
           <input
+            id="type-name"
+            aria-label="Nombre del tipo"
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
@@ -68,8 +69,10 @@ function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias
         </div>
 
         <div className="form-group">
-          <label>Categorías Asignadas:</label>
+          <label htmlFor="type-categories">Categorías Asignadas:</label>
           <select
+            id="type-categories"
+            aria-label="Categorías asignadas"
             multiple
             value={categoriasAsignadas}
             onChange={handleCategoriaChange}
@@ -102,23 +105,5 @@ function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias
     </div>
   );
 }
-
-TypeForm.propTypes = {
-  onAgregar: PropTypes.func.isRequired,
-  onActualizar: PropTypes.func.isRequired,
-  tipoSeleccionado: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    nombre: PropTypes.string.isRequired,
-    categorias: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }),
-  categorias: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      nombre: PropTypes.string.isRequired,
-      typeId: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
-
 
 export default TypeForm;

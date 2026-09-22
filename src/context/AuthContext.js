@@ -1,5 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { createContext, useState, useEffect } from 'react';
 import { apiUrl } from '../config/runtime.js';
 
 // Crear el contexto
@@ -114,7 +113,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
-AuthProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};

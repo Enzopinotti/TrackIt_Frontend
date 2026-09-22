@@ -1,6 +1,5 @@
 // src/components/RequirementForm.js
-import React, { useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext.js';
 import { useForm } from 'react-hook-form';
 import DOMPurify from 'dompurify';
@@ -9,12 +8,12 @@ import LinkRequirementModal from './LinkRequirementModal.js';
 import { apiUrl } from '../config/runtime.js';
 import { validateRequirementFiles } from '../utils/requirementFiles.js';
 
-function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) {
+function RequirementForm({ onSubmit, onCancel }) {
   const { user, token } = useContext(AuthContext);
   
   // Estados para datos del formulario
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
-  const [relatedRequirements, setRelatedRequirements] = useState([]);
+  const [, setRelatedRequirements] = useState([]);
 
   // Estados para combos dependientes
   const [requirementTypes, setRequirementTypes] = useState([]); 
@@ -28,7 +27,6 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors }
   } = useForm();
 
@@ -137,6 +135,7 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
         {errors.subject && <p className="error">{errors.subject.message}</p>}
 
         <select
+          aria-label="Tipo de requerimiento"
           {...register('requirementTypeId', { required: 'El tipo es obligatorio' })}
           onChange={handleRequirementTypeChange}
         >
@@ -149,7 +148,7 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
         </select>
         {errors.requirementTypeId && <p className="error">{errors.requirementTypeId.message}</p>}
 
-        <select {...register('categoryId', { required: 'La categoría es obligatoria' })}>
+        <select aria-label="Categoría" {...register('categoryId', { required: 'La categoría es obligatoria' })}>
           <option value="">Seleccione Categoría</option>
           {categories.map((cat) => (
             <option key={cat.id} value={cat.id}>
@@ -162,6 +161,7 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
         {/* Campo para archivos adjuntos */}
         <input
           type="file"
+          aria-label="Archivos adjuntos"
           {...register('files')}
           multiple
           accept=".doc,.docx,.xls,.xlsx,.pdf"
@@ -176,13 +176,14 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
           <>
             <input
               type="text"
+              aria-label="Asignado a"
               placeholder="Asignado a"
               {...register('assignedUser')}
               list="assignedUsers"
             />
             <datalist id="assignedUsers">
-              <option value="user1" label="Juan Pérez" />
-              <option value="user2" label="María García" />
+              <option value="user1">Juan Pérez</option>
+              <option value="user2">María García</option>
               {/* ... */}
             </datalist>
           </>
@@ -190,6 +191,7 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
 
         {/* Descripción */}
         <textarea
+          aria-label="Descripción"
           placeholder="Descripción"
           {...register('description', { required: 'La descripción es obligatoria' })}
         />
@@ -224,12 +226,5 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
     </div>
   );
 }
-
-RequirementForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  setRequerimientos: PropTypes.func.isRequired,
-  closeModal: PropTypes.func.isRequired,
-};
 
 export default RequirementForm;

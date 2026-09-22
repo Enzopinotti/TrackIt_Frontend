@@ -1,6 +1,6 @@
 // src/pages/ResetearContrasenia.js
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import Logo from '../components/Logo.js';
@@ -97,7 +97,7 @@ function ResetearContrasenia() {
           confirmButtonText: 'Aceptar',
         });
       }
-    } catch (error) {
+    } catch {
       await Swal.fire({
         title: 'Error',
         text: 'Hubo un problema al conectar con el servidor. Inténtelo nuevamente más tarde.',
@@ -126,7 +126,15 @@ function ResetearContrasenia() {
               />
               <div
                 onClick={togglePasswordVisibility}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    togglePasswordVisibility();
+                  }
+                }}
                 className="toggle-password ojo"
+                role="button"
+                tabIndex={0}
                 aria-label="Mostrar u ocultar contraseña"
               >
                 {showPassword ? (
@@ -160,7 +168,15 @@ function ResetearContrasenia() {
               />
               <div
                 onClick={toggleConfirmPasswordVisibility}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleConfirmPasswordVisibility();
+                  }
+                }}
                 className="toggle-password ojo"
+                role="button"
+                tabIndex={0}
                 aria-label="Mostrar u ocultar contraseña"
               >
                 {showConfirmPassword ? (

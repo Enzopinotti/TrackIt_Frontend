@@ -1,15 +1,27 @@
 // src/components/TypeList.js
 
-import React from 'react';
-import PropTypes from 'prop-types';
 
 function TypeList({ tipos, onSeleccionar }) {
+  const handleItemKeyDown = (event, id) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onSeleccionar(id);
+    }
+  };
+
   return (
     <div className="type-list">
       <h2>Lista de Tipos</h2>
       <ul>
         {tipos.map((tipo) => (
-          <li key={tipo.id} onClick={() => onSeleccionar(tipo.id)}>
+          <li
+            key={tipo.id}
+            onClick={() => onSeleccionar(tipo.id)}
+            onKeyDown={(event) => handleItemKeyDown(event, tipo.id)}
+            role="button"
+            tabIndex={0}
+            aria-label={`Editar tipo ${tipo.nombre}`}
+          >
             <div className="info">
               <p className="nombre">{tipo.nombre}</p>
               <p className="cantidad">
@@ -22,16 +34,5 @@ function TypeList({ tipos, onSeleccionar }) {
     </div>
   );
 }
-
-TypeList.propTypes = {
-  tipos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      nombre: PropTypes.string.isRequired,
-      categorias: PropTypes.arrayOf(PropTypes.string).isRequired,
-    })
-  ).isRequired,
-  onSeleccionar: PropTypes.func.isRequired,
-};
 
 export default TypeList;
