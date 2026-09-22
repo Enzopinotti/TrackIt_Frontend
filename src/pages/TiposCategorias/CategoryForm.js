@@ -1,6 +1,6 @@
 // src/components/CategoryForm.js
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null }) {
   const [nombre, setNombre] = useState('');
