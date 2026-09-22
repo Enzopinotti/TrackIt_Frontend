@@ -89,9 +89,34 @@ GitHub Actions verifies:
 - Vite/Vercel build authority;
 - React 19 / React Router 8 runtime authority;
 - centralized API/callback configuration;
-- Vitest execution;
+- maintained behavior-test authority;
+- zero-warning ESLint + accessibility checks;
+- dead-source/dependency/Sass cleanup authority;
+- route code-splitting and bundle-size authority;
 - production build output;
-- dependency audit measurement.
+- production and complete dependency audits.
+
+## Deployment
+
+TrackIt ships as a Vite SPA through the repository-owned Vercel contract in `vercel.json`:
+
+- build command: `npm run build`;
+- output directory: `dist`;
+- deep-link fallback: `/(.*) -> /index.html`;
+- route screens/layouts are lazy-loaded so the previous ~934 kB monolithic JavaScript bundle does not return.
+
+Before deploy, run:
+
+```bash
+npm ci
+npm run lint
+npm test
+npm run build
+```
+
+The detailed deployment, environment and smoke-test procedure lives in `docs/deployment.md`.
+
+A successful frontend deploy does not prove availability of the historical external Somee API. Auth/profile/registration/recovery/requirement/admin operations that call that service must be smoke-tested separately when suitable external credentials/data are available.
 
 Modernization program: issue #3.
 
