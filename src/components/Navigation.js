@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { NavLink } from 'react-router';
-import PropTypes from 'prop-types';
 
 function Navigation({ className = 'navigation', role, onLinkClick = () => {} }) {
   return (
@@ -36,11 +35,5 @@ function Navigation({ className = 'navigation', role, onLinkClick = () => {} }) 
     </nav>
   );
 }
-
-Navigation.propTypes = {
-  className: PropTypes.string,
-  role: PropTypes.string.isRequired,
-  onLinkClick: PropTypes.func,
-};
 
 export default Navigation;
