@@ -1,6 +1,5 @@
 // src/components/UserProfile/UserProfile.js
 
-import React from 'react';
 
 function UserProfile({ onClick, user }) {
     console.log(user)
