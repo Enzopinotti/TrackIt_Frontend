@@ -1,5 +1,4 @@
 // src/components/KanbanBoard/KanbanBoard.js
-import React from 'react';
 import RequerimientoCard from './RequerimientoCard.js'; // Ajusta la ruta si es necesario
 
 function KanbanBoard({ requerimientos, estados, isDraggable = false }) {
