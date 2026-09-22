@@ -1,6 +1,5 @@
 // src/components/UserList.js
 
-import React from 'react';
 
 function UserList({ usuarios, onSeleccionar }) {
   return (
