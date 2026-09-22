@@ -128,7 +128,15 @@ function RegistroInterno() {
               />
               <div
                 onClick={togglePasswordVisibility}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    togglePasswordVisibility();
+                  }
+                }}
                 className="toggle-password ojo"
+                role="button"
+                tabIndex={0}
                 aria-label="Mostrar u ocultar contraseña"
               >
                 {showPassword ? (
@@ -164,7 +172,15 @@ function RegistroInterno() {
               />
               <div
                 onClick={toggleConfirmPasswordVisibility}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleConfirmPasswordVisibility();
+                  }
+                }}
                 className="toggle-password ojo"
+                role="button"
+                tabIndex={0}
                 aria-label="Mostrar u ocultar contraseña"
               >
                 {showConfirmPassword ? (
