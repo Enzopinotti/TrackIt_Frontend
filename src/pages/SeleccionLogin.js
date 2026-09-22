@@ -1,6 +1,6 @@
 // src/pages/SeleccionLogin.js
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate, Link } from 'react-router';
 import Logo from '../components/Logo.js';
 import { AuthContext } from '../context/AuthContext.js';
