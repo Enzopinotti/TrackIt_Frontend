@@ -49,6 +49,12 @@ jobs:
       - name: Validate TrackIt behavior-test authority
         run: node scripts/b4-behavior-test-authority.mjs
 
+      - name: Validate TrackIt source-quality authority
+        run: node scripts/b5-source-quality-authority.mjs
+
+      - name: Run ESLint and accessibility checks
+        run: npm run lint
+
       - name: Run Vitest suite
         run: npm test
 
