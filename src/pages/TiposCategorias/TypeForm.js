@@ -1,7 +1,6 @@
 // src/components/TypeForm.js
 
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias }) {
   const [nombre, setNombre] = useState('');
@@ -102,23 +101,5 @@ function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias
     </div>
   );
 }
-
-TypeForm.propTypes = {
-  onAgregar: PropTypes.func.isRequired,
-  onActualizar: PropTypes.func.isRequired,
-  tipoSeleccionado: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    nombre: PropTypes.string.isRequired,
-    categorias: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }),
-  categorias: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      nombre: PropTypes.string.isRequired,
-      typeId: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
-
 
 export default TypeForm;
