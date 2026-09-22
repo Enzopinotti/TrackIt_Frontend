@@ -1,3 +1,4 @@
+@use 'sass:color';
 // src/pages/Requerimientos/Requerimientos.scss
 
 @use '../abstract/variables' as vars;
@@ -271,7 +272,7 @@
 
       /* Estilos para cuando una columna está en estado de arrastre */
       &.dragging-over {
-        background-color: lighten(vars.$color-primario, 40%);
+        background-color: color.adjust(vars.$color-primario, $lightness: 40%);
         transition: background-color 0.2s ease;
       }
     }
