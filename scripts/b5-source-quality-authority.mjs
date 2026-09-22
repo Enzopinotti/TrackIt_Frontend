@@ -52,7 +52,7 @@ for (const [name, version] of Object.entries(expectedDevDependencies)) {
   }
 }
 
-if (pkg.scripts?.lint !== "eslint src scripts vite.config.js eslint.config.js") {
+if (pkg.scripts?.lint !== "eslint src scripts vite.config.js eslint.config.js --max-warnings 0") {
   failures.push("npm lint command is not authoritative");
 }
 
