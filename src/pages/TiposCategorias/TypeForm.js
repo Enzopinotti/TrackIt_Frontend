@@ -56,8 +56,9 @@ function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias
       <h2>{tipoSeleccionado ? 'Editar Tipo' : 'Agregar Tipo'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Nombre del Tipo:</label>
+          <label htmlFor="type-name">Nombre del Tipo:</label>
           <input
+            id="type-name"
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
@@ -67,8 +68,9 @@ function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias
         </div>
 
         <div className="form-group">
-          <label>Categorías Asignadas:</label>
+          <label htmlFor="type-categories">Categorías Asignadas:</label>
           <select
+            id="type-categories"
             multiple
             value={categoriasAsignadas}
             onChange={handleCategoriaChange}
