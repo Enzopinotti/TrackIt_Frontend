@@ -1,5 +1,4 @@
 // src/components/RequerimientoCard/RequerimientoCard.js
-import React from 'react';
 import { useNavigate } from 'react-router';
 
 function RequerimientoCard({ requerimiento }) {
