@@ -1,6 +1,5 @@
 // src/components/Navigation/Navigation.js
 
-import React from 'react';
 import { NavLink } from 'react-router';
 
 function Navigation({ className = 'navigation', role, onLinkClick = () => {} }) {
