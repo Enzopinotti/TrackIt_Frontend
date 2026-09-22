@@ -20,6 +20,7 @@ function UserList({ usuarios, onSeleccionar }) {
             onKeyDown={(event) => handleItemKeyDown(event, usuario.id)}
             role="button"
             tabIndex={0}
+            aria-label={`Editar usuario ${usuario.nombre}`}
           >
             <img src={usuario.avatar} alt={usuario.nombre} className="avatar" />
             <div className="info">
