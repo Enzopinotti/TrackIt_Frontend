@@ -39,6 +39,7 @@ const expectedDevDependencies = {
   eslint: "9.39.5",
   "@eslint/js": "9.39.5",
   globals: "17.12.0",
+  "eslint-plugin-react": "7.37.5",
   "eslint-plugin-react-hooks": "7.1.1",
   "eslint-plugin-jsx-a11y": "6.10.2",
 };
