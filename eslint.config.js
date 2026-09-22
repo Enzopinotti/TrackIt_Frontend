@@ -50,6 +50,13 @@ export default [
       "react-hooks/exhaustive-deps": "warn",
       ...accessibilityWarnings,
       "jsx-a11y/label-has-for": "off",
+      "jsx-a11y/no-noninteractive-element-to-interactive-role": [
+        "warn",
+        {
+          li: ["button"],
+          img: ["button"],
+        },
+      ],
       "jsx-a11y/alt-text": "error",
       "jsx-a11y/aria-props": "error",
       "jsx-a11y/aria-role": "error",
