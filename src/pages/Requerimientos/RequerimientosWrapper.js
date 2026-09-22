@@ -1,6 +1,6 @@
 // src/pages/Requerimientos/RequerimientosWrapper.js
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext.js';
 import MisRequerimientos from './MisRequerimientos.js';
 import Requerimientos from './Requerimientos.js';
