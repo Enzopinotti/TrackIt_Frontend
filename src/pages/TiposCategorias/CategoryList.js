@@ -1,7 +1,6 @@
 // src/components/CategoryList.js
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 function CategoryList({ categorias, onSeleccionar }) {
   return (
@@ -18,16 +17,5 @@ function CategoryList({ categorias, onSeleccionar }) {
     </div>
   );
 }
-
-CategoryList.propTypes = {
-  categorias: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      nombre: PropTypes.string.isRequired,
-      typeId: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onSeleccionar: PropTypes.func.isRequired,
-};
 
 export default CategoryList;
