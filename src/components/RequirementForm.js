@@ -8,12 +8,12 @@ import LinkRequirementModal from './LinkRequirementModal.js';
 import { apiUrl } from '../config/runtime.js';
 import { validateRequirementFiles } from '../utils/requirementFiles.js';
 
-function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) {
+function RequirementForm({ onSubmit, onCancel }) {
   const { user, token } = useContext(AuthContext);
   
   // Estados para datos del formulario
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
-  const [relatedRequirements, setRelatedRequirements] = useState([]);
+  const [, setRelatedRequirements] = useState([]);
 
   // Estados para combos dependientes
   const [requirementTypes, setRequirementTypes] = useState([]); 
@@ -27,7 +27,6 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors }
   } = useForm();
 
@@ -136,6 +135,7 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
         {errors.subject && <p className="error">{errors.subject.message}</p>}
 
         <select
+          aria-label="Tipo de requerimiento"
           {...register('requirementTypeId', { required: 'El tipo es obligatorio' })}
           onChange={handleRequirementTypeChange}
         >
@@ -148,7 +148,7 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
         </select>
         {errors.requirementTypeId && <p className="error">{errors.requirementTypeId.message}</p>}
 
-        <select {...register('categoryId', { required: 'La categoría es obligatoria' })}>
+        <select aria-label="Categoría" {...register('categoryId', { required: 'La categoría es obligatoria' })}>
           <option value="">Seleccione Categoría</option>
           {categories.map((cat) => (
             <option key={cat.id} value={cat.id}>
