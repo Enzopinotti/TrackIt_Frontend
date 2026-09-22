@@ -1,5 +1,5 @@
 // src/pages/Requerimientos/RequirementDetails.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // Función para formatear la fecha
 const formatDate = (dateString) => {
