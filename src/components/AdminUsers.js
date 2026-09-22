@@ -1,5 +1,5 @@
 // src/components/UsuarioAdmin.js
-import { useEffect, useState, useContext } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import Swal from 'sweetalert2';
 import LoadingOverlay from './LoadingOverlay.js';
 import { AuthContext } from '../context/AuthContext.js';
@@ -11,7 +11,7 @@ function AdminUsers() {
   const { token } = useContext(AuthContext); // Suponiendo que el token se gestiona en AuthContext
 
   // Función para obtener el listado de usuarios
-  const fetchUsuarios = async () => {
+  const fetchUsuarios = useCallback(async () => {
     try {
       const response = await fetch(apiUrl('/api/Admin/GetAllUsers'), {
         method: 'GET',
@@ -37,11 +37,11 @@ function AdminUsers() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     fetchUsuarios();
-  }, [token]);
+  }, [fetchUsuarios]);
 
   // Manejo de aceptar usuario (cambiar isEnabled a true)
   const handleAccept = async (user) => {
