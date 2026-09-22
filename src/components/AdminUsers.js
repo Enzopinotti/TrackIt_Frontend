@@ -1,5 +1,5 @@
 // src/components/UsuarioAdmin.js
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Swal from 'sweetalert2';
 import LoadingOverlay from './LoadingOverlay.js';
 import { AuthContext } from '../context/AuthContext.js';
