@@ -1,7 +1,6 @@
 // src/components/UserList.js
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 function UserList({ usuarios, onSeleccionar }) {
   return (
@@ -21,17 +20,5 @@ function UserList({ usuarios, onSeleccionar }) {
     </div>
   );
 }
-
-UserList.propTypes = {
-  usuarios: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      nombre: PropTypes.string.isRequired,
-      cargo: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onSeleccionar: PropTypes.func.isRequired,
-};
 
 export default UserList;
