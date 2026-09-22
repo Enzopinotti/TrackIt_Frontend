@@ -1,6 +1,6 @@
 // src/pages/Usuarios/Usuarios.js
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import UserList from '../../pages/Usuarios/UserList.js';
 import UserForm from '../../pages/Usuarios/UserForm.js';
 import mockUsers from '../../data/mockUsers.js';
