@@ -66,3 +66,25 @@ B6 can close the modernization program when one exact candidate proves:
 - merge to `main`;
 - post-merge `main` Quality green;
 - final issue #3 evidence recorded.
+
+
+## Candidate evidence
+
+GitHub Actions Quality run `35674715406` proved candidate `7757c156959157b2203babf6680da30a37739edf`:
+
+- B1–B6 authority gates: green;
+- ESLint/accessibility with zero-warning ceiling: green;
+- 6/6 Vitest files, 26/26 behavior tests: green;
+- production build: green;
+- emitted JavaScript chunks: 30;
+- lazy route/layout imports: 19;
+- eager page imports in `App.js`: 0;
+- previous monolithic B5 JavaScript chunk: approximately 934.5 kB;
+- B6 largest emitted JavaScript chunk: 339,337 bytes;
+- B6 entry chunk: approximately 301.3 kB;
+- 500,000-byte bundle gate: green;
+- Vite >500 kB advisory: eliminated;
+- production dependency audit: 0 vulnerabilities;
+- complete dependency audit: 0 vulnerabilities.
+
+The largest route-specific chunk is currently the requirement-detail surface. It remains below the permanent 500 kB gate, so B6 does not add manual vendor chunking solely for smaller numbers.
