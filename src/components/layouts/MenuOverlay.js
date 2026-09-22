@@ -1,6 +1,6 @@
 // src/components/MenuOverlay/MenuOverlay.js
 
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Navigation from '../Navigation.js';
 
 function MenuOverlay({ isOpen, onClose, userRole, onProfileClick, user }) {
