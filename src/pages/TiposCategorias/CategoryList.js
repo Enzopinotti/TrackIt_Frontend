@@ -20,6 +20,7 @@ function CategoryList({ categorias, onSeleccionar }) {
             onKeyDown={(event) => handleItemKeyDown(event, categoria.id)}
             role="button"
             tabIndex={0}
+            aria-label={`Editar categoría ${categoria.nombre}`}
           >
             <p className="nombre">{categoria.nombre}</p>
             <p className="tipo">Tipo: {categoria.typeId}</p>
