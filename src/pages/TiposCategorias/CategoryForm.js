@@ -48,6 +48,7 @@ function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null })
           <label htmlFor="category-name">Nombre de la Categoría:</label>
           <input
             id="category-name"
+            aria-label="Nombre de la categoría"
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
