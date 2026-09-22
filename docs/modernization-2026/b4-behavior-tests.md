@@ -77,3 +77,27 @@ The permanent Quality workflow verifies that all six behavior-test surfaces rema
 ## Exit condition
 
 B4 is complete when the behavior authority gate, complete Vitest suite, production build, previous B1–B3 authority gates and dependency audits are green on the same PR head.
+
+
+## Final B4 evidence
+
+GitHub Actions Quality run `35670058657` proved the behavior candidate under Node 24.20.0:
+
+- exact `npm ci`: green;
+- B1 Vite/deployment authority: green;
+- B2 React/runtime authority: green;
+- B3 API/config authority: green;
+- B4 behavior-test authority: green;
+- maintained test files: 6;
+- Vitest: 6 files passed;
+- behavior tests: 26 passed;
+- Vite production build and `dist/` authority: green;
+- production dependency audit: 0 vulnerabilities;
+- complete dependency audit: 0 vulnerabilities;
+- hard-coded localhost/Somee regressions: 0.
+
+The first B4 run exposed that the B3 static gate was counting test fixtures as production consumers. B4 corrected that gate to inspect production source only while preserving all URL/environment restrictions.
+
+The initial demo-administration tests also exposed duplicate visible labels between lists and form `<option>` elements. The tests were corrected to scope assertions to the actual list surfaces rather than weakening the product contract.
+
+Vercel did not execute the preview because the account remains over its daily deployment quota (`api-deployments-free-per-day`). GitHub Actions remains the reproducible build authority for this candidate.
