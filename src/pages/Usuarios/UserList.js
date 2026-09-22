@@ -2,12 +2,25 @@
 
 
 function UserList({ usuarios, onSeleccionar }) {
+  const handleItemKeyDown = (event, id) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onSeleccionar(id);
+    }
+  };
+
   return (
     <div className="user-list">
       <h2>Lista de Usuarios</h2>
       <ul>
         {usuarios.map((usuario) => (
-          <li key={usuario.id} onClick={() => onSeleccionar(usuario.id)}>
+          <li
+            key={usuario.id}
+            onClick={() => onSeleccionar(usuario.id)}
+            onKeyDown={(event) => handleItemKeyDown(event, usuario.id)}
+            role="button"
+            tabIndex={0}
+          >
             <img src={usuario.avatar} alt={usuario.nombre} className="avatar" />
             <div className="info">
               <p className="nombre">{usuario.nombre}</p>
