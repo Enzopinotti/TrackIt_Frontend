@@ -66,6 +66,9 @@ jobs:
           test -d dist
           test ! -d build
 
+      - name: Validate TrackIt deployment and bundle authority
+        run: node scripts/b6-deployment-authority.mjs
+
       - name: Measure production dependency audit
         continue-on-error: true
         run: npm audit --omit=dev --audit-level=high
