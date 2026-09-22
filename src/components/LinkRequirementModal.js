@@ -1,6 +1,6 @@
 // src/components/LinkRequirementModal.js
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import CustomModal from './CustomModal.js';
 
 function LinkRequirementModal({ isOpen, onRequestClose, onSelect }) {
