@@ -122,7 +122,7 @@ function PerfilUsuario() {
           className="perfil-imagen"
         />
         <form onSubmit={handleImageUpload} className="form-upload-image">
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+          <input type="file" accept="image/*" onChange={handleImageChange} aria-label="Seleccionar imagen de perfil" />
           <button type="submit" className="btn-actualizar-imagen">
             Actualizar Imagen
           </button>
