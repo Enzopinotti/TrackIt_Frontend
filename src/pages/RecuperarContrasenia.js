@@ -41,7 +41,7 @@ function RecuperarContrasenia() {
           confirmButtonText: 'Aceptar',
         });
       }
-    } catch (error) {
+    } catch {
       await Swal.fire({
         title: 'Error',
         text: 'Hubo un problema al conectar con el servidor. Inténtelo nuevamente más tarde.',
