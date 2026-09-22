@@ -46,6 +46,7 @@ function LinkRequirementModal({ isOpen, onRequestClose, onSelect }) {
             <label key={req.id}>
               <input
                 type="checkbox"
+                aria-label={req.title}
                 value={req.id}
                 checked={selectedIds.includes(req.id)}
                 onChange={() => handleCheckboxChange(req.id)}
