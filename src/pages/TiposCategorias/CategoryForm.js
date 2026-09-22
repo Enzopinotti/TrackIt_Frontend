@@ -1,7 +1,6 @@
 // src/components/CategoryForm.js
 
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null }) {
   const [nombre, setNombre] = useState('');
@@ -91,16 +90,5 @@ function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null })
     </div>
   );
 }
-
-CategoryForm.propTypes = {
-  onAgregar: PropTypes.func.isRequired,
-  onActualizar: PropTypes.func.isRequired,
-  categoriaSeleccionada: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    nombre: PropTypes.string.isRequired,
-    typeId: PropTypes.string.isRequired,
-  }),
-};
-
 
 export default CategoryForm;
