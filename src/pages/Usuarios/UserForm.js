@@ -1,6 +1,6 @@
 // src/components/UserForm.js
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
   const [nombre, setNombre] = useState('');
