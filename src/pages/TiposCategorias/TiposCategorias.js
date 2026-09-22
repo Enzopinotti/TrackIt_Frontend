@@ -1,6 +1,6 @@
 // src/pages/TiposCategorias/TiposCategorias.js
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import TypeList from '../../pages/TiposCategorias/TypeList.js';
 import CategoryList from '../../pages/TiposCategorias/CategoryList.js';
 import TypeForm from '../../pages/TiposCategorias/TypeForm.js';
