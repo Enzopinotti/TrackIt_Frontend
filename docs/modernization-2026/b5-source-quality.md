@@ -85,3 +85,32 @@ The temporary dependency-refresh workflow used to regenerate the lockfile was de
 ## Exit condition
 
 B5 is complete when the same PR head passes all B1–B5 authority gates, ESLint, 26 behavior tests, the production build and both dependency audits, with remaining warnings understood and documented.
+
+
+## Final B5 evidence
+
+GitHub Actions Quality run `35674409686` proved candidate `550d131d5c27b0123e9c8c6bd1e49e8e9881f822` under Node 24.20.0:
+
+- exact `npm ci`: green;
+- B1 Vite/deployment authority: green;
+- B2 React/runtime authority: green;
+- B3 API/config authority: green;
+- B4 behavior-test authority: green;
+- B5 source-quality authority: green;
+- ESLint/accessibility with `--max-warnings 0`: green;
+- lint result: 0 errors and 0 warnings;
+- maintained behavior suite: 6/6 files green, 26/26 tests green;
+- Vite production build: green;
+- build output authority: `dist/`;
+- direct dead source baseline: 0;
+- direct `prop-types`: absent;
+- direct Font Awesome packages: absent;
+- deprecated Sass `darken()`: 0;
+- deprecated Sass `lighten()`: 0;
+- maintained `sass:color` consumers: 15;
+- production dependency audit: 0 vulnerabilities;
+- complete dependency audit: 0 vulnerabilities.
+
+The lint cleanup reduced the initial measured baseline from 214 warnings to 0 without disabling the broader React Hooks or jsx-a11y rule sets. The only semantic exception is narrowly configured for the existing styled `li`/interactive image controls that now implement focus, keyboard activation and accessible naming.
+
+Vercel did not execute the preview because the account remains over its daily deployment quota (`api-deployments-free-per-day`). GitHub Actions is therefore the reproducible build authority for this candidate; the Vercel failure is an external quota condition rather than a TrackIt build failure.
