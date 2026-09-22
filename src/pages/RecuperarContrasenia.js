@@ -64,6 +64,7 @@ function RecuperarContrasenia() {
           <div className="inputsContainer">
             <input
               type="email"
+              aria-label="Correo electrónico"
               placeholder="Correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
