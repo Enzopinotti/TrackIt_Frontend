@@ -59,6 +59,7 @@ function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias
           <label htmlFor="type-name">Nombre del Tipo:</label>
           <input
             id="type-name"
+            aria-label="Nombre del tipo"
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
@@ -71,6 +72,7 @@ function TypeForm({ onAgregar, onActualizar, tipoSeleccionado = null, categorias
           <label htmlFor="type-categories">Categorías Asignadas:</label>
           <select
             id="type-categories"
+            aria-label="Categorías asignadas"
             multiple
             value={categoriasAsignadas}
             onChange={handleCategoriaChange}
