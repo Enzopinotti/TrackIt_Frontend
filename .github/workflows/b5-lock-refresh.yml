@@ -1,0 +1,49 @@
+name: B5 lock refresh
+
+on:
+  push:
+    branches:
+      - modernize/b5-source-quality
+    paths:
+      - .github/workflows/b5-lock-refresh.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout B5 branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: modernize/b5-source-quality
+          fetch-depth: 0
+
+      - name: Setup Node 24.20.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: "24.20.0"
+          cache: npm
+
+      - name: Remove measured dead runtime packages
+        run: npm uninstall @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome prop-types
+
+      - name: Install reproducible lint toolchain
+        run: >
+          npm install --save-dev --save-exact
+          eslint@9.39.5
+          @eslint/js@9.39.5
+          globals@17.12.0
+          eslint-plugin-react-hooks@7.1.1
+          eslint-plugin-jsx-a11y@6.10.2
+
+      - name: Commit refreshed package graph
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git diff --cached --quiet && exit 0
+          git commit -m "B5: refresh static-quality dependency graph"
+          git push origin HEAD:modernize/b5-source-quality
