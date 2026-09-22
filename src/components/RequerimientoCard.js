@@ -88,6 +88,7 @@ function RequerimientoCard({ requerimiento }) {
               onKeyDown={handleEyeKeyDown}
               role="button"
               tabIndex={0}
+              aria-label="Ver detalle del requerimiento"
             />
           </div>
         </div>
