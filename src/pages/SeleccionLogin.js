@@ -7,7 +7,7 @@ import { AuthContext } from '../context/AuthContext.js';
 
 function SeleccionLogin() {
   const navigate = useNavigate();
-  const { user, loading } = useContext(AuthContext);
+  const { loading } = useContext(AuthContext);
 
   const handleInternalLogin = () => {
     navigate('/login/interno');
