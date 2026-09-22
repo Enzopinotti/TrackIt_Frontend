@@ -1,7 +1,6 @@
 // src/components/LinkRequirementModal.js
 
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import CustomModal from './CustomModal.js';
 
 function LinkRequirementModal({ isOpen, onRequestClose, onSelect }) {
@@ -67,11 +66,5 @@ function LinkRequirementModal({ isOpen, onRequestClose, onSelect }) {
     </CustomModal>
   );
 }
-
-LinkRequirementModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
-  onSelect: PropTypes.func.isRequired,
-};
 
 export default LinkRequirementModal;
