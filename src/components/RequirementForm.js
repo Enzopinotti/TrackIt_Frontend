@@ -1,6 +1,5 @@
 // src/components/RequirementForm.js
 import React, { useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { AuthContext } from '../context/AuthContext.js';
 import { useForm } from 'react-hook-form';
 import DOMPurify from 'dompurify';
@@ -224,12 +223,5 @@ function RequirementForm({ onSubmit, onCancel, setRequerimientos, closeModal }) 
     </div>
   );
 }
-
-RequirementForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  setRequerimientos: PropTypes.func.isRequired,
-  closeModal: PropTypes.func.isRequired,
-};
 
 export default RequirementForm;
