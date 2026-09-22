@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ReactModal from 'react-modal';
-import PropTypes from 'prop-types';
 
 // Establecer el elemento raíz para accesibilidad
 ReactModal.setAppElement('#root');
@@ -20,11 +19,5 @@ function CustomModal({ isOpen, onRequestClose, children }) {
     </ReactModal>
   );
 }
-
-CustomModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
-};
 
 export default CustomModal;
