@@ -20,6 +20,7 @@ function TypeList({ tipos, onSeleccionar }) {
             onKeyDown={(event) => handleItemKeyDown(event, tipo.id)}
             role="button"
             tabIndex={0}
+            aria-label={`Editar tipo ${tipo.nombre}`}
           >
             <div className="info">
               <p className="nombre">{tipo.nombre}</p>
