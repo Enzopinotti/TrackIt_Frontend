@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../abstract/variables' as vars;
 
 .admin-dashboard {
@@ -99,14 +100,14 @@
             background-color: green;
             color: white;
             &:hover {
-              background-color: darken(green, 10%);
+              background-color: color.adjust(green, $lightness: -10%);
             }
           }
           .btn-reject {
             background-color: red;
             color: white;
             &:hover {
-              background-color: darken(red, 10%);
+              background-color: color.adjust(red, $lightness: -10%);
             }
           }
         }
