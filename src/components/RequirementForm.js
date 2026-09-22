@@ -161,6 +161,7 @@ function RequirementForm({ onSubmit, onCancel }) {
         {/* Campo para archivos adjuntos */}
         <input
           type="file"
+          aria-label="Archivos adjuntos"
           {...register('files')}
           multiple
           accept=".doc,.docx,.xls,.xlsx,.pdf"
@@ -175,6 +176,7 @@ function RequirementForm({ onSubmit, onCancel }) {
           <>
             <input
               type="text"
+              aria-label="Asignado a"
               placeholder="Asignado a"
               {...register('assignedUser')}
               list="assignedUsers"
@@ -189,6 +191,7 @@ function RequirementForm({ onSubmit, onCancel }) {
 
         {/* Descripción */}
         <textarea
+          aria-label="Descripción"
           placeholder="Descripción"
           {...register('description', { required: 'La descripción es obligatoria' })}
         />
