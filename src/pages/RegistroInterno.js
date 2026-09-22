@@ -72,7 +72,7 @@ function RegistroInterno() {
           confirmButtonText: 'Aceptar',
         });
       }
-    } catch (error) {
+    } catch {
       await Swal.fire({
         title: 'Error',
         text: 'Error en la conexión. Intenta nuevamente.',
