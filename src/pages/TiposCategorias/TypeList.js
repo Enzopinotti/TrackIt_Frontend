@@ -1,7 +1,6 @@
 // src/components/TypeList.js
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 function TypeList({ tipos, onSeleccionar }) {
   return (
@@ -22,16 +21,5 @@ function TypeList({ tipos, onSeleccionar }) {
     </div>
   );
 }
-
-TypeList.propTypes = {
-  tipos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      nombre: PropTypes.string.isRequired,
-      categorias: PropTypes.arrayOf(PropTypes.string).isRequired,
-    })
-  ).isRequired,
-  onSeleccionar: PropTypes.func.isRequired,
-};
 
 export default TypeList;
