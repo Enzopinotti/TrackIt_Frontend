@@ -53,6 +53,7 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
           <label htmlFor="user-name">Nombre:</label>
           <input
             id="user-name"
+            aria-label="Nombre del usuario"
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
@@ -65,6 +66,7 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
           <label htmlFor="user-role">Cargo:</label>
           <input
             id="user-role"
+            aria-label="Cargo del usuario"
             type="text"
             value={cargo}
             onChange={(e) => setCargo(e.target.value)}
@@ -77,6 +79,7 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
           <label htmlFor="user-avatar">Avatar (URL):</label>
           <input
             id="user-avatar"
+            aria-label="URL del avatar"
             type="text"
             value={avatar}
             onChange={(e) => setAvatar(e.target.value)}
