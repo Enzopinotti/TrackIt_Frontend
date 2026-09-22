@@ -1,5 +1,5 @@
 // src/pages/Requerimientos/MisRequerimientos.js
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import { useContext, useState, useEffect, useCallback } from 'react';
 import KanbanBoard from '../../components/KanbanBoard.js';
 import { AuthContext } from '../../context/AuthContext.js';
 import CustomModal from '../../components/CustomModal.js';
