@@ -12,13 +12,33 @@ function RequerimientoCard({ requerimiento }) {
     navigate(`/requerimiento/${requerimiento.id}`);
   };
 
+  const handleCardKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleCardClick();
+    }
+  };
+
+  const handleEyeKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleEyeClick(event);
+    }
+  };
+
   const handleSubrequirementsClick = (e) => {
     e.stopPropagation(); // Evita que el evento de clic se propague al contenedor principal
     navigate(`/requerimiento/${requerimiento.id}/subrequerimientos`); // Ruta a sub-requerimientos
   };
 
   return (
-    <div className="requerimiento-card" onClick={handleCardClick}>
+    <div
+      className="requerimiento-card"
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      role="button"
+      tabIndex={0}
+    >
       <div className="card-content">
         {/* Tipo del Requerimiento */}
         <div className="requirement-type">{requerimiento.requirementType}</div> 
@@ -65,6 +85,9 @@ function RequerimientoCard({ requerimiento }) {
               alt="Ver Detalle"
               className="eye-icon"
               onClick={handleEyeClick}
+              onKeyDown={handleEyeKeyDown}
+              role="button"
+              tabIndex={0}
             />
           </div>
         </div>
