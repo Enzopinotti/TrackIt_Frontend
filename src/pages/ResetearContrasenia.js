@@ -1,6 +1,6 @@
 // src/pages/ResetearContrasenia.js
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import Logo from '../components/Logo.js';
