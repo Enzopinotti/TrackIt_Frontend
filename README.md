@@ -13,8 +13,9 @@ The repository intentionally preserves the historical product flows while modern
 - React Hook Form + Yup
 - Sass
 - DOMPurify
-- Font Awesome / React Icons
+- React Icons
 - dotLottie React
+- ESLint + JSX accessibility checks
 - GitHub Actions quality gates
 - Vercel SPA deployment contract
 
@@ -40,7 +41,13 @@ Build the production application:
 npm run build
 ```
 
-Run the current test command:
+Run static quality and accessibility checks:
+
+```bash
+npm run lint
+```
+
+Run the maintained behavior suite:
 
 ```bash
 npm test
