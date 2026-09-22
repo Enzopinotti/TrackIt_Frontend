@@ -1,5 +1,5 @@
 // src/pages/Login.js
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import Logo from '../components/Logo.js';
 import { AuthContext } from '../context/AuthContext.js';
