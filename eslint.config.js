@@ -49,6 +49,7 @@ export default [
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       ...accessibilityWarnings,
+      "jsx-a11y/label-has-for": "off",
       "jsx-a11y/alt-text": "error",
       "jsx-a11y/aria-props": "error",
       "jsx-a11y/aria-role": "error",
