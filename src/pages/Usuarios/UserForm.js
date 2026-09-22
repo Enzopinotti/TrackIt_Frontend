@@ -50,8 +50,9 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
       <h2>{usuarioSeleccionado ? 'Editar Usuario' : 'Agregar Usuario'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Nombre:</label>
+          <label htmlFor="user-name">Nombre:</label>
           <input
+            id="user-name"
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
@@ -61,8 +62,9 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
         </div>
 
         <div className="form-group">
-          <label>Cargo:</label>
+          <label htmlFor="user-role">Cargo:</label>
           <input
+            id="user-role"
             type="text"
             value={cargo}
             onChange={(e) => setCargo(e.target.value)}
@@ -72,8 +74,9 @@ function UserForm({ onAgregar, onActualizar, usuarioSeleccionado = null }) {
         </div>
 
         <div className="form-group">
-          <label>Avatar (URL):</label>
+          <label htmlFor="user-avatar">Avatar (URL):</label>
           <input
+            id="user-avatar"
             type="text"
             value={avatar}
             onChange={(e) => setAvatar(e.target.value)}
