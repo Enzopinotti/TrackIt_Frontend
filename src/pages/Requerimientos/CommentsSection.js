@@ -49,7 +49,7 @@ function CommentsSection({ requirement, user }) {
     };
   }, []);
 
-  const onEmojiClick = (emojiData, event) => {
+  const onEmojiClick = (emojiData) => {
     setNewComment((prev) => prev + emojiData.emoji);
   };
 
