@@ -1,81 +1,89 @@
 // src/App.js
 
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
-// Importar los layouts
-import MainLayout from './components/layouts/MainLayout.js';
-import AuthLayout from './components/layouts/AuthLayout.js';
-
-// Importar las páginas
-import SeleccionLogin from './pages/SeleccionLogin.js';
-import Login from './pages/Login.js';
-import RecuperarContrasenia from './pages/RecuperarContrasenia.js';
-import ResetearContrasenia from './pages/ResetearContrasenia.js';
-import Inicio from './pages/Inicio.js';
-import RequerimientosWrapper from './pages/Requerimientos/RequerimientosWrapper.js'; // Ruta actualizada
-import TiposCategorias from './pages/TiposCategorias/TiposCategorias.js'; // Ruta actualizada
-import Usuarios from './pages/Usuarios/Usuarios.js';
-import Notificaciones from './pages/Notificaciones.js';
-import PerfilUsuario from './pages/PerfilUsuario.js';
-
-import ConfirmacionRegistro from './pages/ConfirmacionRegistro.js';
-import RegistroExterno from './pages/RegistroExterno.js';
-import RegistroInterno from './pages/RegistroInterno.js';
-import SeleccionRegistro from './pages/SeleccionRegistro.js';
-
-// Importar componentes de rutas
+// Core route guards remain eager so auth decisions happen before route chunks load.
 import ProtectedRoute from './components/ProtectedRoute.js';
 import PublicRoute from './components/PublicRoute.js';
-import DetalleRequerimiento from './pages/Requerimientos/DetalleRequerimiento.js';
-import PageNotFound from './pages/PageNotFound.js';
-import AdminDashboard from './pages/AdminDashboard.js';
+
+// Route surfaces are split by navigation boundary instead of shipping every screen
+// in the initial application bundle.
+const MainLayout = lazy(() => import('./components/layouts/MainLayout.js'));
+const AuthLayout = lazy(() => import('./components/layouts/AuthLayout.js'));
+const SeleccionLogin = lazy(() => import('./pages/SeleccionLogin.js'));
+const Login = lazy(() => import('./pages/Login.js'));
+const RecuperarContrasenia = lazy(() => import('./pages/RecuperarContrasenia.js'));
+const ResetearContrasenia = lazy(() => import('./pages/ResetearContrasenia.js'));
+const Inicio = lazy(() => import('./pages/Inicio.js'));
+const RequerimientosWrapper = lazy(() =>
+  import('./pages/Requerimientos/RequerimientosWrapper.js')
+);
+const TiposCategorias = lazy(() => import('./pages/TiposCategorias/TiposCategorias.js'));
+const Usuarios = lazy(() => import('./pages/Usuarios/Usuarios.js'));
+const Notificaciones = lazy(() => import('./pages/Notificaciones.js'));
+const PerfilUsuario = lazy(() => import('./pages/PerfilUsuario.js'));
+const ConfirmacionRegistro = lazy(() => import('./pages/ConfirmacionRegistro.js'));
+const RegistroExterno = lazy(() => import('./pages/RegistroExterno.js'));
+const RegistroInterno = lazy(() => import('./pages/RegistroInterno.js'));
+const SeleccionRegistro = lazy(() => import('./pages/SeleccionRegistro.js'));
+const DetalleRequerimiento = lazy(() =>
+  import('./pages/Requerimientos/DetalleRequerimiento.js')
+);
+const PageNotFound = lazy(() => import('./pages/PageNotFound.js'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard.js'));
+
+function RouteFallback() {
+  return (
+    <div className="route-loading" role="status" aria-live="polite">
+      Cargando...
+    </div>
+  );
+}
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Rutas Públicas */}
-        <Route
-          element={
-            <PublicRoute>
-              <AuthLayout />
-            </PublicRoute>
-          }
-        >
-          <Route path="/" element={<SeleccionLogin />} />
-          <Route path="/login/:tipoUsuario" element={<Login />} />
-          <Route path="/recuperar-contrasenia" element={<RecuperarContrasenia />} />
-          <Route path="/resetear-contrasenia" element={<ResetearContrasenia />} />
-          {/* Rutas de Registro */}
-          <Route path="/registro" element={<SeleccionRegistro />} />
-          <Route path="/registro/interno" element={<RegistroInterno />} />
-          <Route path="/registro/externo" element={<RegistroExterno />} />
-          {/* Ruta de Confirmación de Registro */}
-          <Route path="/confirmacion-registro/" element={<ConfirmacionRegistro />} />
-        </Route>
+      <Suspense fallback={<RouteFallback />}>
+        <Routes>
+          {/* Rutas Públicas */}
+          <Route
+            element={
+              <PublicRoute>
+                <AuthLayout />
+              </PublicRoute>
+            }
+          >
+            <Route path="/" element={<SeleccionLogin />} />
+            <Route path="/login/:tipoUsuario" element={<Login />} />
+            <Route path="/recuperar-contrasenia" element={<RecuperarContrasenia />} />
+            <Route path="/resetear-contrasenia" element={<ResetearContrasenia />} />
+            <Route path="/registro" element={<SeleccionRegistro />} />
+            <Route path="/registro/interno" element={<RegistroInterno />} />
+            <Route path="/registro/externo" element={<RegistroExterno />} />
+            <Route path="/confirmacion-registro/" element={<ConfirmacionRegistro />} />
+          </Route>
 
-        {/* Rutas Protegidas */}
-        <Route
-          element={
-            <ProtectedRoute>
-              <MainLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="/home" element={<Inicio />} />
-          <Route path="/requerimientos" element={<RequerimientosWrapper />} />
-          <Route path="/requerimiento/:id" element={<DetalleRequerimiento />} />
-          <Route path="/notificaciones" element={<Notificaciones />} />
-          <Route path="/perfil-usuario" element={<PerfilUsuario />} />
-
-          {/* Rutas exclusivas para usuarios internos */}
-          <Route path="/tipos-categorias" element={<TiposCategorias />} />
-          <Route path="/usuarios" element={<Usuarios />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="*" element={<PageNotFound />} />
-
-        </Route>
-      </Routes>
+          {/* Rutas Protegidas */}
+          <Route
+            element={
+              <ProtectedRoute>
+                <MainLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="/home" element={<Inicio />} />
+            <Route path="/requerimientos" element={<RequerimientosWrapper />} />
+            <Route path="/requerimiento/:id" element={<DetalleRequerimiento />} />
+            <Route path="/notificaciones" element={<Notificaciones />} />
+            <Route path="/perfil-usuario" element={<PerfilUsuario />} />
+            <Route path="/tipos-categorias" element={<TiposCategorias />} />
+            <Route path="/usuarios" element={<Usuarios />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
