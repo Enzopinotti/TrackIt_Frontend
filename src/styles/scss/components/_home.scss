@@ -1,3 +1,4 @@
+@use 'sass:color';
   @use '../abstract/variables' as vars;
 
   .inicio-page {
@@ -137,7 +138,7 @@
           transition: background-color 0.3s ease;
 
           &:hover {
-            background-color: darken(vars.$color-primario, 10%);
+            background-color: color.adjust(vars.$color-primario, $lightness: -10%);
           }
         }
       }
