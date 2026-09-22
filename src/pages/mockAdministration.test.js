@@ -1,5 +1,10 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import TiposCategorias from "./TiposCategorias/TiposCategorias.js";
 import Usuarios from "./Usuarios/Usuarios.js";
@@ -13,8 +18,11 @@ describe("intentional mock/local administration boundaries", () => {
 
     render(<TiposCategorias />);
 
-    expect(screen.getByText("Tipo A")).toBeInTheDocument();
-    expect(screen.getByText("Categoría 1")).toBeInTheDocument();
+    const typeList = within(document.querySelector(".type-list"));
+    const categoryList = within(document.querySelector(".category-list"));
+
+    expect(typeList.getByText("Tipo A")).toBeInTheDocument();
+    expect(categoryList.getByText("Categoría 1")).toBeInTheDocument();
 
     await waitFor(() => {
       expect(JSON.parse(localStorage.getItem("tipos"))).toEqual(mockTypes);
@@ -39,9 +47,12 @@ describe("intentional mock/local administration boundaries", () => {
 
     render(<TiposCategorias />);
 
-    expect(screen.getByText("Tipo Local")).toBeInTheDocument();
-    expect(screen.getByText("Categoría Local")).toBeInTheDocument();
-    expect(screen.queryByText("Tipo A")).not.toBeInTheDocument();
+    const typeList = within(document.querySelector(".type-list"));
+    const categoryList = within(document.querySelector(".category-list"));
+
+    expect(typeList.getByText("Tipo Local")).toBeInTheDocument();
+    expect(categoryList.getByText("Categoría Local")).toBeInTheDocument();
+    expect(typeList.queryByText("Tipo A")).not.toBeInTheDocument();
   });
 
   it("keeps the users administration screen on its mock dataset", () => {
