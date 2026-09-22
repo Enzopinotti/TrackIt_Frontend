@@ -1,6 +1,5 @@
 // src/components/RequerimientoCard/RequerimientoCard.js
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 
 function RequerimientoCard({ requerimiento }) {
@@ -74,24 +73,5 @@ function RequerimientoCard({ requerimiento }) {
     </div>
   );
 }
-
-RequerimientoCard.propTypes = {
-  requerimiento: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    requirementType: PropTypes.string.isRequired, // Cambié 'tipo' por 'requirementType'
-    subject: PropTypes.string.isRequired, // Cambié 'title' por 'subject'
-    description: PropTypes.string.isRequired, // Cambié 'descripcion' por 'description'
-    code: PropTypes.string.isRequired, // Cambié 'codigo' por 'code'
-    date: PropTypes.string.isRequired, // Cambié 'fechaCreacion' por 'date'
-    status: PropTypes.string.isRequired,
-    assignedUsers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        nombre: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-};
 
 export default RequerimientoCard;
