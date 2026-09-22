@@ -1,6 +1,6 @@
 // src/components/layouts/MainLayout.js
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Outlet, Navigate } from 'react-router';
 import Header from '../layouts/Header.js';
 import Footer from '../layouts/Footer.js';
