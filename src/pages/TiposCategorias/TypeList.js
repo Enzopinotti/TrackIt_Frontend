@@ -1,6 +1,5 @@
 // src/components/TypeList.js
 
-import React from 'react';
 
 function TypeList({ tipos, onSeleccionar }) {
   return (
