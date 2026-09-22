@@ -1,6 +1,5 @@
 // src/components/NotificationsButton/NotificationsButton.js
 
-import React from 'react';
 
 function NotificationsButton({ onClick, count }) {
   return (
