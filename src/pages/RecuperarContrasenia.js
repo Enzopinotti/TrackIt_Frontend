@@ -1,6 +1,6 @@
 // src/pages/RecuperarContrasenia.js
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 import Logo from '../components/Logo.js';
 import { apiUrl, callbackUrl } from '../config/runtime.js';
