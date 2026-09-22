@@ -182,8 +182,8 @@ function RequirementForm({ onSubmit, onCancel }) {
               list="assignedUsers"
             />
             <datalist id="assignedUsers">
-              <option value="user1" label="Juan Pérez" />
-              <option value="user2" label="María García" />
+              <option value="user1">Juan Pérez</option>
+              <option value="user2">María García</option>
               {/* ... */}
             </datalist>
           </>
