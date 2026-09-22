@@ -45,8 +45,9 @@ function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null })
       <h2>{categoriaSeleccionada ? 'Editar Categoría' : 'Agregar Categoría'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Nombre de la Categoría:</label>
+          <label htmlFor="category-name">Nombre de la Categoría:</label>
           <input
+            id="category-name"
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
@@ -56,8 +57,9 @@ function CategoryForm({ onAgregar, onActualizar, categoriaSeleccionada = null })
         </div>
 
         <div className="form-group">
-          <label>Tipo Asociado:</label>
+          <label htmlFor="category-type">Tipo Asociado:</label>
           <select
+            id="category-type"
             value={typeId}
             onChange={(e) => setTypeId(e.target.value)}
             required
