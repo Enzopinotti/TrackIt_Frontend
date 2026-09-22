@@ -1,6 +1,5 @@
 // src/components/CustomModal.js
 
-import React from 'react';
 import ReactModal from 'react-modal';
 
 // Establecer el elemento raíz para accesibilidad
